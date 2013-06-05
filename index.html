@@ -2,19 +2,52 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>aem1k - min.js</title>
-    <meta name="description" content="Created by Martin Kleppe aka. @aemkei.">
+    <title>aem1k - crazy.min.js</title>
+    <meta name="description" content="Minimalistic JavaScript Craziness. Created by Martin Kleppe aka @aemkei.">
     <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+    <link href='styles.css' rel='stylesheet' type='text/css'>
     <style>
       html, body {
-        background: #000;
+        background: #090909;
         color: #FFF;
         font-family: 'Inconsolata', Monaco, Consolas, "Lucida Console", monospace;
         padding: 20px;
       }
+
+      * {
+        font-weight: normal;
+      }
+
+      h1 {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+      }
+
+      h2 {
+        color: #FF00FF;
+      }
       
-      pre em {
-        color: #666;
+      h3 {
+        color: #00CCFF;
+      }
+      
+      pre i {
+        color: #999;
+		    font-style: normal;
+      }
+	  
+  	  pre b {
+  		  color: yellow;  
+  	  }
+
+      a {
+        color: #FFF;
+      }
+
+      pre#photo {
+        font-size: 10px;
+        line-height: 14px;
       }
 
     </style>
@@ -22,18 +55,80 @@
   <body>
     <pre>
                                     __         
-                                  _/\ \        
-                                 /' \ \ \        
-          __      __    ___ ___ /\_, \ \ \/'\    
-        /'__`\  /'__`\/' __` __`\/_/\ \ \ , &lt;    
-  ___  /\ \L\.\.\  __//\ \/\ \/\ \ \ \ \ \ \\`\____  
-/\___\ \ \__/.\_\\____\ \_\ \_\ \_\ \ \_\ \_\ \____\
-\/___/  \/__/\/_//____/\/_/\/_/\/_/  \/_/\/_/\/____/
+                                  <b>_</b><i>/</i>\ \        
+                                 <b>/' \</b> \ \        
+          __      __    ___ ___ <i>/</i><b>\_, \</b> \ \/'\    
+        /'__`\  /'__`\/' __` __`\<i>/_/</i><b>\ \</b> \ , &lt;    
+  ___  <i>/</i>\ \L\.\.\  __/<i>/</i>\ \<i>/</i>\ \<i>/</i>\ \<i> \ </i><b>\ \</b> \ \\`\____  
+<i>/</i>\___\ <i>\ </i>\__/.\_\\____\ \_\ \_\ \_\<i> \ </i><b>\_\</b> \_\ \____\
+<i>\/___/  \/__/\/_//____/\/_/\/_/\/_/  \/_/\/_/\/____/</i>
 
     </pre>
 
     <h1>aem1k</h1>
     <h2>Minimalistic JavaScript Craziness</h2>
-    <p>Created by Martin Kleppe aka. @aemkei.</p>
+    <p>Created by Martin Kleppe aka @aemkei.</p>
+
+    <h3>Projects</h3>
+    <ul>
+      <li><a href="http://www.jsfuck.com/">JSFuck.com</a></li>
+      <li><a href="https://github.com/aemkei/fishbone.js">fishbone.js</a></li>
+      <li><a href="https://gist.github.com/aemkei/1672254">Binary Teetris</a></li>
+      <li><a href="https://ubilabs.github.io/geocomplete/">$.geocomplete()</a></li>
+      <li><a href="http://js1k.com/2012-love/demo/1254">Fuse JS1k</a></li>
+      <li><a href="http://www.140byt.es/users/aemkei">140byt.es/aemkei</a></li>
+    </ul>
+
+    <h3>Talks</h3>
+    <ul>
+      <li><a href="https://docs.google.com/a/ubilabs.net/present/view?id=dds45w4x_88gz75dkgn">JS Golf Lessons</a></li>
+      <li><a href="https://docs.google.com/presentation/d/1azRe7gmmfaGs_QMNIMm4NUoDylf0wXjdqGjj9wH4z-Q/present">Binary Love</a></li>
+      <li><a href="http://slideshare.net/aemkei/google-maps-api-devfest-karlsruhe">Google Maps API</a></li>
+      <li><a href="http://de.slideshare.net/aemkei/visualization-using-the-google-maps-api-symposium-konigslutter-2013">Maps Visualization</a></li>
+      <li><a href="http://lanyrd.com/profile/aemkei/sessions/">Full Speaking History</a></li>
+
+    </ul>
+
+    <h3>Photo</h3>
+
+    <pre id="photo">
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNdyssoooyNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMMMNy/..`  ``` ``..--/+/+yydNMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMMMNy-             `      `....+mMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMMNs.`                    `` `...`/hNMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMMN+`                               `-dMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMMN:                           `     ``-dMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMMN-                              `  ``.:/dMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMdo`                                   `.-/-hMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMNo`                                    .:/:/.:hMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMN/                                   `.../sms.:oNMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMo`                              ``..-//:yNMMm::shMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMy.                  ``..---.``.::///++oyNMMMMM+:soMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMN-                 ``..---::::/+ooosydmNMMMMMMN+//+NMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMy-               `....---:://+oyhdmNNNNMMMMMMmy/-+NMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMmo             `....----::/++ohmmNNNNMMMMMMMMN/./mMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMN/          `.....``````..-::/osyhddhhddddmNd..+NMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMy`         `.--...````````  ``-:/+++/:.``./hs`oNMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMNo+:.`      .---..```    `.`````.:+o:.`  `:+mNNMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMMm:`  ```----...``````:-``.``-+mN+..``:NNMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMMMMMmh-..`..`-::--........---....-oNMNdyyhmMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMMMMho:.   `-..``-:----..--::::::-...-+NMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMMNo.         ` `.-------:://///:-....-/hMMMMMMMMMh`oMMMMMMMMMMMMMMMM
+MMMMMMMMMMMMN-              .-:------:::::--.`..--/sMMMh+yNMMh  sMMMMMMMMMMMMMMM
+MMMMMMMMMMMMo               `.-----..........`````.-+dNm+-/dN-  +MMMMMMMMMMMMMMM
+MMMMMMMMMMMM.               `.--...````````````````.oNMMo:.o/   +MMMMMMMMMMMMMMM
+MMMMMMMMMMMM/                `....`````    ````.-:/+hmmy-:/y    oMMMMMMMMMMMMMMM
+MMMMMMMMMMMMs                ``..`````````     ```.-+shyydh.    dMMMMMMMMMMMMMMM
+MMMMMMMMMMMMy                 ``````````..``````--:/yMMNmh.     /mMMMMMMMMMMMMMM
+MMMMMMMMMMMMs                    `````` ``````````.-oNNh+.       .+oyhhmMMMMMMMM
+MMMMMMMMMMMM.                  `    ````````....-:ohmNd/`                 `-:+sh
+MMMMMMMMMMMs                                `...--/ydy:                         
+MMMMMMMMmdy-                                      `.-.                          
+MMMNy+-.                                                                        
+ms:                                          ```                                
+
+    </pre>
+
   </body>
 </html>
