@@ -8,10 +8,18 @@
     <link href='styles.css' rel='stylesheet' type='text/css'>
     <style>
       html, body {
-        background: #090909;
+        background: #222;
         color: #FFF;
         font-family: 'Inconsolata', Monaco, Consolas, "Lucida Console", monospace;
-        padding: 20px;
+
+      }
+
+      #container {
+        max-width: 600px;
+        padding: 40px;
+        border-right: 1px solid #666;
+        border-left: 1px solid #666;
+        background: #090909;
       }
 
       * {
@@ -29,9 +37,9 @@
       }
       
       h3 {
-        color: #00CCFF;
+        color: #00FF66;
       }
-      
+
       pre i {
         color: #999;
 		    font-style: normal;
@@ -45,9 +53,13 @@
         color: #FFF;
       }
 
+      li a {
+         color: #00CCFF
+      }
+
       pre#photo, pre#photo * {
         font-size: 10px;
-        line-height: 14px;
+        line-height: 11px;
         color: yellow;
       }
 
@@ -55,9 +67,14 @@
         color: white;
       }
 
+      pre#logo {
+        line-height: 10px
+      }
+
     </style>
   </head>
   <body>
+    <div id="container">
     <pre>
                                     __         
                                   <b>_</b><i>/</i>\ \        
@@ -76,22 +93,36 @@
 
     <h3>Projects</h3>
     <ul>
-      <li><a href="http://www.jsfuck.com/">JSFuck.com</a></li>
-      <li><a href="https://github.com/aemkei/fishbone.js">fishbone.js</a></li>
-      <li><a href="https://gist.github.com/aemkei/1672254">Binary Teetris</a></li>
-      <li><a href="https://ubilabs.github.io/geocomplete/">$.geocomplete()</a></li>
-      <li><a href="http://js1k.com/2012-love/demo/1254">Fuse JS1k</a></li>
-      <li><a href="http://www.140byt.es/users/aemkei">140byt.es/aemkei</a></li>
+      <li><a href="http://www.jsfuck.com/">JSFuck.com</a> - Write any JavaScript with 6 Characters: []()!+</li>
+      <li><a href="https://github.com/aemkei/fishbone.js">fishbone.js</a> – A super lightweight (½kb) JavaScript library</li>
+      <li><a href="https://gist.github.com/aemkei/1672254">Binary Teetris</a> - Tetris in 140 bytes of JavaScript</li>
+      <li><a href="https://ubilabs.github.io/geocomplete/">$.geocomplete()</a> - jQuery Places AutoComplete</li>
+      <li><a href="https://github.com/ubilabs/google-maps-api-threejs-layer">Three.js Layer</a> - WebGL overlays for the Google Maps API</li>
+      <li><a href="https://npmjs.org/package/stagger">Stagger</a> – NPM package to handle request rates</li>
+      <li><a href="http://js1k.com/2012-love/demo/1254">Fuse JS1k</a> - A game in 1024 bytes</li>
+      <li><a href="http://www.140byt.es/users/aemkei">140byt.es/aemkei</a> - More tweet-sized code</li>
+      <li><a href="https://github.com/ubilabs/kd-tree-javascript">k-d Tree</a> - Handle k-dimensional tree data in JavaScript</li>
     </ul>
+
+    <h3>Example</h3>
+
+<pre>
+function(a,b,c,d){d+
+=c;return[d&lt;0|a&b&lt;&lt;d
+?a=parseInt((a|b&lt;&lt;c)
+.toString(d=32,b=new
+Date&2|1).replace('v
+',''),d):a|b&lt;&lt;d,a,b,
+d]}      <b>// tweetris</b>
+</0|a&b<<d></pre>
 
     <h3>Talks</h3>
     <ul>
-      <li><a href="https://docs.google.com/a/ubilabs.net/present/view?id=dds45w4x_88gz75dkgn">JS Golf Lessons</a></li>
-      <li><a href="https://docs.google.com/presentation/d/1azRe7gmmfaGs_QMNIMm4NUoDylf0wXjdqGjj9wH4z-Q/present">Binary Love</a></li>
-      <li><a href="http://slideshare.net/aemkei/google-maps-api-devfest-karlsruhe">Google Maps API</a></li>
-      <li><a href="http://de.slideshare.net/aemkei/visualization-using-the-google-maps-api-symposium-konigslutter-2013">Maps Visualization</a></li>
-      <li><a href="http://lanyrd.com/profile/aemkei/sessions/">Full Speaking History</a></li>
-
+      <li><a href="https://docs.google.com/a/ubilabs.net/present/view?id=dds45w4x_88gz75dkgn">JS Golf Lessons</a> - FrOSCon 2011</li>
+      <li><a href="https://docs.google.com/presentation/d/1azRe7gmmfaGs_QMNIMm4NUoDylf0wXjdqGjj9wH4z-Q/present">Binary Love</a> - HH.js 2012</li>
+      <li><a href="http://slideshare.net/aemkei/google-maps-api-devfest-karlsruhe">Google Maps API</a> - GDG DevFest 2012</li>
+      <li><a href="http://de.slideshare.net/aemkei/visualization-using-the-google-maps-api-symposium-konigslutter-2013">Maps Visualization</a> - Symposium Königslutter 2013</li>
+      <li><a href="http://lanyrd.com/profile/aemkei/sessions/">Full Speaking History</a> - Sessions at Lanyrd</li>
     </ul>
 
     <h3>Photo</h3>
@@ -135,5 +166,31 @@ ms:                                          <b>```</b>
 
     </pre>
 
+    <h3>Contact</h3>
+    <ul>
+      <li><a href="http://twitter.com/aemkei">Twitter</a> – Follow @aemkei</li>
+      <li><a href="https://plus.google.com/103747379090421872359/posts">Google+</a> - Martin +1</li>
+      <li><a href="mailto:kleppe@gmail.com">Email</a> - Drop him some lines!</li>
+    </ul>
+
+    <hr>
+
+    
+
+<pre id="logo">
+      <b>#</b>
+      <b>#</b>
+     <b>##</b>
+      <b>#</b> #
+   ## <b>#</b> #  
+ ## # <b>#</b> # #
+# # # <b>#</b> ##
+# # # <b>#</b> # #
+# # # <b>#</b> #  #
+</pre>
+
+20XX - Martin Kleppe <a href="http://www.ubilabs.net">Ubilabs</a>
+
+  </div>
   </body>
 </html>
