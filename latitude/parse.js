@@ -4,6 +4,7 @@ var fs = require('fs'),
   outputLines = "latitude-lines.geojson",
   last;
 
+// https://gist.github.com/aemkei/1163223
 function computeDistance(a,b,c,d,e,z){with(Math)return z=PI/360,e*atan2(sqrt(z=pow(sin((c-a)*z),2)+cos(a*z*2)*cos(c*z*2)*pow(sin((d-b)*z),2)),sqrt(1-z))}
 
 function computeSpeed(distance, timeMS){
@@ -23,7 +24,6 @@ function getBucket(distance){
 
   for (var all in buckets){
     if (distance < (1*all)){
-      console.log(buckets[all], distance);
       return 1*buckets[all];
     }
   }
@@ -36,7 +36,6 @@ fs.readFile(input, 'utf8', function(err, data) {
 
   var obj = JSON.parse(data),
     items = obj.data.items,
-    time2012 = new Date("2012"),
     points = { type: "FeatureCollection", features: [] },
     lines = { type: "FeatureCollection", features: [] },
     line = [],
@@ -47,7 +46,7 @@ fs.readFile(input, 'utf8', function(err, data) {
     var distance = 0,
       date = new Date(1*item.timestampMs),
       coordinates = [item.longitude, item.latitude],
-      time = ~~(item.timestampMs/1000/60/60),
+      time = Math.round(item.timestampMs/1000/60/60),
       speed = 0;
 
     if (!item.accuracy){ return; }
@@ -71,9 +70,7 @@ fs.readFile(input, 'utf8', function(err, data) {
       speed = computeSpeed(distance, last.timestampMs-item.timestampMs);
 
       if (speed > 250){ return; }
-
     }
-
 
     points.features.push({
       type: "Feature",
@@ -86,7 +83,6 @@ fs.readFile(input, 'utf8', function(err, data) {
         time: time
       }
     });
-
 
     var newBucket = getBucket(distance);
 
@@ -123,5 +119,4 @@ fs.readFile(input, 'utf8', function(err, data) {
 
   fs.writeFile(outputPoints, JSON.stringify(points));
   fs.writeFile(outputLines, JSON.stringify(lines));
-
 });
