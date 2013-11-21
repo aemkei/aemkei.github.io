@@ -1,0 +1,54 @@
+<table id=t><script>for(e=[a=Q=""];6>a;a++)for(b=t.insertRow(-1),c=0;6>c;c++)d=String.fromCharCode(64+c),b.insertCell(-1).innerHTML=a&&c?"<input id="+[I=d+a,e.push(I)][0]+" onfocus=this.value=l."+I+"||Q onblur=l."+I+"=this.value;A() >":a||d;(A=function(X){e.forEach(function(i){X&&Object.defineProperty(e,i,{get:function(){with(b=(l=localStorage)[i]||Q,e)return"="!=b[0]?isNaN(p=parseFloat(b))?b:p:eval(b.substr(1))}});try{eval(i).value=e[i]}catch(x){}})})(1)</script>
+
+<!-- 468 bytes -->
+
+
+
+
+
+
+
+
+
+
+
+
+<b>Spreadsheet in less than 512 bytes</b>
+
+<p>
+	Main logic by <a href="http://ondras.zarovi.cz/">Ondras Zarovi</a> (<a href="http://jsfiddle.net/ondras/hYfN3/">source</a>),
+	inspired by <a href="http://thomasstreet.net/blog/spreadsheet.html">Thomas Street</a>,
+	golfed down by <a href="/">me</a>.
+</p>
+
+Features:
+
+<ul>
+  <li>Excel-like syntax (formulas start with "=")</li>
+  <li>Support for arbitrary expressions (=A1+B2)</li>
+  <li>Automatic localStorage persistence</li>
+  <li>Circular reference prevention</li>
+</ul>
+
+Source:
+
+<pre>
+&lt;table id=t>&lt;script>for(e=[a=Q=""];6>a;a++)for(b=t.insertRow
+(-1),c=0;6>c;c++)d=String.fromCharCode(64+c),b.insertCell(-1
+).innerHTML=a&&c?"&lt;input id="+[I=d+a,e.push(I)][0]+" onfocus
+=this.value=l."+I+"||Q onblur=l."+I+"=this.value;A() >":a||d
+;(A=function(X){e.forEach(function(i){X&&Object.defineProper
+ty(e,i,{get:function(){with(b=(l=localStorage)[i]||Q,e)retur
+n"="!=b[0]?isNaN(p=parseFloat(b))?b:p:eval(b.substr(1))}});t
+ry{eval(i).value=e[i]}catch(x){}})})(1)&lt;/script> 468 bytes
+</pre>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-57649-13', 'aem1k.com');
+  ga('send', 'pageview');
+</script>
