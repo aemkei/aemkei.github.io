@@ -1,8 +1,6 @@
-<table id=t><script>for(e=[a=Q=""];6>a;a++)for(b=t.insertRow(c=-1);6>++c;)d=String.fromCharCode(64+c),b.insertCell(-1).innerHTML=a&&c?"<input id="+[I=d+a,e.push(I)][0]+" onfocus=this.value=l."+I+"||Q onblur=l."+I+"=this.value;A()>":a||d;(A=function(X){e.forEach(function(i){X&&Object.defineProperty(e,i,{get:function(){with(b=(l=localStorage)[i]||Q,e)return"="!=b[0]?(p=parseFloat(b))!=p?b:p:eval(b.substr(1))}});try{eval(i).value=e[i]}catch(x){}})})(1)</script>
+<table id=t><script>for(e=[a=Q=""];6>a;a++)for(b=t.insertRow(c=-1);6>++c;)d="@ABCDEF"[c],b.insertCell(-1).innerHTML=a&&c?e.push(I=d+a)&&"<input id="+I+" onfocus=this.value=l."+I+"||Q onblur=l."+I+"=this.value;A()>":a||d;(A=function(X){e.forEach(function(i){X&&Object.defineProperty(e,i,{get:function(){with(b=(l=localStorage)[i]||Q,e)return"="!=b[0]?(p=parseInt(b))!=p?b:p:eval(b.substr(1))}});try{eval(i).value=e[i]}catch(x){}})})(1)</script>
 
-<!-- 462 bytes -->
-
-
+<!-- 443 bytes -->
 
 
 
@@ -13,7 +11,9 @@
 
 
 
-<b>Spreadsheet in less than 512 bytes</b>
+
+
+<b>Spreadsheet in less than 512 bytes of JavaScript</b>
 
 <p>
 	Main logic by <a href="http://ondras.zarovi.cz/">Ondras Zarovi</a> (<a href="http://jsfiddle.net/ondras/hYfN3/">source</a>),
@@ -34,13 +34,13 @@ Source:
 
 <pre>
 &lt;table id=t>&lt;script>for(e=[a=Q=""];6>a;a++)for(b=t.insertRow
-(c=-1);6>++c;)d=String.fromCharCode(64+c),b.insertCell(-1).
-innerHTML=a&&c?"&lt;input id="+[I=d+a,e.push(I)][0]+" onfocus=
-this.value=l."+I+"||Q onblur=l."+I+"=this.value;A()>":a||d;
-(A=function(X){e.forEach(function(i){X&&Object.defineProperty
-(e,i,{get:function(){with(b=(l=localStorage)[i]||Q,e)return
-"="!=b[0]?(p=parseFloat(b))!=p?b:p:eval(b.substr(1))}});try
-{eval(i).value=e[i]}catch(x){}})})(1)&lt;/script> // 462 bytes
+(c=-1);6>++c;)d="@ABCDEF"[c],b.insertCell(-1).innerHTML=a&&c
+?e.push(I=d+a)&&"&lt;input id="+I+" onfocus=this.value=l."+I+"|
+|Q onblur=l."+I+"=this.value;A()>":a||d;(A=function(X){e.for
+Each(function(i){X&&Object.defineProperty(e,i,{get:function(
+){with(b=(l=localStorage)[i]||Q,e)return"="!=b[0]?(p=parseIn
+t(b))!=p?b:p:eval(b.substr(1))}});try{eval(i).value=e[i]}cat
+ch(x){}})})(1)&lt;/script> // 443 bytes
 </pre>
 
 <script>
