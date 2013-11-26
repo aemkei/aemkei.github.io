@@ -1,8 +1,6 @@
-<table id=t><script>for(a=h=e=[];6>a;a++)for(h+="<tr>",c=0;d="@ABCDE"[c];h+="<td>"+(a*c++?"<input id=D onfocus=D[V]=l.D||'' onblur=l.D=D[V];A()>".replace(/D/g,e[a*5+c]=d+a):+a||d))function A(X){e.forEach(function(i){this[i][V='value']=(e[i]=X?function(){return"="!=(b=l[i]||'')[0]?b!=+b?b:+b:eval(b.slice(1).replace(/[A-E]\d/g,'e.$&()'))}:e[i])()})}t.innerHTML=h;A(l=localStorage)</script>
+<table id=t><script>for(a=h=e=[];6>a;a++)for(h+="<tr>",c=0;d="@ABCDE"[c];h+="<td>"+(a*c++?"<input id=D onfocus=D[V]=l.D||'' onblur=l.D=D[V];A()>".replace(/D/g,e[a*5+c]=d+a):+a||d))function A(X){e.forEach(function(i){X&&Object.defineProperty(e,i,{get:function(){with(b=l[i]||'',e)return"="!=b[0]?b!=+b?b:b&&+b:eval(b.slice(1))}});top[i][V='value']=e[i]})}t.innerHTML=h;A(l=localStorage)</script>
 
-<!-- 389 bytes -->
-
-
+<!-- 394 bytes -->
 
 
 
@@ -10,13 +8,15 @@
 
 
 
-<title>A Spreadsheet in 400 bytes of JavaScript</title>
-<b>A Spreadsheet in 400 bytes of JavaScript</b>
+
+
+<title>A Spreadsheet in 394 bytes of JavaScript</title>
+<b>A Spreadsheet in 394 bytes of JavaScript</b>
 
 <p>
-	Main logic by <a href="http://ondras.zarovi.cz/">Ondras Zarovi</a> (<a href="http://jsfiddle.net/ondras/hYfN3/">source</a>),
-	inspired by <a href="http://thomasstreet.net/blog/spreadsheet.html">Thomas Street</a>,
-	golfed down by <a href="/">me</a>, <a href="https://twitter.com/subzey/status/403505540602417153">subzey</a> and <a href="https://twitter.com/p01/status/403523757882744832">p01</a>. See the <a href="https://github.com/aemkei/aemkei.github.io/commits/master/sheet/index.html">commit history</a>.
+  Main logic by <a href="http://ondras.zarovi.cz/">Ondras Zarovi</a> (<a href="http://jsfiddle.net/ondras/hYfN3/">source</a>),
+  inspired by <a href="http://thomasstreet.net/blog/spreadsheet.html">Thomas Street</a>,
+  golfed down by <a href="/">me</a>, <a href="https://twitter.com/subzey/status/403505540602417153">subzey</a> and <a href="http://www.p01.org/">p01</a>. See the <a href="https://github.com/aemkei/aemkei.github.io/commits/master/sheet/index.html">commit history</a>.
 </p>
 
 Features:
@@ -31,13 +31,14 @@ Source:
 
 <pre>
 
-&lt;table id=t>&lt;script>for(a=h=e=[];6>a;a++)
-for(h+="&lt;tr>",c=0;d="@ABCDE"[c];h+="&lt;td>"+(a*c++?
-"&lt;input id=D onfocus=D[V]=l.D||'' onblur=l.D=D[V];A()>"
-.replace(/D/g,e[a*5+c]=d+a):+a||d))function A(X){e.forEach(
-function(i){this[i][V='value']=(e[i]=X?function(){return"="!=
-(b=l[i]||'')[0]?b!=+b?b:+b:eval(b.slice(1).replace(/[A-E]\d/g
-,'e.$&()'))}:e[i])()})}t.innerHTML=h;A(l=localStorage)&lt;/script>
+&lt;table id=t>&lt;script>for(a=h=e=[];6>a;a++)for(h+="&lt;
+tr>",c=0;d="@ABCDE"[c];h+="&lt;td>"+(a*c++?"&lt;input id
+=D onfocus=D[V]=l.D||'' onblur=l.D=D[V];A()>".repl
+ace(/D/g,e[a*5+c]=d+a):+a||d))function A(X){e.forE
+ach(function(i){X&&Object.defineProperty(e,i,{get:
+function(){with(b=l[i]||'',e)return"="!=b[0]?b!=+b
+?b:b&&+b:eval(b.slice(1))}});top[i][V='value']=e[
+i]})}t.innerHTML=h;A(l=localStorage)&lt;/script>
 
 </pre>
 
