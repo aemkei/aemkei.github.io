@@ -54,12 +54,23 @@ rage,t.innerHTML=h)&lt;/script> // 328
 test()
 function test() {
   for (key in localStorage) { localStorage.removeItem(key) }
+
   set('A1','tom')
   set('B1','=A1')
+  check('A1','tom')
+  check('B1','tom')
+  
   function set(cell, value) {
     localStorage[cell] = value
     document.getElementById(cell).onfocus()
     document.getElementById(cell).onblur()
+  }
+  function check(cell, value) {
+    if (document.getElementById(cell).value === value) {
+      console.log('\u2713 #' + cell + ' is "' + value + '", as expected.')
+    } else {
+      console.log('\u2718 #' + cell + ' is "' + document.getElementById(cell) + '", not "' + value + '".')
+    }
   }
 }
 </script>
