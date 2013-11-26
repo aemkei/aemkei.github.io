@@ -70,6 +70,12 @@ function test() {
   check('B2','5')
   check('C2','7')
 
+  testcase('There should be 26 columns.')
+  set('Y1','wildebeest')
+  set('Z1','=A1')
+  check('Y1','wildebeest')
+  check('Z1','wildebeest')
+
   function testcase(title) {
     console.log('\n' + title)
   }
