@@ -48,3 +48,18 @@ rage,t.innerHTML=h)&lt;/script> // 328
   ga('create', 'UA-57649-13', 'aem1k.com');
   ga('send', 'pageview');
 </script>
+
+<!-- Tests -->
+<script>
+test()
+function test() {
+  for (key in localStorage) { localStorage.removeItem(key) }
+  set('A1','tom')
+  set('B1','=A1')
+  function set(cell, value) {
+    localStorage[cell] = value
+    document.getElementById(cell).onfocus()
+    document.getElementById(cell).onblur()
+  }
+}
+</script>
