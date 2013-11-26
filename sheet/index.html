@@ -1,17 +1,13 @@
-<table id=t><script>for(a=h=e=[];6>a;a++)for(h+="<tr>",c=0;d="@ABCDE"[c];h+="<td>"+(a*c++?"<input id=D onfocus=D[V]=l.D||'' onblur=A(l.D=D[V])>".replace(/D/g,e[d+a]=d+a):+a||d))function A(){with(t)for(i in e)t[i]=top[i][V='value']="="!=(b=l[i]||'')[0]?b!=+b?b:(t[i]=b&&+b):eval(b.slice(1))}A(l=localStorage,t.innerHTML=h)</script>
+<table id=t><script>for(a=h=e=[];6>a;a++)for(h+="<tr>",c=0;d="@ABCDE"[c];h+="<td>"+(a*c++?"<input id=D onfocus=D[V]=[l.D] onblur=A(l.D=D[V])>".replace(/D/g,e[d+=a]=d):+a||d))function A(){with(t)for(i in e)t[i]=top[i][V='value']="="!=(b=[l[i]])[0]?b!=+b?b:(t[i]=b&&+b):eval(b.slice(1))}A(l=localStorage,t.innerHTML=h)</script>
 
-<!-- 330 bytes -->
-
-
+<!-- 325 bytes -->
 
 
 
 
 
-
-
-<title>A Spreadsheet in 330 bytes of JavaScript</title>
-<b>A Spreadsheet in 330 bytes of JavaScript</b>
+<title>A Spreadsheet in 325 bytes of JavaScript</title>
+<b>A Spreadsheet in 325 bytes of JavaScript</b>
 
 <p>
   Main logic by <a href="http://ondras.zarovi.cz/">Ondras Zarovi</a> (<a href="http://jsfiddle.net/ondras/hYfN3/">source</a>),
@@ -33,11 +29,11 @@ Source:
 
 &lt;table id=t&gt;&lt;script&gt;for(a=h=e=[];6&gt;a;a++)for(h+="&lt;
 tr&gt;",c=0;d="@ABCDE"[c];h+="&lt;td&gt;"+(a*c++?"&lt;input id
-=D onfocus=D[V]=l.D||'' onblur=A(l.D=D[V])&gt;".repla
-ce(/D/g,e[d+a]=d+a):+a||d))function A(){with(t)for
-(i in e)t[i]=top[i][V='value']="="!=(b=l[i]||'')[0
-]?b!=+b?b:(t[i]=b&&+b):eval(b.slice(1))}A(l=localS
-torage,t.innerHTML=h)&lt;/script&gt; // 330
+=D onfocus=D[V]=[l.D] onblur=A(l.D=D[V])&gt;".replace
+(/D/g,e[d+=a]=d):+a||d))function A(){with(t)for(i
+in e)t[i]=top[i][V='value']="="!=(b=[l[i]])[0]?b!=
++b?b:(t[i]=b&&+b):eval(b.slice(1))}A(l=localStorag
+e,t.innerHTML=h)&lt;/script&gt; // 325
 
 </pre>
 
