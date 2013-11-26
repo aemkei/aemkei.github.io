@@ -29,15 +29,26 @@ Features:
 
 Source:
 
-<pre>
+<pre id="source">
 &lt;table id=t>&lt;script>for(a=h=e=[];6>a;a++)for(h+="&lt;
 tr>",c=0;d="@ABCDE"[c];h+="&lt;td>"+(a*c++?"&lt;input id
 =D onfocus=D[V]=[l.D] onblur=A(l.D=D[V])>".replace
 (/D/g,e[d+a]=d+a):+a||d))function A(){with(t)for(i
  in e)t[i]=top[i][V='value']="="!=(b=l[i]||'')[0]?
 b!=+b?b:(t[i]=b&&+b):eval(b.slice(1))}A(l=localSto
-rage,t.innerHTML=h)&lt;/script> // 328
+rage,t.innerHTML=h)&lt;/script>
 </pre>
+<ul>
+  <li>All of the code, including the table tag, is <span id="table_code_length"></span> bytes.</li>
+  <li>Just the code inside the script tag is <span id="script_code_length"></span> bytes.</li>
+</ul>
+
+<script>
+var table_code = source.innerHTML.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\n/g,'')
+var script_code = table_code.replace('<table id=t><script>','').replace('<' + '/script>','')
+table_code_length.textContent = table_code.length
+script_code_length.textContent = script_code.length
+</script>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
