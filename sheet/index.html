@@ -1,14 +1,24 @@
-<table id=t><script>for(a=h=e=[];6>a;a++)for(h+="<tr>",c=0;d="@ABCDE"[c];h+="<td>"+(a*c++?"<input id=D onfocus=D[V]=[l.D] onblur=A(l.D=D[V])>".replace(/D/g,e[d+a]=d+a):+a||d))function A(){with(t)for(i in e)t[i]=top[i][V='value']="="!=(b=l[i]||'')[0]?b!=+b?b:(t[i]=b&&+b):eval(b.slice(1))}A(l=localStorage,t.innerHTML=h)</script>
+<!-- Edit this one. -->
+<script id="metascript" type="text">
+&lt;table id=t>&lt;script>for(a=h=e=[];6>a;a++)for(h+="<tr>",c=0;d="@ABCDE"[c];h+="<td>"+(a*c++?"<input id=D onfocus=D[V]=[l.D] onblur=A(l.D=D[V])>".replace(/D/g,e[d+a]=d+a):+a||d))function A(){with(t)for(i in e)t[i]=top[i][V='value']="="!=(b=l[i]||'')[0]?b!=+b?b:(t[i]=b&&+b):eval(b.slice(1))}A(l=localStorage,t.innerHTML=h)&lt;/script>
+</script>
 
-<!-- 328 bytes -->
+<script>
+var table_code = metascript.textContent.replace(/&lt;/g,'<').replace(/&gt;/g,'>').replace(/\n/g,'')
+var script_code = table_code.replace('<table id=t><script>','').replace('<' + '/script>','')
+document.write(table_code)
+</script>
 
-
-
-
-
-
-
-
+<style>
+pre {
+  max-width: 60em;
+  white-space: pre-wrap;       /* css-3 */
+  white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+</style>
 
 <title>A Spreadsheet in 328 bytes of JavaScript</title>
 <b>A Spreadsheet in 328 bytes of JavaScript</b>
@@ -29,15 +39,17 @@ Features:
 
 Source:
 
-<pre>
-&lt;table id=t>&lt;script>for(a=h=e=[];6>a;a++)for(h+="&lt;
-tr>",c=0;d="@ABCDE"[c];h+="&lt;td>"+(a*c++?"&lt;input id
-=D onfocus=D[V]=[l.D] onblur=A(l.D=D[V])>".replace
-(/D/g,e[d+a]=d+a):+a||d))function A(){with(t)for(i
- in e)t[i]=top[i][V='value']="="!=(b=l[i]||'')[0]?
-b!=+b?b:(t[i]=b&&+b):eval(b.slice(1))}A(l=localSto
-rage,t.innerHTML=h)&lt;/script> // 328
-</pre>
+<pre id="source"></pre>
+<ul>
+  <li>All of the code, including the table tag, is <span id="table_code_length"></span> bytes.</li>
+  <li>Just the code inside the script tag is <span id="script_code_length"></span> bytes.</li>
+</ul>
+
+<script>
+table_code_length.textContent = table_code.length
+script_code_length.textContent = script_code.length
+source.textContent = table_code
+</script>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -47,4 +59,51 @@ rage,t.innerHTML=h)&lt;/script> // 328
 
   ga('create', 'UA-57649-13', 'aem1k.com');
   ga('send', 'pageview');
+</script>
+
+<!-- Tests -->
+<script>
+// test()
+function test() {
+  for (key in localStorage) { localStorage.removeItem(key) }
+
+  testcase('\nA1=tom;B1=A1')
+  set('A1','tom')
+  set('B1','=A1')
+  check('A1','tom')
+  check('B1','tom')
+  
+  // https://twitter.com/codazzo/status/405328423012163584
+  testcase('A2=2;B2=2+3;C2=A2+B2')
+  set('A2','2')
+  set('B2','=2+3')
+  set('C2','=A2+B2')
+  check('A2','2')
+  check('B2','5')
+  check('C2','7')
+
+  /*
+  testcase('There should be 26 columns.')
+  set('Y1','wildebeest')
+  set('Z1','=A1')
+  check('Y1','wildebeest')
+  check('Z1','wildebeest')
+  */
+
+  function testcase(title) {
+    console.log('\n' + title)
+  }
+  function set(cell, value) {
+    localStorage[cell] = value
+    document.getElementById(cell).onfocus()
+    document.getElementById(cell).onblur()
+  }
+  function check(cell, value) {
+    if (document.getElementById(cell).value === value) {
+      console.log('\u2713 #' + cell + ' is "' + value + '", as expected.')
+    } else {
+      console.log('\u2718 #' + cell + ' is "' + document.getElementById(cell) + '", not "' + value + '".')
+    }
+  }
+}
 </script>
