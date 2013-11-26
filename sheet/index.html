@@ -55,11 +55,24 @@ test()
 function test() {
   for (key in localStorage) { localStorage.removeItem(key) }
 
+  testcase('\nA1=tom;B1=A1')
   set('A1','tom')
   set('B1','=A1')
   check('A1','tom')
   check('B1','tom')
   
+  // https://twitter.com/codazzo/status/405328423012163584
+  testcase('A2=2;B2=2+3;C2=A2+B2')
+  set('A2','2')
+  set('B2','=2+3')
+  set('C2','=A2+B2')
+  check('A2','2')
+  check('B2','3')
+  check('C2','7')
+
+  function testcase(title) {
+    console.log('\n' + title)
+  }
   function set(cell, value) {
     localStorage[cell] = value
     document.getElementById(cell).onfocus()
