@@ -1,8 +1,6 @@
-<table id=t><script>function A(){for(a=h='';9>a;a++)for(h+="<tr>",c=0;d=" ABCDE"[c];)with(t)h+="<td>"+(c++?a?t[d+=a]=t[d]?top[d][V='value']="="!=(b=l[d]||'')[0]?b!=+b?b:(t[d]=b&&+b):eval(b.slice(1)):"<input id=D onfocus=D[V]=[l.D] onblur=A(l.D=D[V])>".replace(/D/g,d):d:a)}A(A(l=localStorage),t.innerHTML=h)</script>
+<table id=t><script>with(t)A=function(){for(a=h='';9>a;a++)for(h+="<tr>",c=0;d=" ABCDE"[c];)h+="<td>"+(c++?a?t[d+=a]=t[d]?top[d][V='value']="="!=(b=l[d]||'')[0]?b!=+b?b:t[d]=b&&+b:eval(b.slice(1)):"<input id=D onfocus=D[V]=[l.D] onblur=A(l.D=D[V])>".replace(/D/g,d):d:a)},A(A(l=localStorage),innerHTML=h)</script>
 
-<!-- 316 bytes -->
-
-
+<!-- 313 bytes -->
 
 
 
@@ -10,8 +8,10 @@
 
 
 
-<title>A Spreadsheet in 316 bytes of JavaScript</title>
-<b>A Spreadsheet in 316 bytes of JavaScript</b>
+
+
+<title>A Spreadsheet in 313 bytes of JavaScript</title>
+<b>A Spreadsheet in 313 bytes of JavaScript</b>
 
 <p>
   Main logic by <a href="http://ondras.zarovi.cz/">Ondras Zarovi</a> (<a href="http://jsfiddle.net/ondras/hYfN3/">source</a>),
@@ -30,13 +30,13 @@ Features:
 Source:
 
 <pre>
-&lt;table id=t>&lt;script>function A(){for(a=h='';9>a;a+
-+)for(h+="&lt;tr>",c=0;d=" ABCDE"[c];)with(t)h+="&lt;td>
+&lt;table id=t>&lt;script>with(t)A=function(){for(a=h=''
+;9>a;a++)for(h+="&lt;tr>",c=0;d=" ABCDE"[c];)h+="&lt;td>
 "+(c++?a?t[d+=a]=t[d]?top[d][V='value']="="!=(b=l[
-d]||'')[0]?b!=+b?b:(t[d]=b&&+b):eval(b.slice(1)):"
-&lt;input id=D onfocus=D[V]=[l.D] onblur=A(l.D=D[V])>
-".replace(/D/g,d):d:a)}A(A(l=localStorage),t.inner
-HTML=h)&lt;/script> // 316
+d]||'')[0]?b!=+b?b:t[d]=b&&+b:eval(b.slice(1)):"&lt;i
+nput id=D onfocus=D[V]=[l.D] onblur=A(l.D=D[V])>".
+replace(/D/g,d):d:a)},A(A(l=localStorage),innerHTM
+L=h)&lt;/script> // 313
 </pre>
 
 <script>
