@@ -1,8 +1,6 @@
-<table id=t><script>function A(){for(a=h='';9>a;a++)for(h+="<tr>",c=0;d=" ABCDE"[c];h+="<td>"+(a*c++?("<input onfocus=this.value=[l.D] onblur=A(l.D=this.value) value="+(top[d]=/=/.test(b=l[d])?eval(d+b):+b||[b])+">").replace(/D/g,d):d))d+=a;t.innerHTML=h}A(l=localStorage)</script>
+<table id=t><script>A=function(f){for(a=h="";9>a;a++)for(h+="<tr>",c=0;d=" ABCDE"[c];h+="<td>"+(a*c++?f?"<input id=Di onfocus=Di[V]=[l.D] onblur=l.D=Di[V];A()>".replace(/D/g,d):eval(d+"i[V='value']="+d+(l[d]||"''").replace(/^=?/,"=")):d))d+=a},A(A(l=localStorage),t.innerHTML=h)</script>
 
-<!-- 281 bytes -->
-
-
+<!-- 287 bytes -->
 
 
 
@@ -10,8 +8,10 @@
 
 
 
-<title>A Spreadsheet in 281 bytes of JavaScript</title>
-<b>A Spreadsheet in 281 bytes of JavaScript</b>
+
+
+<title>A Spreadsheet in 287 bytes of JavaScript</title>
+<b>A Spreadsheet in 287 bytes of JavaScript</b>
 
 <p>
   Main logic by <a href="http://ondras.zarovi.cz/">Ondras Zarovi</a> (<a href="http://jsfiddle.net/ondras/hYfN3/">source</a>),
@@ -30,12 +30,12 @@ Features:
 Source:
 
 <pre>
-&lt;table id=t>&lt;script>function A(){for(a=h='';9>a;a
-++)for(h+="&lt;tr>",c=0;d=" ABCDE"[c];h+="&lt;td>"+(a*c
-++?("&lt;input onfocus=this.value=[l.D] onblur=A(l.D
-=this.value) value="+(top[d]=/=/.test(b=l[d])?eva
-l(d+b):+b||[b])+">").replace(/D/g,d):d))d+=a;t.in
-nerHTML=h}A(l=localStorage)&lt;/script>
+&lt;table id=t>&lt;script>A=function(f){for(a=h="";9>a;
+a++)for(h+="&lt;tr>",c=0;d=" ABCDE"[c];h+="&lt;td>"+(a*
+c++?f?"&lt;input id=Di onfocus=Di[V]=[l.D] onblur=l.
+D=Di[V];A()>".replace(/D/g,d):eval(d+"i[V='value'
+]="+d+(l[d]||"''").replace(/^=?/,"=")):d))d+=a},A
+(A(l=localStorage),t.innerHTML=h)&lt;/script>
 <pre>
 
 <script>
