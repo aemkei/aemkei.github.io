@@ -84,10 +84,13 @@
 
 <!-- The code below is used to render the source and track the page. -->
 
+<br><br><hr>
+<tt><a href='view-source:http://aem1k.com/deathstar/'>view-source:</a>
+<pre id=x></pre>
+
 <script>
   var r = new XMLHttpRequest();
   r.onload = function(){
-    document.body.innerHTML += "<br><br><pre id=x>\t\tSource:\n\n\n";
     x.innerText += r.responseText
   };
   r.open("get", "#", true);
