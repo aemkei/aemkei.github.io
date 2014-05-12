@@ -1,0 +1,71 @@
+<style>
+textarea {
+  font-family: monospace;
+}
+</style>
+<textarea id="layout" cols=60 rows=21 oninput=update()>
+
+                                  #
+                                 #  #
+                              #   #######
+                             ##########       ##
+                       #  ################## ## #
+                        #######################
+              ###      ##########################
+            #######   ###########################
+      #   ########### ##########################
+   ###########################################
+      ##   ###### ##############################
+            ######   ############################
+              ##       #########################
+                        #######################
+                       #  ################## ## #
+                             ###########      ##
+                              #   ###### #
+                                 #  #
+                                  #
+
+
+
+
+
+</textarea>
+<textarea id="script" cols=60 rows=21 oninput=update()>
+E=1,z=1.07;function s(a){for(a&&(E=!E),H= "",z*=.9,T*=.8,Y=0;2>Y;Y+=.1){for(X=0;2>X;X+=.04){for(x=y=i=0;99>i&&99>=x*x+y*y;i++)t=2*x*y,x=x*x-y*y+z*X-z-Z/(1-T),y=t+z*Y-z/*###########################################*/-U;H+="  .+#"[i%5]}H+=n}P.innerHTML=H,!E&&setTimeout(s,99)}Z=1.749093,U=3.38774526e-7,onclick=s;Z+=5185097156e-16;n="\n"T=-2</textarea>
+
+<textarea id="output" cols=60 rows=21>
+</textarea>
+
+<button onclick=update()>Update</button>
+
+<script>
+
+function update () {
+    var  s = script.value,
+      l = layout.value,
+      j = 0;
+      o = "";
+
+    for (var i=0; i<l.length; i++){
+
+      c = l[i];
+
+      if (c == "#"){
+        c = s[j];
+        j++;
+
+        if (!c){
+          c = " "
+        }
+      }
+
+      o += c;
+
+    };
+
+    output.value = o;
+}
+
+update();
+
+</script>
