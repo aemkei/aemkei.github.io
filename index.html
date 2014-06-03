@@ -13,12 +13,12 @@
   <body>
     <div id="container">
     <pre>
-                                    __         
-                                  <b>_</b><i>/</i>\ \        
-                                 <b>/' \</b> \ \        
-          __      __    ___ ___ <i>/</i><b>\_, \</b> \ \/'\    
-        /'__`\  /'__`\/' __` __`\<i>/_/</i><b>\ \</b> \ , &lt;    
-  ___  <i>/</i>\ \L\.\.\  __/<i>/</i>\ \<i>/</i>\ \<i>/</i>\ \<i> \ </i><b>\ \</b> \ \\`\____  
+                                    __
+                                  <b>_</b><i>/</i>\ \
+                                 <b>/' \</b> \ \
+          __      __    ___ ___ <i>/</i><b>\_, \</b> \ \/'\
+        /'__`\  /'__`\/' __` __`\<i>/_/</i><b>\ \</b> \ , &lt;
+  ___  <i>/</i>\ \L\.\.\  __/<i>/</i>\ \<i>/</i>\ \<i>/</i>\ \<i> \ </i><b>\ \</b> \ \\`\____
 <i>/</i>\___\ <i>\ </i>\__/.\_\\____\ \_\ \_\ \_\<i> \ </i><b>\_\</b> \_\ \____\
 <i>\/___/  \/__/\/_//____/\/_/\/_/\/_/  \/_/\/_/\/____/</i>
 
@@ -31,10 +31,11 @@
     <h3>Projects</h3>
     <ul>
       <li><a href="/world">Hello World 1K</a> - Spinning globe embedded in JavaScript code</li>
-      <li><a href="/deathstar">ЗВЕЗДА СМЕРТИ - Death Star</a> 666 bytes ASCII art XSS attack</li>
       <li><a href="http://www.jsfuck.com/">JSFuck.com</a> - Write any JavaScript with 6 Characters: []()!+</li>
-      <li><a href="https://github.com/aemkei/fishbone.js">fishbone.js</a> – A super lightweight (½kb) JavaScript library</li>
+      <li><a href="/deathstar">ЗВЕЗДА СМЕРТИ - Death Star</a> 666 bytes ASCII art XSS attack</li>
+      <li><a href="/mandelcode">Mandelcode</a> – A quine zooming into the limits of JS</li>
       <li><a href="https://gist.github.com/aemkei/1672254">Binary Tetris</a> - Tetris in 140 bytes of JavaScript</li>
+      <li><a href="https://github.com/aemkei/fishbone.js">fishbone.js</a> – A super lightweight (½kb) JavaScript library</li>
       <li><a href="https://ubilabs.github.io/geocomplete/">$.geocomplete()</a> - jQuery Places AutoComplete</li>
       <li><a href="https://github.com/ubilabs/google-maps-api-threejs-layer">Three.js Layer</a> - WebGL overlays for the Google Maps API</li>
       <li><a href="https://npmjs.org/package/stagger">Stagger</a> – NPM package to handle request rates</li>
@@ -63,7 +64,7 @@ it(B = "\\\\")./*<b>           G####B" #       </b>*/join(B+B).split\
 +61*y-1]).fontcolor/*<b>         TP         </b>*/(/\\w/.test(S)&&"#\
 03B");document.body.innerHTML=p+=B+"\\n"}setTimeout(z)')//
 </pre>
-<a class="globe" href="/world">Spin the globe</a>
+<a class="globe" href="/world">Spin the globe</a> - Hello World 1K
 
 <pre id="deathstar">
                    Зв
@@ -89,6 +90,33 @@ it(B = "\\\\")./*<b>           G####B" #       </b>*/join(B+B).split\
 </pre>
 <a class="globe" href="/deathstar">ЗВЕЗДА СМЕРТИ</a> - Death Star
 
+
+
+<pre id="mandel">
+                                  E
+                                 =  1
+                              ,   z=1.07 ;
+                             function s(       a)
+                       {  for(a&&(E=!E),H="",z *=
+                        .9,T*=.8,Y=0;2>Y;Y+=.1)  {
+              for      (X=0;2>X;X+=.04){for(x=y=i
+            =0;99>i   &&99>=x*x+y*y;i++)t=2*x*y,x
+      =   x*x-y*y+z*X -z-Z/(1-T),y=t+z*Y-z-U;(/*
+   MANDELCODE=A-QUINE-BY-AEMKEI=CLICK-TO-ZOOM*/
+      H   )+="  .+#"[ i%5]}H+=n}!E&&setTimeout(s
+            ,99),P[   I]=H}Z=1.74909351846789013,
+              U  =     3.40220976e-7,onclick=s;n
+                        ="\n";P.textContent="<"  +
+                          "pre id=P>\n"+P[I= "i"+
+                             "nnerHTML"       ]
+                              T  /*aem1k*/
+                                 =  -
+                                  2
+</pre>
+
+<a class="globe" href="/mandelcode">Mandelcode</a> - A quine, zooming into JS
+
+
 <pre>
 function(a,b,c,d){d+
 =c;return[d&lt;0|a&b&lt;&lt;d
@@ -99,10 +127,17 @@ Date&2|1).replace('v
 d]}      <b>// tweetris</b>
 </0|a&b<<d></pre>
 
+<a class="globe" href="http://jsbin.com/egiqul/195">Tweetris</a> - Play Binary Tetris
+
+<br>
+<br>
+<br>
+
     <h3>Talks</h3>
     <ul>
       <li><a href="http://2013.jsconf.eu/speakers/martin-kleppe-1024-seconds-of-js-wizardry.html">1024+ Seconds of JS Wizardry</a> - JSConf 2013</li>
       <li><a href="https://www.youtube.com/watch?v=SinHLo5J0dg">The Dark Side</a> - Front End Ops Conference 2014</li>
+      <li><a href="https://speakerdeck.com/aemkei/jscamp-dot-ro-minified-javascript-craziness">xxx.min.js</a> - JSCamp.ro</li>
       <li><a href="https://docs.google.com/a/ubilabs.net/present/view?id=dds45w4x_88gz75dkgn">JS Golf Lessons</a> - FrOSCon 2011</li>
       <li><a href="https://docs.google.com/presentation/d/1azRe7gmmfaGs_QMNIMm4NUoDylf0wXjdqGjj9wH4z-Q/present">Binary Love</a> - HH.js 2012</li>
       <li><a href="http://slideshare.net/aemkei/google-maps-api-devfest-karlsruhe">Google Maps API</a> - GDG DevFest 2012</li>
@@ -144,10 +179,10 @@ MMMMMMMMMMMMs                <b>``..`````````     ```.-+shyydh.</b>    dMMMMMMMM
 MMMMMMMMMMMMy                 <b>``````````..``````--:/yMMNmh.</b>     /mMMMMMMMMMMMMMM
 MMMMMMMMMMMMs                    <b>`````` ``````````.-oNNh+.</b>       .+oyhhmMMMMMMMM
 MMMMMMMMMMMM.                  <b>`    ````````....-:ohmNd/`</b>                 `-:+sh
-MMMMMMMMMMMs                                <b>`...--/ydy:</b>                         
-MMMMMMMMmdy-                                      <b>`.-.</b>                          
-MMMNy+-.                                                                        
-ms:                                          <b>```</b>                                
+MMMMMMMMMMMs                                <b>`...--/ydy:</b>
+MMMMMMMMmdy-                                      <b>`.-.</b>
+MMMNy+-.
+ms:                                          <b>```</b>
 
     </pre>
 
@@ -160,14 +195,14 @@ ms:                                          <b>```</b>
 
     <hr>
 
-    
+
 
 <pre id="logo">
       <b>#</b>
       <b>#</b>
      <b>##</b>
       <b>#</b> #
-   ## <b>#</b> #  
+   ## <b>#</b> #
  ## # <b>#</b> # #
 # # # <b>#</b> ##
 # # # <b>#</b> # #

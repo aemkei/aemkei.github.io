@@ -238,7 +238,7 @@ pre i {
 }
 
 pre b {
-  color: yellow;  
+  color: yellow;
 }
 
 a {
@@ -264,6 +264,9 @@ pre#logo {
   line-height: 10px
 }
 
+#mandel {
+  line-height: 16px;
+}
 #globe {
   font-size: 13px;
   line-height: 15px;
