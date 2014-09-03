@@ -32,6 +32,7 @@
     <ul>
       <li><a href="/world">Hello World 1K</a> - Spinning globe embedded in JavaScript code</li>
       <li><a href="http://www.jsfuck.com/">JSFuck.com</a> - Write any JavaScript with 6 Characters: []()!+</li>
+      <li><a href="/שלום-עולם">שלום-עולם</a> - Valid JavaScript in the Hebrew alphabet</li>
       <li><a href="/deathstar">ЗВЕЗДА СМЕРТИ - Death Star</a> 666 bytes ASCII art XSS attack</li>
       <li><a href="/mandelcode">Mandelcode</a> – A quine zooming into the limits of JS</li>
       <li><a href="https://gist.github.com/aemkei/1672254">Binary Tetris</a> - Tetris in 140 bytes of JavaScript</li>
@@ -67,6 +68,23 @@ it(B = "\\\\")./*<b>           G####B" #       </b>*/join(B+B).split\
 </pre>
 <a class="globe" href="/world">Spin the globe</a> - Hello World 1K
 
+
+
+<pre>
+(![]+[])[+!+[]]+(![]+[])[!+[]+!+[]]+(!![]+[])
+[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]+(!![]+[])[+
+[]]+(![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[
+]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[+[]]+(
+!![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]])[!
++[]+!+[]+[+[]]]+[+!+[]]+(!![]+[][(![]+[])[+[]
+]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!
++[]]+(!![]+[])[+[]]+(!![]+[])[!+[]+!+[]+!+[]]
++(!![]+[])[+!+[]]])[!+[]+!+[]+[+[]]] // <b>()+[]!</b>
+</pre>
+
+<a class="globe" href="http://jsfuck.com">JSFuck</a> - Write JS with 6 chars!
+
+
 <pre id="deathstar">
                    Зв
                   езда
@@ -89,8 +107,18 @@ it(B = "\\\\")./*<b>           G####B" #       </b>*/join(B+B).split\
      р                          Ти
 </bOdY>
 </pre>
+
 <a class="globe" href="/deathstar">ЗВЕЗДА СМЕРТИ</a> - Death Star
 
+<pre dir="rtl" id="hebrew">
+<b>// שלום עולם</b>
+א="",ב=!א+א,ג=!ב+א,ד=א+{},ה=ב[א++]
+ו=ב[ח=א],ט=++ח+א,כ=ד[ח+ט],ב[כ+=ד[
+א]+(ד.ד+ד)[א]+ג[ט]+ה+ו+ב[ח]+כ+ה+ד[א
+]+ו][כ](ג[א]+ג[ח]+ב[ט]+ו+ה+"(א)")()
+</pre>
+
+<a class="globe" href="/שלום-עולם">שלום-עולם</a> - Hebrew JavaScript
 
 
 <pre id="mandel">
@@ -119,14 +147,14 @@ it(B = "\\\\")./*<b>           G####B" #       </b>*/join(B+B).split\
 
 
 <pre id="katakana">
-ウ=""   ,ア=     !ウ+     ウ,ネ     =!ア     +ウ,    ホ=ウ
-+{},    ヌ=ア    [ウ++    ],セ=     ア[ミ    =ウ]    ,ハ=
-++ミ    +ウ,     ヘ=ホ    [ミ+ハ    ],ア[    ヘ+=    ホ[ウ
-]+(ホ  .ホ+ホ    )[ウ]    +ネ[ハ    ]+ヌ+    セ+ア   [ミ]+
-ヘ+ヌ            +ホ[     ウ]+セ    ][ヘ]    (ネ[
-ウ]+             ネ[ミ              ]+ア     [ハ]+
-                 セ+ヌ+            "(ウ)"
-                 )()
+ウ=""   ,ア=   <b>  !ウ+   </b>  ウ,ネ     =!ア     +ウ,    ホ=ウ
++{},    ヌ=ア  <b>  [ウ++  </b>  ],セ=     ア[ミ    =ウ]    ,ハ=
+++ミ    +ウ,   <b>  ヘ=ホ  </b>  [ミ+ハ    ],ア[    ヘ+=    ホ[ウ
+]+(ホ  .ホ+ホ  <b>  )[ウ]  </b>  +ネ[ハ    ]+ヌ+    セ+ア   [ミ]+
+ヘ+ヌ          <b>  +ホ[   </b>  ウ]+セ    ][ヘ]    (ネ[
+ウ]+           <b>  ネ[ミ  </b>            ]+ア     [ハ]+
+              <b>   セ+ヌ+ </b>           "(ウ)"
+              <b>   )()   </b>
 </pre>
 
 <a class="globe" href="/katakana">Katakana</a> - Translate JS into Japanese
