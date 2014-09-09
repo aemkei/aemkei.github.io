@@ -21,11 +21,11 @@ D = B + B                 // 4 = 2 + 2
 E = B + C                 // 5 = 2 + 3
 F = C + C                 // 6 = 3 + 3
 G = C + D                 // 7 = 3 + 4
-H = D + D                 // 8 = 4 + 4
-I = D + E                 // 9 = 4 + 5
+// H = D + D                 // 8 = 4 + 4
+// I = D + E                 // 9 = 4 + 5
 
 c = O[E]                  // c = "[object Object]"[5]
-n = (G.A + O)[A]          // n = "undefined[object Object]"[1]
+n = (B.A + O)[A]          // n = "undefined[object Object]"[1]
 u = T[B]                  // u = "true"[2]
 o = O[A]                  // o = "[object Object]"[1]
 s = L[C]                  // s = "false"[3]
@@ -40,16 +40,16 @@ R = "\\"
 Q = "'"
 M = '"'
 
-X = function(arg){
-  return function(){
-    console.log(arg)
-    return Function(arg)()
-  }
-};
+// X = function(arg){
+//   return function(){
+//     console.log(arg)
+//     return Function(arg)()
+//   }
+// };
 
 X(
   X(
-    (K=r+e+t+u+r+n+S) + M +
+    (K = r+e+t+u+r+n + S) + M +
     X(
       K +
 
@@ -60,9 +60,9 @@ X(
         "允兔充兢兤偐偡偑" +
         Q
         + ")." +
-        r+e+p+R+A+E+D+a+c+e+"(/%../g,R)" +
+        r+e+p+(R+A+E+D)+a+c+e+      // replace
+        "(/%../"+ (R+A+D+G) +",R)" +  // (/%../g, '\')
         M
-
       )()
     )()
     + M
