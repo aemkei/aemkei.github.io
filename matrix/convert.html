@@ -1,0 +1,47 @@
+<style>
+body { width: 800px; word-wrap: break-word;}
+</style>
+
+
+<input id=s value="alert(1)">
+<br>
+<tt id=p>
+<script>
+
+bootstrap = 'A="",T=!A+A,L=!T+A,O=A+{},N=+A,t=T[A++],r=T[B=A],C=++B+A,D=B+B,' +
+  'E=B+C,F=C+C,G=C+D,H=D+D,I=D+E,c=O[E],n=(G.A+O)[A],u=T[B],o=O[A],s=L[C],' +
+  'e=T[C],X=T[P=c+o+n+s+t+r+u+c+t+o+r][P],S=" ",R="\\\\",Q="\'",' +
+  'X(X(r+e+t+u+r+n+S+Q+XXX+Q)())()';
+
+numbers = 'NABCDEFGHI';
+
+f = s.oninput = function(){
+  o = '';
+
+  for (i in s.value){
+
+    if (s.value.match(/[a-z0-9]/i)){
+
+      o += unescape(
+        '%u5' +
+        ('0' + s.value.charCodeAt(i).toString(8)).substr(-3)
+      );
+
+    }
+
+  }
+
+  o += '"';
+
+  // 'escape("' + o + '").replace(/%../g, "\\")';
+
+  o = bootstrap.replace('XXX', o);
+
+  p.innerHTML = o + '<hr>' +  o.length + ' chars';
+}
+
+f();
+
+</script>
+
+

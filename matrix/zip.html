@@ -1,0 +1,52 @@
+<style>
+body { width: 800px; word-wrap: break-word;}
+</style>
+
+
+<input id=s value="yabcdhelloxworldhellocbaworld">
+<br>
+<tt id=p>
+<script>
+
+f = s.oninput = function(){
+  o = [];
+
+  input = s.value;
+  substitutes = {};
+
+  replacer = 12354;
+
+  for (length = input.length; length; length--){
+
+    for (i = 0; i < input.length - length + 1; i++){
+
+      substring = input.substr(i, length);
+
+      if (
+        input.indexOf(substring) != i &&
+        substring < 'あ'
+      ) {
+        console.log(substring)
+
+        substitute = String.fromCharCode(replacer);
+        input = input.split(substring).join(substitute);
+
+        substitutes[substitute] = substring;
+
+        replacer++;
+        length = input.length;
+        break;
+      }
+    }
+  }
+
+  console.log(substitutes, input);
+
+  p.innerText = input + '\n' + JSON.stringify(substitutes, null, 2);
+}
+
+f();
+
+</script>
+
+
