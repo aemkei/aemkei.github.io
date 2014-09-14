@@ -1,5 +1,6 @@
 
-<meta charset="utf-8">.
+<meta charset="utf-8">
+<pre id=P style=background:black>
 <script id=Ö>
 
 
@@ -17,7 +18,7 @@
 H=Ö.innerHTML
 setInterval(function(){
   j+=1
-  document.body.innerHTML="<pre style=background:black>"+H.replace(/[^\t]*/g,function(c,i){
+  P.innerHTML=H.replace(/[^\t]*/g,function(c,i){
   	i = ~(i / 3) + j;
     return c.fontcolor("#3" + ("FC96"[i % 10] || 3) + 3);
   })

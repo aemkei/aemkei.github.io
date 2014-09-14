@@ -11,11 +11,7 @@ body { width: 400px; word-wrap: break-word;}
 <script>
 
 
-bootstrap = 'A="",T=!A+A,L=!T+A,O=A+{},N=+A,t=T[A++],r=T[B=A],C=++B+A,D=B+B,' +
-  'E=B+C,F=C+C,G=C+D,H=D+D,I=D+E,c=O[E],n=(G.A+O)[A],u=T[B],o=O[A],s=L[C],' +
-  'e=T[C],X=T[P=c+o+n+s+t+r+u+c+t+o+r][P],S=" ",R="\\\\",Q="\'",M=\'"\',X(X(' +
-  '(K=r+e+t+u+r+n+S)+M+X(K+X(K+M+e+s+c+(a=L[A])+(p=R+A+F+N)+e+"("+Q+"###"' +
-  '+Q+")."+r+e+p+R+A+E+D+a+c+e+"(/%../"+R+A+D+G+",R)"+M)())()+M)())()';
+bootstrap = 'A="";T=!A+A;L=!T+A;O=A+{};N=+A;t=T[A++];r=T[B=A];C=++B+A;D=B+B;E=B+C;F=C+C;G=C+D;c=O[E];n=(B.A+O)[A];u=T[B];o=O[A];s=L[C];e=T[C];X=T[P=c+o+n+s+t+r+u+c+t+o+r][P];S=" ";R="\\\\";Q="\'";M=\'"\';X(X((K=r+e+t+u+r+n+S)+M+X(K+X(K+M+e+s+c+(a=L[A])+(p=R+A+F+N)+e+"("+Q+"###"+Q+(Y=")."+r+e+p+(R+A+E+D)+a+c+e+"(/")+("%."+(W="/"+(R+A+D+G)+",\'")+"\'")+(Y+"(..)"+W+R+R+R+R+R+A+G+N+"$"+A+"\')")+M)())()+M)())()';
 
 
 // 146 left
@@ -46,21 +42,22 @@ for (i = 65; i < 122; i++) {
 
 numbers = 'NABCDEFGHI';
 
+
+
+
 f = s.oninput = function(){
   o = '';
 
-  for (i in s.value){
+  for (i=0; i<s.value.length; i+=2){
 
     char = s.value[i];
 
-    if (char.match(/[a-z0-9]/i) || escape(char) != char){
-      o += unescape(
-        '%u5' +
-        ('0' + char.charCodeAt(0).toString(8)).substr(-3)
-      );
-    } else {
-      o += char;
-    }
+    o += unescape(
+      '%u' +
+      s.value.charCodeAt(i).toString(16) +
+      (s.value.charCodeAt(i+1)||32).toString(16)
+    );
+
   }
 
   o = bootstrap.replace('###', o);
