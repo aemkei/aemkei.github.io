@@ -1,0 +1,67 @@
+<meta charset="utf-8">
+<script>
+
+// 343 chars
+
+/// 'A="",T=!A+A,L=!T+A,O=A+{},t=T[0],r=T[1],c=O[5],n=(T.L+O)[1],u=T[2],o=O[1],s=L[3],e=T[3],X=T[P=c+o+n+s+t+r+u+c+t+o+r][P],S=" ",R="\\\\",Q="\'",M=\'"\',X(X((K=r+e+t+u+r+n+S)+M+X(K+X(K+M+e+s+c+(a=L[1])+(p=R+160)+e+"("+Q+"###"+Q+(Y=")."+r+e+p+R+154+a+c+e+"(/")+("%."+(W="/"+R+147+",\'")+"\'")+(Y+"(..)"+W+R+R+R+R+R+170+"$1\')")+M)())()+M)())()'
+
+
+A = ""                    // ""
+
+T = !A + A                // "true"
+L = !T + A                // "false"
+O = A + {}                // "[object Object]"
+
+t = T[0]                  // t = "true"[0]
+
+r = T[1]                  // r = "true"[1]
+
+c = O[5]                  // c = "[object Object]"[5]
+n = (T.L + O)[1]          // n = "undefined[object Object]"[1]
+u = T[2]                  // u = "true"[2]
+o = O[1]                  // o = "[object Object]"[1]
+s = L[3]                  // s = "false"[3]
+e = T[3]                  // e = "true"[3]
+
+X = T[
+  P = c+o+n+s+t+r+u+c+t+o+r
+][P]
+
+S = " "
+R = "\\"
+Q = "'"
+M = '"'
+
+X(
+  X(
+   (K = r+e+t+u+r+n + S) + M +
+    X(
+      K +
+      X(
+        K + M +
+        e+s+c+(a=L[1])+(p=R+160)+e+"("+  // escpae
+        Q +
+        "慬敲琨ㄩ" +
+        Q +
+        (
+          Y =
+          ")." +
+          r+e+p+R+154+a+c+e+      // replace
+          "(/"
+        ) +
+        (
+          "%." + (W = "/"+ R+147 +",'") + "'"
+        ) +
+        (
+          Y + "(..)" +
+          W +
+          R + R + R + R + R+170 + "$1')"
+        ) +
+        M
+      )()
+    )()
+    + M
+ )()
+)()
+
+</script>
