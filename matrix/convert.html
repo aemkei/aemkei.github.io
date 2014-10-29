@@ -1,23 +1,32 @@
 <meta charset="utf-8">
 
 <style>
-body { width: 400px; word-wrap: break-word;}
+  body { word-wrap: break-word;}
+
+  canvas, textarea, tt {
+    float: left;
+    width: 400px;
+    margin-right: 20px
+  }
+
+  textarea {
+    height: 160px
+  }
+
 </style>
 
+<canvas id=q><script id=source>y=p=[h=q.width=360,q.height=220,i=0];setInterval("_Style=i?'rgba(0,0,0,.03)':0;_Rect(0,0,h,h);_Style=++i%2?'#0F0':'#FFF';for(x=I;x;p[x]=y>I+Math.random()*h||y+i%2)_Text(q.innerHTML[--x+I*(y=p[x]|0)-I],12*x,12*y);_Text(' SOURCECODE'[i]||'',12*i+120,120)".replace(/_/g,"q.getContext('2d').fill"),I=30)</script>
 
-<input id=s value="alert(1+1)">
-<br>
-<tt id=p>
+</canvas>
+
+<textarea id=s>alert(1+1)</textarea>
+
+<tt id=code></tt>
 <script>
-
 
 // bootstrap = 'A="";T=!A+A;L=!T+A;O=A+{};N=+A;t=T[A++];r=T[B=A];C=++B+A;D=B+B;E=B+C;F=C+C;G=C+D;c=O[E];n=(B.A+O)[A];u=T[B];o=O[A];s=L[C];e=T[C];X=T[P=c+o+n+s+t+r+u+c+t+o+r][P];S=" ";R="\\\\";Q="\'";M=\'"\';X(X((K=r+e+t+u+r+n+S)+M+X(K+X(K+M+e+s+c+(a=L[A])+(p=R+A+F+N)+e+"("+Q+"###"+Q+(Y=")."+r+e+p+(R+A+E+D)+a+c+e+"(/")+("%."+(W="/"+(R+A+D+G)+",\'")+"\'")+(Y+"(..)"+W+R+R+R+R+R+A+G+N+"$"+A+"\')")+M)())()+M)())()'; -->
 
 bootstrap = 'A="",T=!A+A,L=!T+A,O=A+{},t=T[0],r=T[1],c=O[5],n=(T.L+O)[1],u=T[2],o=O[1],s=L[3],e=T[3],X=T[P=c+o+n+s+t+r+u+c+t+o+r][P],S=" ",R="\\\\",Q="\'",M=\'"\',X(X((K=r+e+t+u+r+n+S)+M+X(K+X(K+M+e+s+c+(a=L[1])+(p=R+160)+e+"("+Q+"###"+Q+(Y=")."+r+e+p+(R+154)+a+c+e+"(/")+("%."+(W="/"+R+147+",\'")+"\'")+(Y+"(..)"+W+R+R+R+R+R+170+"$1\')")+M)())()+M)())()';
-
-
-// 146 left
-
 
 
 start = 'ぁ'.charCodeAt(0);
@@ -35,11 +44,7 @@ for (i = 65; i < 122; i++) {
   }
 }
 
-
 numbers = 'NABCDEFGHI';
-
-
-
 
 f = s.oninput = function(){
   o = '';
@@ -58,12 +63,19 @@ f = s.oninput = function(){
 
   o = bootstrap.replace('###', o);
 
-  p.innerHTML = o + '<hr>' +  o.length + ' chars<hr>' +
+  q.innerText = o;
+
+  o = "<meta charset=utf-8><canvas id=q><script>" + o + "</"+"script>";
+
+  console.log(code)
+
+  code.innerText = o;
+  code.innerHTML += '<hr>' +  o.length + ' chars<hr>' +
     encodeURIComponent(o).replace(/%[A-F\d]{2}/g, 'U').length + ' bytes'
 }
+
+s.value = source.innerHTML;
 
 f();
 
 </script>
-
-
