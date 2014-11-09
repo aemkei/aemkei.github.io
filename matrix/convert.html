@@ -15,8 +15,8 @@
 
 </style>
 
-<canvas id=q><script id=source>y=p=[h=q.width=360,q.height=220,i=0];setInterval("_Style=i?'rgba(0,0,0,.03)':0;_Rect(0,0,h,h);_Style=++i%2?'#0F0':'#FFF';for(x=I;x;p[x]=y>I+Math.random()*h||y+i%2)_Text(q.innerHTML[--x+I*(y=p[x]|0)-I],12*x,12*y);_Text(' SOURCECODE'[i]||'',12*i+120,120)".replace(/_/g,"q.getContext('2d').fill"),I=30)</script>
-
+<canvas id=q>
+<script>y=p=[h=q.width=368,q.height=210,i=0];setInterval("_Style=i?'rgba(0,0,0,.02)':0;_Rect(0,0,h,h);_Style=++i%2?'#0F0':'#FFF';for(x=I;x;p[x]=y>I+Math.random()*h||y+i%2)_Text(q.innerHTML[x--+I*(y=p[x]|0)-I]||'',12*x+4,12*y);_Text(' M1K MATRIX'[i]||'',12*i+231,204)".replace(/_/g,"q.getContext('2d').fill"),I=30)</script>
 </canvas>
 
 <textarea id=s>alert(1+1)</textarea>
@@ -67,14 +67,12 @@ f = s.oninput = function(){
 
   o = "<meta charset=utf-8><canvas id=q><script>" + o + "</"+"script>";
 
-  console.log(code)
-
   code.innerText = o;
   code.innerHTML += '<hr>' +  o.length + ' chars<hr>' +
     encodeURIComponent(o).replace(/%[A-F\d]{2}/g, 'U').length + ' bytes'
 }
 
-s.value = source.innerHTML;
+s.value = document.querySelector('#q script').innerHTML;
 
 f();
 
