@@ -15,16 +15,15 @@
 
 </style>
 
-<canvas id=q>
-<script>y=p=[h=q.width=368,q.height=210,i=0];setInterval("_Style=i?'rgba(0,0,0,.02)':0;_Rect(0,0,h,h);_Style=++i%2?'#0F0':'#FFF';for(x=I;x;p[x]=y>I+Math.random()*h||y+i%2)_Text(q.innerHTML[x--+I*(y=p[x]|0)-I]||'',12*x+4,12*y);_Text(' M1K MATRIX'[i]||'',12*i+231,204)".replace(/_/g,"q.getContext('2d').fill"),I=30)</script>
+<canvas id=雨>
+<script>c=\u96e8,y=p=[h=c.width=360,c.height=210,i=0];setInterval("_Style=i?'rgba(0,0,0,.02)':0;_Rect(0,0,h,h);_Style=++i%2?'#0C0':'#FFF';for(x=I;x;p[x]=y>I+Math.random()*h||y+i%2)_Text(c.innerHTML[x--+I*(y=p[x]|0)-I]||'',12*x,12*y);_Text(' -M4TR1X'[i],12*i+263,204)".replace(/_/g,"c.getContext('2d').fill"),I=30)</script>
 </canvas>
-
 <textarea id=s>alert(1+1)</textarea>
 
 <tt id=code></tt>
 <script>
 
-// bootstrap = 'A="";T=!A+A;L=!T+A;O=A+{};N=+A;t=T[A++];r=T[B=A];C=++B+A;D=B+B;E=B+C;F=C+C;G=C+D;c=O[E];n=(B.A+O)[A];u=T[B];o=O[A];s=L[C];e=T[C];X=T[P=c+o+n+s+t+r+u+c+t+o+r][P];S=" ";R="\\\\";Q="\'";M=\'"\';X(X((K=r+e+t+u+r+n+S)+M+X(K+X(K+M+e+s+c+(a=L[A])+(p=R+A+F+N)+e+"("+Q+"###"+Q+(Y=")."+r+e+p+(R+A+E+D)+a+c+e+"(/")+("%."+(W="/"+(R+A+D+G)+",\'")+"\'")+(Y+"(..)"+W+R+R+R+R+R+A+G+N+"$"+A+"\')")+M)())()+M)())()'; -->
+q = 雨;
 
 bootstrap = 'A="",T=!A+A,L=!T+A,O=A+{},t=T[0],r=T[1],c=O[5],n=(T.L+O)[1],u=T[2],o=O[1],s=L[3],e=T[3],X=T[P=c+o+n+s+t+r+u+c+t+o+r][P],S=" ",R="\\\\",Q="\'",M=\'"\',X(X((K=r+e+t+u+r+n+S)+M+X(K+X(K+M+e+s+c+(a=L[1])+(p=R+160)+e+"("+Q+"###"+Q+(Y=")."+r+e+p+(R+154)+a+c+e+"(/")+("%."+(W="/"+R+147+",\'")+"\'")+(Y+"(..)"+W+R+R+R+R+R+170+"$1\')")+M)())()+M)())()';
 
@@ -65,14 +64,14 @@ f = s.oninput = function(){
 
   q.innerText = o;
 
-  o = "<meta charset=utf-8><canvas id=q><script>" + o + "</"+"script>";
+  o = "<meta charset=utf-8><canvas id=雨>\n<script>" + o + "</"+"script>";
 
   code.innerText = o;
   code.innerHTML += '<hr>' +  o.length + ' chars<hr>' +
     encodeURIComponent(o).replace(/%[A-F\d]{2}/g, 'U').length + ' bytes'
 }
 
-s.value = document.querySelector('#q script').innerHTML;
+s.value = document.querySelector('#雨 script').innerHTML;
 
 f();
 
