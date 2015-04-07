@@ -1,5 +1,5 @@
 <script>
-var a = 'eval(eval(\'"\'+escape(X).replace(/..(.)..(.)/g,\'\\\\x$1$2\')+\'"\'))'.replace(/./g, function(x) {
+var a = 'eval(eval(\'"\'+escape(XXXX).replace(/.{5}(.).{5}(.).{5}(.)/g,\'\\\\$1$2$3\')+\'"\'))'.replace(/./g, function(x) {
   var allowed = "()[]X",
   	code = x.charCodeAt(0);
   if (
