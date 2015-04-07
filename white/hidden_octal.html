@@ -1,0 +1,44 @@
+<meta charset='utf-8'>
+<body>
+
+<script id="script" type="source">alert(1)</script>
+
+<script>
+
+var CHARS = [1760,1461,8232,8233,8234,8235,8236,8237];
+var CHARS = [1440,1441,1442,1443,1444,1445,1446,1447];
+// var CHARS = [304,305,306,307,308,309,310,312];
+
+a = script.innerHTML
+  .replace(/./g, function(x){
+    return (
+      '000' + x.charCodeAt(0).toString(8)
+    ).substr(-3)
+  });
+
+console.log('a="' + a + '"');
+
+b = a
+  .replace(/./g, function(A){
+    var code = parseInt(A, 8);
+    return String.fromCharCode(CHARS[code]);
+  })
+
+console.log('b=\'' + b + '\'');
+
+console.log('b=' + escape(b));
+
+// c = escape(b).replace(/..(.)..(.)/g,'\\x$1$2')
+// c = escape(b).replace(/.....(.).....(.).....(.)/g,'\\$1$2$3')
+// c = escape(b).replace(/.{5}(.).{5}(.).{5}(.)/g,'\\$1$2$3')
+c = escape(b).replace(/%..../g,'').replace(/(...)/g,'\\$1')
+console.log('c="' + c + '"');
+
+d = eval('"'+ c +  '"');
+console.log('d="' + d + '"');
+
+
+// eval(eval('"'+escape(XXXX).replace(/.{5}(.).{5}(.).{5}(.)/g,'\\$1$2$3')+'"'))
+
+
+</script>
