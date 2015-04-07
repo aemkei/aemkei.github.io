@@ -1,0 +1,41 @@
+<script>
+
+a = 0;
+b = 3;
+c = 32
+
+
+setInterval(onkeydown = function(d){
+
+  d=d||5;
+
+  if (e = d.keyCode){
+    d = (e % 2 ? e % 3 ? -1 : 1 : 5);
+  }
+
+  t = "<pre>";
+
+  d = c-d;
+  e = a | b << d;
+  d < 0 | a & b << d && (
+    a = e = parseInt(
+      (a | b << c)
+        .toString(d = 32)
+        .replace(/v/, ""),
+      d
+    ),
+    b = new Date % 2 ? 1 : 3
+  )
+
+  c = d;
+
+  for(i = 1; i < 31;) {
+    t += ".#"[(1<<30|e).toString(2)[i]&1] + (i++ % 5 ? "" : "\n");
+  }
+
+  document.body.innerHTML = t;
+
+}, 888);
+
+
+</script>
