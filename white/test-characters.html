@@ -1,0 +1,97 @@
+<meta charset="UTF-8">
+
+<style>
+  div {
+    font-family: monospace;
+    font-size: 2em;
+    background: yellow;
+    display: inline-block;
+    -moz-control-character-visibility: visible;
+  }
+</style>
+
+<div id="output">loading…</div>
+
+<canvas id="canvas"></canvas>
+
+<script>
+
+  var ctx = canvas.getContext('2d');
+  ctx.fillText("o", 100, 100);
+
+  url = canvas.toDataURL();
+
+
+
+  var a = new Array(100),
+    matches = [],
+    char;
+
+  for (var i=0; i<=3000; i++) {
+    char = String.fromCharCode(0 + i);
+    output.innerHTML = a.join(char);
+
+    if (!output.clientWidth) {
+
+
+
+      if (i % 10 < 2){
+
+        matches.push(char);
+      }
+
+
+
+      // ctx.fillText("o" + char, 100, 100);
+      // if (canvas.toDataURL() == url){
+      // }
+      // ctx.clearRect(0,0,300,150);
+
+
+    }
+  }
+
+  chars = "a" + matches.join("");
+
+  console.log(chars)
+
+  console.log('"' + matches.join('') + '"');
+
+
+  matches = matches.map(function(m) {
+    return m.charCodeAt(0) + " " + m + " " + escape(m)//.replace("%", "\\u");
+  })
+
+  output.innerHTML = matches.join("<br>");
+
+
+  var test = "";
+
+  chars = [1760,1461,8232,8233,8234,8235,8236,8237];
+
+  for (var i=0; i<500; i++){
+    test += String.fromCharCode(chars[i % chars.length ]);
+  }
+
+
+  console.log("test:", '"' + test + '"');
+
+
+</script>
+
+847 ͏ %u034F
+8203 ​ %u200B
+8206 ‎ %u200E
+8207 ‏ %u200F
+
+
+
+1760 ۠ %u06E0
+1461 ֵ %u05B5
+1471 ֿ %u05BF
+8232  %u2028
+8233  %u2029
+8234 ‪ %u202A
+8235 ‫ %u202B
+8236 ‬ %u202C
+8237 ‭ %u202D

@@ -1,0 +1,104 @@
+<meta charset="utf-8">
+
+<style>
+  body { word-wrap: break-word;}
+
+  canvas, textarea, tt {
+    float: left;
+    width: 400px;
+    margin-right: 20px
+  }
+
+  textarea {
+    height: 160px
+  }
+
+</style>
+
+
+<textarea id=s>alert(1+1)</textarea>
+
+<tt id=code></tt>
+
+<script type="demo">b=!setInterval('for(a=b,b=h=[],i=3760;i--;h+="\u2581\u2589-"[i%92?b[i]=a?3==d|a[i]&2==d:24*i%7%2:2])for(d=0,j=5;e=(2<j--)*89+j;)d+=a[i+e]+a[i-e];document.body.innerHTML=h',99)</script>
+
+
+<script type="bootstrap">A="",T=!A+A,L=!T+A,O=A+{},M='"',t=T[0],r=T[1],c=O[5],n=(T.L+O)[1],u=T[2],o=O[1],s=L[3],e=T[3],a=L[1],K=r+e+t+u+r+n+" ",X=(P=c+o+n+s+t+r+u+c+t+o+r)[P][P],X(X(K+M+X(K+X(K+M+e+s+c+a+(p="\\160")+e+"('###')."+r+e+p+"\\154"+a+c+e+"(/"+(f=".{5}(.)")+f+f+"/\\147,'\\\\\\\\$1$2$3')"+M)())()+M)())()</script>
+
+<script>
+
+bootstrap = document.querySelector('script[type=bootstrap]').innerHTML;
+
+
+// תֹ֙הוּ֙וָבֹ֔הוּ
+// תהוובהו
+// בֹּ֫הוּ = bohu = emptiness
+// תֹּ֫הוּ = tuhu = formlessness, confusion, unreality, emptiness
+
+start = 'א'.charCodeAt(0) + 1;
+alphabet = [];
+
+chars = ["ו", "בה", "ד", "ה", "ז", "ח", "ט", "י", "ך", "כ", "ל", "ם", "מ", "ן", "נ", "ס", "ע", "ף"];
+c = 0;
+
+for (i = 65; i < 122; i++) {
+  input = String.fromCharCode(i);
+
+  if (
+    !(i > 90 && i<97) &&
+    bootstrap.match(input)
+  ) {
+    output = String.fromCharCode(start);
+    bootstrap = bootstrap.split(input).join(output);
+    alphabet.push(output);
+    start++;
+  }
+}
+console.log('alphabet', alphabet)
+
+
+f = s.oninput = function(){
+
+  var CHARS = [1440,1441,1458,1443,1444,1445,1446,1447];
+
+  o = s.value.replace(/./g, function(x){
+    return (
+      '000' + x.charCodeAt(0).toString(8)
+    ).substr(-3)
+  });
+
+  console.log(o);
+
+  o = '40' + o;
+
+  o = o.replace(/./g, function(A){
+    var code = parseInt(A, 8);
+    return String.fromCharCode(CHARS[code]);
+  })
+
+  o = 'א' + o;
+
+  console.log(o);
+
+  console.log(eval('"'+escape(o).replace(/.{5}(.).{5}(.).{5}(.)/g,'\\$1$2$3')+'"'))
+
+  o = bootstrap.replace('###', o);
+
+
+  o = "<script>" + o + "</"+"script>";
+
+  console.log(
+    o.replace(/(["'\\])/g, "\\$1")
+  )
+
+  code.innerText = o;
+  code.innerHTML += '<hr>' +  o.length + ' chars<hr>' +
+    encodeURIComponent(o).replace(/%[A-F\d]{2}/g, 'U').length + ' bytes'
+
+}
+
+s.value = document.querySelector('script[type=demo]').innerHTML;
+
+f();
+
+</script>

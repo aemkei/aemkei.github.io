@@ -1,0 +1,52 @@
+<meta charset='utf-8'>
+<body>
+
+<script id="script" type="source">for(b=i=[X=3772];i--;)b[i]=68*i%9%2;setInterval('for(a=b,b=[h="<pre>"],i=0;i++<X;i%w||(h+="\\n")){for(d=j=0;e=[1,91,w,93][j++];)d+=a[i+e]+a[i-e];h+=".#"[b[i]=3==d|a[i]&2==d]}document.body.innerHTML=h',w=92)</script>
+
+<script>
+
+//http://codepoints.net/U+0090
+
+
+var B = "";
+
+var A = "";
+
+C=(C="constructor")[C][C];
+
+// C('X="'+escape(A).replace(/..(.)..(.)/g,'\\x$1$2')+'"')();C(X)()
+
+
+// eval(eval('"'+escape(A).replace(/..(.)..(.)/g,'\\x$1$2')+'"'))
+
+// C(C('return "'+escape(A).replace(/..(.)..(.)/g,'\\x$1$2')+'"')())()
+
+// for (var i=0,A='';i<16; i++){A+=String.fromCharCode(16+i)};
+
+
+a = script.innerHTML
+  .replace(/./g, function(x){
+    return x
+      .charCodeAt(0)
+      .toString(16)
+      .toUpperCase();
+  })
+
+console.log('a="' + a + '"');
+
+b = a
+  .replace(/./g, function(A){
+    var code = parseInt(A, 16);
+    return String.fromCharCode(16 + code);
+  })
+
+console.log('b="' + b + '"', b.length);
+
+c = escape(b).replace(/..(.)..(.)/g,'\\x$1$2')
+console.log('c="' + c + '"');
+
+d = eval('"'+ c +  '"');
+console.log('d="' + d + '"');
+
+
+</script>
