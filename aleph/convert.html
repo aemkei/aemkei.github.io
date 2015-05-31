@@ -23,7 +23,7 @@
 <script type="demo">b=!setInterval('for(a=b,b=h=[],i=3760;i--;h+="\u2581\u2589-"[i%92?b[i]=a?3==d|a[i]&2==d:24*i%7%2:2])for(d=0,j=5;e=(2<j--)*89+j;)d+=a[i+e]+a[i-e];document.body.innerHTML=h',99)</script>
 
 
-<script type="bootstrap">A="",T=!A+A,L=!T+A,O=A+{},M='"',t=T[0],r=T[1],c=O[5],n=(T.L+O)[1],u=T[2],o=O[1],s=L[3],e=T[3],a=L[1],p="\\160",K=r+e+t+u+r+n+" ",X=T[P=c+o+n+s+t+r+u+c+t+o+r][P],X(X(K+M+X(K+X(K+M+e+s+c+a+p+e+"('###')."+r+e+p+"\\154"+a+c+e+"(/"+(f=".{5}(.)")+f+f+"/\\147,'\\\\\\\\$1$2$3')"+M)())()+M)())()</script>
+<script type="bootstrap">A="",T=!A+A,L=!T+A,O=A+{},M='"',t=T[0],r=T[1],c=O[5],n=(T.L+O)[1],u=T[2],o=O[1],s=L[3],e=T[3],a=L[1],K=r+e+t+u+r+n+" ",X=(P=c+o+n+s+t+r+u+c+t+o+r)[P][P],X(X(K+M+X(K+X(K+M+e+s+c+a+(p="\\160")+e+"('###')."+r+e+p+"\\154"+a+c+e+"(/"+(f=".{5}(.)")+f+f+"/\\147,'\\\\\\\\$1$2$3')"+M)())()+M)())()</script>
 
 <script>
 
@@ -59,7 +59,7 @@ console.log('alphabet', alphabet)
 
 f = s.oninput = function(){
 
-  var CHARS = [1440,1441,1442,1443,1444,1445,1446,1447];
+  var CHARS = [1440,1441,1458,1443,1444,1445,1446,1447];
 
   o = s.value.replace(/./g, function(x){
     return (
@@ -78,10 +78,12 @@ f = s.oninput = function(){
 
   o = 'א' + o;
 
-
   console.log(o);
 
+  console.log(eval('"'+escape(o).replace(/.{5}(.).{5}(.).{5}(.)/g,'\\$1$2$3')+'"'))
+
   o = bootstrap.replace('###', o);
+
 
   o = "<script>" + o + "</"+"script>";
 
@@ -92,6 +94,7 @@ f = s.oninput = function(){
   code.innerText = o;
   code.innerHTML += '<hr>' +  o.length + ' chars<hr>' +
     encodeURIComponent(o).replace(/%[A-F\d]{2}/g, 'U').length + ' bytes'
+
 }
 
 s.value = document.querySelector('script[type=demo]').innerHTML;
