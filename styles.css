@@ -286,3 +286,8 @@ pre#logo {
   font-size: 0.9em;
   line-height: 1.2em;
 }
+
+#pacman {
+  line-height: 0.9;
+  letter-spacing: 0.1em;
+}
