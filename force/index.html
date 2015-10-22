@@ -18,6 +18,10 @@ html, body {
 
 <script>
 
+
+/// https://www.youtube.com/watch?v=Ff6Y51EP69M
+/// http://2015.ffconf.org/js/starfield.js
+
 var Star = function(x, y, maxSpeed) {
     this.x = x;
     this.y = y;
@@ -31,55 +35,46 @@ Star.prototype.resetPosition = function(x, y, maxSpeed) {
     return this;
 };
 
-var BigBang = {
 
-    getRandomStar: function(minX, minY, maxX, maxY, maxSpeed) {
-        var coords = BigBang.getRandomPosition(minX, minY, maxX, maxY);
-        return new Star(coords.x, coords.y, maxSpeed);
-    },
+function getRandomStar(minX, minY, maxX, maxY, maxSpeed) {
+    var coords = getRandomPosition(minX, minY, maxX, maxY);
+    return new Star(coords.x, coords.y, maxSpeed);
+}
 
-    getRandomPosition: function(minX, minY, maxX, maxY) {
-        return {
-            x: (Math.random() * 999)-500,
-            y: (Math.random() * 999)-500
-        };
-    }
-};
+function getRandomPosition(minX, minY, maxX, maxY) {
+    return {
+        x: (Math.random() * 999)-500,
+        y: (Math.random() * 999)-500
+    };
+}
 
-var StarField = function(containerId) {
-    this.container = document.getElementById(containerId);
-    this.canvasElem = this.container.getElementsByTagName('canvas')[0];
-    this.canvas = this.canvasElem.getContext('2d');
 
-    this.width = this.container.offsetWidth;
-    this.height = this.container.offsetHeight;
+container = document.getElementById("fullScreen");
+canvasElem = container.getElementsByTagName('canvas')[0];
+canvas = canvasElem.getContext('2d');
 
-    this.starField = [];
+width = canvasElem.width = container.offsetWidth;
+height = canvasElem.height = container.offsetHeight;
 
-    this.numStars = 300;
-    this.maxStarSpeed = 3;
+starField = [];
 
-    var i;
-    for (i = 0; i < this.numStars; i++) {
-        this.starField.push(
-            BigBang.getRandomStar(-this.width / 2, -this.height / 2, this.width, this.height, this.maxStarSpeed)
-        );
-    }
+numStars = 300;
+maxStarSpeed = 3;
 
-    this.width = this.canvasElem.width = this.container.offsetWidth;
-    this.height = this.canvasElem.height = this.container.offsetHeight;
+for (i = 0; i < numStars; i++) {
+    starField.push(
+        getRandomStar(-width / 2, -height / 2, width, height, maxStarSpeed)
+    );
+}
 
-    setInterval(this._updateStarField.bind(this));
-};
-
-StarField.prototype._updateStarField = function() {
+setInterval(function() {
     var i,
         star,
         randomLoc,
         increment;
 
-    for (i = 0; i < this.numStars; i++) {
-        star = this.starField[i];
+    for (i = 0; i < numStars; i++) {
+        star = starField[i];
 
         increment = Math.min(star.speed, Math.abs(star.speed / star.slope));
         star.x += (star.x > 0) ? increment : -increment;
@@ -88,34 +83,31 @@ StarField.prototype._updateStarField = function() {
         star.opacity += star.speed / 100;
 
         // Recycle star obj if it goes out of the frame
-        if ((Math.abs(star.x) > this.width / 2) ||
-            (Math.abs(star.y) > this.height / 2)) {
-            randomLoc = BigBang.getRandomPosition(
-                -this.width / 10, -this.height / 10,
-                   this.width / 5, this.height / 5
+        if ((Math.abs(star.x) > width / 2) ||
+            (Math.abs(star.y) > height / 2)) {
+            randomLoc = getRandomPosition(
+                -width / 10, -height / 10,
+                   width / 5, height / 5
             );
-            star.resetPosition(randomLoc.x, randomLoc.y, this.maxStarSpeed);
+            star.resetPosition(randomLoc.x, randomLoc.y, maxStarSpeed);
         }
     }
 
     var i,
         star;
     // Background
-    this.canvas.fillStyle = "rgba(0, 0, 0, .5)";
-    this.canvas.fillRect(0, 0, this.width, this.height);
+    canvas.fillStyle = "rgba(0, 0, 0, .5)";
+    canvas.fillRect(0, 0, width, height);
 
     // Stars
-    for (i = 0; i < this.numStars; i++) {
-        star = this.starField[i];
-        this.canvas.fillStyle = "rgba(255, 255, 255, " + star.opacity + ")";
-        this.canvas.fillRect(
-            star.x + this.width / 2,
-            star.y + this.height / 2,
+    for (i = 0; i < numStars; i++) {
+        star = starField[i];
+        canvas.fillStyle = "rgba(255, 255, 255, " + star.opacity + ")";
+        canvas.fillRect(
+            star.x + width / 2,
+            star.y + height / 2,
             2, 2);
     }
-};
+});
 
-
-// Kick off!
-var starField = new StarField('fullScreen');
 </script>
