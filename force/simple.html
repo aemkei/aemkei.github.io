@@ -1,11 +1,8 @@
-<div id=b style=background:#000;perspective:100px;width:400px;height:400px><script>
+<body id=b bgColor=0 style=perspective:9em><script>
   setInterval(function(){
     I++;
-    for (h=i=400;i--;){
-      x = i*229%400;
-      y = i*377%400;
-      z = (i*117+I)%400;
-      h+="<p style=color:#FFF;transform:translate3d("+x+"px,"+y+"px,"+z+"px);position:absolute>."
+    for (h=i=30;i--;h+="<p style=color:tan;transform:translate3d("+i*i%99+"%,0,"+z+"px)>."){
+      z = (i*7+I)%100;
     }
     b.innerHTML=h
   },I=1)
