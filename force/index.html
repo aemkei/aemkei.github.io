@@ -1,34 +1,19 @@
-<body id=p text=tan bgcolor=0 style=perspective:4em;display:inline-block;padding:30%>
-
-<x id=L>
-      ##########################
-     ###########################
-    ############################
-   #####        ##        ######
-  ######        ##        ######
- #######        ##        ######
-########    ######    ##########
-########    ######    ##########
-######                    ######
-######                    ######
-########    ######    ##########
-########    ######    ##########
-########    ######    ##########
-########    ######    #########
-########    ######    ########
-#############################
-############################
-###########################
-</x>
-
-<script>
-  B=L.innerHTML;
-  I=setInterval(function(){
-    I+=I<50?I/50:1;
-    p.innerHTML = "<pre>" + B.replace(/\S/g,
-      function(a, i) {
-        z=I*(1+i*i/500%2)%130
-        return "<tt style=display:inline-block;transform:translate3d(0,0," + z + "px)>.</tt>";
-    });
-  },20)
-</script>
+     <body text="tan" bgcolor=00 id=p
+    style="perspective:4.0em;display:
+   inline-block;padding:20%"><script>
+  I=1/7;e          ='          I+=I<\
+ 30?I/30:          1,          p.inn\
+erHTML="<          pr          e>"+B\
+.replace(     /\\S/g,     function(a\
+,b){retur     n\40z=I     *(1+b*b/50\
+0%2)%130,     "<tt\\4     0style=dis\
+play:i                        nline-\
+block;                        transf\
+orm:trans     late3d(     0,0,"+z+"p\
+x)>.</tt>     "})';e=     (e.replace(
+(/\s\s+/g     ),""));     setInterval
+(e,9);S="     ";B=S+p     .outerHTML
+.replace(     /y.*"/,     12);B=S[0
+]+B.substr(0,36)+"\n"+B;/*a_quine-
+like_star-field=by_martin.kleppe=
+for_ffconf2015*/</script>@aemkei
