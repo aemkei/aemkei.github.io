@@ -287,6 +287,11 @@ pre#logo {
   line-height: 1.2em;
 }
 
+#ffconf {
+  line-height: 1em;
+  color: yellow;
+}
+
 #pacman {
   line-height: 0.9;
   letter-spacing: 0.1em;
