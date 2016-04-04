@@ -1,21 +1,33 @@
-<title>ḞÌŔÉ - An ASCII Art Fire Animation in 140 Bytes of JavaScript</title>
+<title>FÌŔÉ - An ASCII Art Fire Animation in 140 Bytes of JavaScript</title>
 
 <pre>
-<b>ḞÌŔÉ</b>
+<b><font color=#F30>FÌŔÉ</font></b>
 
 An ASCII Art Fire Animation
-in 136 Bytes of JavaScript
+in 131 Bytes of JavaScript
 
 <b>Source</b>
 
-setInterval(p=()=>{for(
-p[I++*I%17+578]=h=i=89;
-i++<630;h+=i%30?"`*"[p[
-i]=(p[i]+p[i+1]+p[i+29]
-+p[i+30]>>2)]||8:"\n");
+setInterval(p=h=>{for(
+p[I++*I%17+578]=i=89;i
+++<630;h+=i%30?"`*"[p[
+i]=p[i]+p[i+1]+p[i+29]
++p[i+30]>>2]||8:"\n");
 console.log(h)},I=30)
 
 ~> aem1k.com/fire
 </pre>
 
 <iframe src="./demo/" frameBorder=0 width=300 height=400></iframe>
+
+
+<pre>
+<b>128 using 0|1 only:</b>
+
+setInterval(p=h=>{for(
+p[I++*I%17+578]=i=89;i
+++<630;h+=i%30?+!(p[i]
+=p[i]+p[i+1]+p[i+29]+p
+[i+30]>>2):"\n");
+console.log(h)},I=30)
+</pre>
