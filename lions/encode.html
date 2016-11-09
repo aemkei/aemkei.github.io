@@ -1,4 +1,4 @@
-<body onload=null>
+<body onload="null">
 
 <script id="script">
 document.body.innerHTML=`<pre>
@@ -17,7 +17,11 @@ HERE BE LIONS!
 
 Please open the source code of this page.
 You will find nothing else than this little piece of code:
-<hr>` + document.body.outerHTML.replace('<','&lt;');
+<hr>` + document.body.outerHTML.replace('<','&lt;') + `
+<hr>
+This text and the script that animates the colors
+were injected with invisible characters around the lions.
+A bit scary, right? ROOAAR!`;
 setInterval('p.style.color=`hsl(${Math.random()*70},100%,50%)`',100);
 //🦁🦁🦁
 </script>
