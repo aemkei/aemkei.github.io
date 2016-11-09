@@ -30,7 +30,7 @@ setInterval('p.style.color=`hsl(${Math.random()*70},100%,50%)`',100);
 input = script.outerHTML.split("\n").slice(1,-1).join("\n");
 output = input.replace(/[\x00-\x7f]/g,(a)=>{return String.fromCodePoint(a.charCodeAt(0) + 0xE0100)});
 
-console.log(`<body onload="eval(unescape(escape('${output} ').replace(/u.{8}/g,'')))()">`);
+console.log(`<body onload="eval(unescape(escape('${output} ').replace(/u.{8}/g,'')))">`);
 
 
 </script>
