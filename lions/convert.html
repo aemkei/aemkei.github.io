@@ -1,0 +1,115 @@
+<meta charset="utf-8">
+
+<style>
+  body { word-wrap: break-word;}
+
+  canvas, textarea, tt {
+    float: left;
+    width: 400px;
+    margin-right: 20px
+  }
+
+  textarea {
+    height: 160px
+  }
+
+</style>
+
+
+<textarea id=s>alert(1+1)</textarea>
+
+<tt id=code></tt>
+
+<script type="demo">alert(`works`)</script>
+
+
+<script type="bootstrap">
+A=""
+T=!A+A
+L=!T+A
+O=A+{}
+M='"'
+t=T[0]
+r=T[1]
+c=O[5]
+n=(T.L+O)[1]
+u=T[2]
+o=O[1]
+s=L[3]
+e=T[3]
+a=L[1]
+K=r+e+t+u+r+n+" "
+X=(P=c+o+n+s+t+r+u+c+t+o+r)[P][P]
+
+X(
+  X(
+    K+M+X(
+      K+X(
+        K+M+u+n+e+s+c+a+(p="\\160")+e+"("+e+s+c+a+p+e+"('###')."+
+        r+e+p+"\\154"+a+c+e+"(/"+u+".{8}/\\147,''))"+M
+      )()
+    )()+M
+  )()
+)()
+
+</script>
+
+<script>
+
+bootstrap = document.querySelector('script[type=bootstrap]').innerHTML;
+
+
+alphabet = [];
+
+c = 0;
+
+suffi = '';
+
+for (i = 65; i < 122; i++) {
+  input = String.fromCharCode(i);
+
+  if (
+    !(i > 90 && i<97) &&
+    bootstrap.match(input)
+  ) {
+    suffi += '\u200C';
+    output = '\uFFA0' + suffi;
+    bootstrap = bootstrap.split(input).join(output);
+    alphabet.push(output);
+  }
+}
+console.log('alphabet', alphabet)
+
+
+f = s.oninput = function(){
+
+
+
+  o = s.value.replace(/[\x00-\x7f]/g,(a)=>{return String.fromCodePoint(a.charCodeAt(0) + 0xE0100)});
+
+  console.log(s.value);
+  console.log(o);
+
+  console.log(`eval(unescape(escape('${output} ').replace(/u.{8}/g,'')))`);
+
+  o = bootstrap.replace('###', o);
+
+  console.log(o);
+
+
+  script = "<script>" + o + "</"+"script>";
+  script = ";" + o + ";";
+
+  console.log(
+    script
+  )
+
+  code.innerText = script;
+
+}
+
+s.value = document.querySelector('script[type=demo]').innerHTML;
+
+f();
+
+</script>
