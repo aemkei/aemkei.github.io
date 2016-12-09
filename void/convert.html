@@ -16,11 +16,11 @@
 </style>
 
 
-<textarea id=s>document.body.innerHTML = "<pre>&lt;script>   " + document.head.textContent + "&lt;/script>"</textarea>
+<textarea id=s></textarea>
 
 <tt id=code></tt>
 
-<script type="demo">document.body.innerHTML = "<pre>&lt;script>   " + document.head.textContent + "&lt;/script>"</script>
+<script type="demo">i=setInterval(unescape('document.body.style.backgroundColor%3D0%3Bdocument.body.style.color%3D%22%230FF%22%3Bdocument.body.innerHTML%3D%28%22%3Cpre%3E%26lt%3Bscript%3E%20%20%20%22+%20document.head.textContent+%22%26lt%3B/script%3E%22%29.replace%28/.%uFFA0/g%2Cx%3D%3E%60%3Cb%20style%3D%22color%3A%24%7B%5B%22%23FFF%22%2C%22%23F0F%22%2C%22%23F0F%22%5D%5Bi++%258%5D%7C%7C%22%230F0%22%7D%22%3E%24%7Bx%7D%3C/b%3E%60%29'),50)</script>
 
 
 <script type="bootstrap">
@@ -62,7 +62,7 @@ f = s.oninput = function(){
   o = s.value.replace(/[\x00-\x7f]/g,(a)=>{return String.fromCodePoint(a.charCodeAt(0) + 0xE0100)});
 
   console.log(s.value);
-  console.log(o);
+  console.log("\"'" + o + "'\"");
 
   console.log(`eval(unescape(escape('${output} ').replace(/u.{8}/g,'')))`);
 
