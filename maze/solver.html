@@ -1,0 +1,54 @@
+<html>
+
+<body>
+  <pre id=Z>
+
+  </pre>
+  <script>
+
+    size = 12
+
+    // https://cs.stanford.edu/people/eroberts/courses/soco/projects/1999-00/information-theory/ai.html#work
+
+    for(z=[i=(size*(size-1))];i--;m="map")z[i]=i%size?8:"\n";F=d=>[size,1,-size,-1][m]((f,g,h)=>1<z[f=d+2*h[3&g+i]]&&(z[f]=z[(d+f)/2]=0,i=Math.random()*2,F(f))),F(size+2);
+
+    start = size * (size - 1) / 2; // center
+    end = size + 2;
+
+    current = start;
+    lastDirection = 0;
+
+    solved = false;
+
+    Z.innerHTML = (z+"")
+      .replace(/8/g, "#")
+      .replace(/0/g, " ")
+
+    setInterval(_=>{
+
+      if (!solved){
+        copy = z.slice(0);
+      }
+      copy[current] = 7
+
+      Z.innerHTML = (copy+"")
+        .replace(/[0-3]/g, " ");
+
+      if (current == end) {
+        solved = true;
+        current = start;
+      } else if (!solved) {
+        z[current] = ((z[current]+1) % 4);
+      }
+
+      next = current + (direction = [-size,1,size,-1][z[current]]);
+
+      if (z[next] < 8) {
+        current = next;
+      }
+
+    },1);
+
+    </script>
+</body>
+</html>
