@@ -1,53 +1,76 @@
 <html>
 
 <body>
-  <pre id=Z>
-
-  </pre>
+  <tt id=p>
   <script>
 
-    size = 12
+    S = 12                // maze size
+    c =                   // current position
+    A = S * (S - 1) / 2;  // start position = maze center
+    B = S + 2;            // end
 
-    // https://cs.stanford.edu/people/eroberts/courses/soco/projects/1999-00/information-theory/ai.html#work
+    for (
+      z = [
+        i = S * (S-1)
+      ];
+      i--;
+    ) z[i] =              // set cell content
+      i % S               // if it not matches the width
+      ? 5                 // to 5 = a wall
+      // TODO: how about 6 here?
+      : -1;               // otherwise -1 = a new line
 
-    for(z=[i=(size*(size-1))];i--;m="map")z[i]=i%size?8:"\n";F=d=>[size,1,-size,-1][m]((f,g,h)=>1<z[f=d+2*h[3&g+i]]&&(z[f]=z[(d+f)/2]=0,i=Math.random()*2,F(f))),F(size+2);
 
-    start = size * (size - 1) / 2; // center
-    end = size + 2;
+    X = d => (
+      D = [S, 1, -S, -1]  // direction
+    ).map(
+      (f, g, h) => 1 < z[
+        f = d + 2 * h[
+          3 & g + i
+        ]
+      ] && (
+        z[f] = z[(d + f) / 2] = 0,
+        i = Math.random() * 9,
+        X(f)
+      )
+    ), X(S + 2)
 
-    current = start;
-    lastDirection = 0;
-
-    solved = false;
-
-    Z.innerHTML = (z+"")
-      .replace(/8/g, "#")
-      .replace(/0/g, " ")
+    F = 0; // set "solved" flag to false
 
     setInterval(_=>{
 
-      if (!solved){
-        copy = z.slice(0);
-      }
-      copy[current] = 7
+      c == B ?            // if mouse found the exit
+        F =               // set flag to "solved" and
+        c = A             // move mouse to start position
+      : F || (            // if not solved ...
+        z[c] = (          // update direction slot
+          (z[c] + 1) % 4  // turn by 90 degree
+        )
+      )
 
-      Z.innerHTML = (copy+"")
-        .replace(/[0-3]/g, " ");
+      z[                  // check neighbour
+        n = // next       // get a new potentional position
+        c +               // based on current position
+        D[                // with a x or y offset
+          z[c]            // off the direction index
+        ]
+      ] < 5 && (          // but only if there is no border ...
+        c = n             // move mouse to that new position
+      )
 
-      if (current == end) {
-        solved = true;
-        current = start;
-      } else if (!solved) {
-        z[current] = ((z[current]+1) % 4);
-      }
+      F || (              // if maze has not yet been soved
+        Z = z.slice``     // create a copy to render
+      )
 
-      next = current + (direction = [-size,1,size,-1][z[current]]);
+      Z[c] = 4            // highlight mouse
 
-      if (z[next] < 8) {
-        current = next;
-      }
-
-    },1);
+      p.innerText =       // render array
+        Z.map(i =>        // map numbers to characters
+          "    +X"[i] ||  // "X" = wall, "+" = mouse, "\n"
+`
+`
+        )
+    }, 0);
 
     </script>
 </body>
