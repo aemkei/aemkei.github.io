@@ -189,7 +189,7 @@ hr:after {
   line-height: 20px;
   width: 100%;
   word-wrap: break-word;
-  color: #999;
+  color: #099;
 }
 @-moz-document url-prefix() {
   h1 {
