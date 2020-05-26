@@ -1,6 +1,12 @@
 {
   word-wrap: break-word;
 }
+
+html, body, * {
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
+  font-size: 13.3px;
+}
+
 .markdown,
 h1,
 h2,
@@ -15,11 +21,9 @@ em,
 strong,
 #globe,
 code {
-  font-size: 16px;
   line-height: 20px;
   font-weight: normal;
   font-style: normal;
-  font-family: 'Inconsolata', Monaco, Consolas, "Lucida Console", monospace;
 }
 h1,
 h2,
@@ -100,6 +104,7 @@ li {
   display: block;
   padding-left: 34px;
   padding-left: 4ch;
+  line-height: 18px;
 }
 li:after {
   position: absolute;
@@ -203,8 +208,6 @@ hr:after {
 html, body {
   background: #222;
   color: #FFF;
-  font-family: 'Inconsolata', Monaco, Consolas, "Lucida Console", monospace;
-
 }
 
 #container {
