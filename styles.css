@@ -189,6 +189,7 @@ hr:after {
   line-height: 20px;
   width: 100%;
   word-wrap: break-word;
+  color: #999;
 }
 @-moz-document url-prefix() {
   h1 {
@@ -295,4 +296,4 @@ pre#logo {
 #pacman {
   line-height: 0.9;
   letter-spacing: 0.1em;
-}
+  font-size: 14px;
