@@ -8,50 +8,17 @@ html, body, * {
   text-size-adjust: none;
 }
 
-.markdown,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-pre,
-code,
-blockquote,
-em,
-strong,
-#globe,
-code {
+.markdown,h1,h2,h3,h4,h5,h6,pre,code,blockquote,em,strong,#globe,code {
   line-height: 20px;
   font-weight: normal;
   font-style: normal;
 }
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-pre,
-code,
-blockquote,
-ol,
-ul,
-li,
-p,
-section,
-header,
-footer {
+h1,h2,h3,h4,h5,h6,pre,code,blockquote,ol,ul,li,p,section,header,footer {
   float: none;
   margin: 0;
   padding: 0;
 }
-h1,
-p,
-ul,
-ol,
-pre,
-blockquote {
+h1,p,ul,ol,pre,blockquote {
   margin-top: 20px;
   margin-bottom: 20px;
 }
@@ -72,19 +39,11 @@ h1:after {
 h1 + * {
   margin-top: 0;
 }
-h2,
-h3,
-h4,
-h5,
-h6 {
+h2,h3,h4,h5,h6 {
   position: relative;
   margin-bottom: 20px;
 }
-h2:before,
-h3:before,
-h4:before,
-h5:before,
-h6:before {
+h2:before,h3:before,h4:before,h5:before,h6:before {
   content: "## ";
   display: inline;
 }
@@ -141,13 +100,11 @@ blockquote:after {
   font-size: 14px;
   line-height: 20px;
 }
-strong:before,
-strong:after {
+strong:before,strong:after {
   content: "__";
   display: inline;
 }
-em:before,
-em:after {
+em:before,em:after {
   content: "*";
   display: inline;
 }
@@ -168,13 +125,11 @@ a:after {
 code {
   font-weight: 100;
 }
-code:before,
-code:after {
+code:before,code:after {
   content: "`";
   display: inline;
 }
-pre code:before,
-pre code:after {
+pre code:before,pre code:after {
   content: none;
 }
 hr {
@@ -249,8 +204,7 @@ a {
   color: #FFF;
 }
 
-a.link,
-li a {
+a.link,li a {
    color: #00CCFF
 }
 
