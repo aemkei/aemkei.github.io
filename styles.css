@@ -4,7 +4,8 @@
 
 html, body, * {
   font-family: Monaco, Consolas, "Lucida Console", monospace;
-  font-size: 13.3px;
+  font-size: 16px;
+  text-size-adjust: none;
 }
 
 .markdown,
@@ -103,7 +104,7 @@ li {
   position: relative;
   display: block;
   padding-left: 34px;
-  padding-left: 4ch;
+  padding-left: 2ch;
   line-height: 18px;
 }
 li:after {
@@ -208,13 +209,12 @@ hr:after {
 html, body {
   background: #222;
   color: #FFF;
+  margin: 0;
 }
 
 #container {
-  max-width: 600px;
-  padding: 40px;
-  border-right: 1px solid #666;
-  border-left: 1px solid #666;
+  width: 510px;
+  padding: 30px 30px 30px 30px;
   background: #090909;
 }
 
@@ -271,6 +271,7 @@ pre#logo {
 #mandel {
   line-height: 16px;
 }
+
 #globe {
   line-height: 17px;
 }
