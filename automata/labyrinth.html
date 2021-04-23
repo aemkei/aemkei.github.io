@@ -1,0 +1,23 @@
+<canvas id="canvas" width="1000" height="700"></canvas>
+
+<script>
+  const context = canvas.getContext('2d');
+  for (x = 0; x < 100; x++) {
+    for (y = 0; y < 70; y++) {
+      const r = Math.random();
+
+      let width = 1;
+      let height = 1;
+
+      if (r < 0.9) {
+        height = 6;
+      } else {
+        width = 6;
+      }
+
+      if (r > 3 / y && r > 3 / (70-y)) {
+        context.fillRect(x * 5, y * 5, width, height);
+      }
+    }
+  }
+</script>

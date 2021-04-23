@@ -1,0 +1,113 @@
+<button id="step">step</button>
+<canvas id="c" width="1000" height="1000"></canvas>
+
+
+<script>
+
+ // https://weblog.jamisbuck.org/2011/2/3/maze-generation-sidewinder-algorithm
+ // http://www.astrolog.org/labyrnth/algrithm.htm#perfect
+
+
+const context = c.getContext('2d');
+const step = document.getElementById('step');
+
+
+
+let x = 0;
+let y = 0;
+let width = 20;
+let height = 20;
+let size = 20;
+
+// draw borders
+
+const cells = [];
+
+let row = [];
+cells.push(row);
+for (let i = 0; i < width; i++) {
+  let cell = {top: true};
+  if (i == width - 1) {
+    cell.right = true;
+  }
+  row.push(cell);
+}
+
+function render() {
+  context.fillStyle = '#FFF';
+  context.fillRect(0, 0, width * size, height * size);
+
+  context.fillStyle = '#AAA';
+
+  context.fillRect(0, 0, 1, height * size);
+  context.fillRect(0, 0, height * size, 1);
+  context.fillRect(height * size, 0, 1, height * size);
+  context.fillRect(0, height * size, height * size, 1);
+
+
+  cells.forEach((row, y) => {
+    row.forEach((cell, x) => {
+      context.fillStyle = cell.buffer ? '#FF0' : '#CFF';
+      context.fillRect(x * size + 1, y * size + 1, size - 2, size - 2);
+      context.fillStyle = '#000';
+      cell.top && context.fillRect(x * size, y * size, size-1, 1);
+      cell.right && context.fillRect(x * size + size, y * size, 1, size-1);
+    });
+  })
+}
+
+
+row = [];
+cells.push(row);
+buffer = [];
+
+function next() {
+
+  const cell = {buffer: true};
+
+  let last = false;
+
+  row.push(cell);
+
+  if (row.length == width) {
+    last = true;
+    row = [];
+    cells.push(row);
+  }
+
+  if (
+    !last &&
+    Math.random() < 0.5
+  ) {
+    last = true;
+  }
+
+  buffer.push(cell);
+
+  if (last) {
+    cell.right = true;
+
+    const randomIndex = Math.floor(buffer.length * Math.random());
+    // const randomIndex = 0;
+
+    buffer.forEach((cell, index) => {
+      cell.top = (index != randomIndex);
+      cell.buffer = false;
+    });
+
+    buffer = [];
+  }
+
+  render();
+}
+
+render();
+
+for (let i=0; i < width * height; i++) {
+  next();
+}
+
+
+step.addEventListener('click', next);
+
+</script>

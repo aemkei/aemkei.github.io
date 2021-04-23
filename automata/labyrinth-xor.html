@@ -1,0 +1,15 @@
+<canvas id="canvas" width="1000" height="700"></canvas>
+
+<script>
+  const context = canvas.getContext('2d');
+for (let x = 0; x < 64; x++) {
+  for (let y = 0; y < 64; y++) {
+    context.fillRect(
+      x * 6,
+      y * 6,
+      (x ^ y) % 9 ? 2 : 7,
+      (x ^ y) % 9 ? 7 : 2
+    );
+  }
+}
+</script>

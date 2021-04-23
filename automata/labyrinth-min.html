@@ -1,0 +1,28 @@
+<canvas id=c width=500 height=500></canvas>
+
+<script>
+
+  for (X = 0; X < 50; X++) {
+    for (Y = 0; Y < 60; Y++) {
+      r = X**Y % 9;
+
+      if (r < 7) {
+        w = 1;
+        h = 6;
+      } else {
+        w = 6;
+        h = 1;
+      }
+
+      if (r > Y || (60-Y) < r) {
+        continue
+      }
+
+      c.getContext('2d').fillRect(X * 5, Y * 5, w, h);
+    }
+  }
+
+</script>
+
+
+c.width=530;for(X=99;X--;)for(Y=60;Y--;r>Y||60-Y<r||x.fillRect(5*X,5*Y,w,h))r=X**Y%9,r<7?(w=1,h=6):(w=6,h=1)

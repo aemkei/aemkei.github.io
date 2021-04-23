@@ -1,0 +1,86 @@
+<canvas id="c" width="1000" height="1000"></canvas>
+
+<script>
+
+  const scale = 7;
+  const size = 63;
+  const cells = [];
+  const center = Math.floor(size / 2);
+  const initial = 11;
+
+  for (let y = 0; y < size; y++) {
+    const row = [];
+    cells.push(row);
+    for (let x = 0; x < size; x++) {
+      let state = Math.random() < 0.5;
+      if (
+        // (x == 12)  || (y == 0)
+        Math.abs(x - center) < initial &&
+        Math.abs(y - center) < 1
+      ) {
+        state = true;
+      }
+      row.push(state);
+    }
+  }
+
+  const context = c.getContext('2d');
+
+  function next(){
+    context.fillStyle = '#FFF';
+    context.fillRect(0, 0, 1024, 1024);
+    context.fillStyle = '#000';
+
+    const copy = cells.map(row => [...row]);
+
+    function n(x, y) {
+      return copy[y]?.[x];
+    }
+
+    for (let x = 0; x < size; x++) {
+      for (let y = 0; y < size; y++) {
+
+        let newState = false;
+
+        const oldState = n(x, y);
+
+        const neighbors = [
+          n(x-2, y-2), n(x+2, y-2),
+          n(x-2, y+2), n(x+2, y+2)
+        ];
+
+        const count = neighbors.filter(x=>x).length;
+
+        if (count == 0 || count == 1) {
+          newState = true;
+        }
+
+        if (count == 2 || count == 3) {
+          newState = oldState;
+        }
+
+        if (x % 2 && y % 2) {
+          newState = true;
+        }
+
+        if (!(x % 2) && !(y % 2)) {
+          newState = false;
+        }
+
+
+        cells[y][x] = newState;
+
+
+        if (newState) {
+          context.fillRect(x * scale, y * scale, scale, scale);
+        }
+      }
+    }
+
+    setTimeout(next, 10);
+  }
+
+  next();
+
+
+</script>
