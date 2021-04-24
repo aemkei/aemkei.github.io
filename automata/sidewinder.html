@@ -1,113 +1,99 @@
-<button id="step">step</button>
-<canvas id="c" width="1000" height="1000"></canvas>
+<body style='background:black'>
+<canvas id="c" width="370" height="370"></canvas>
 
 
 <script>
 
- // https://weblog.jamisbuck.org/2011/2/3/maze-generation-sidewinder-algorithm
- // http://www.astrolog.org/labyrnth/algrithm.htm#perfect
+  // https://weblog.jamisbuck.org/2011/2/3/maze-generation-sidewinder-algorithm
+  // http://www.astrolog.org/labyrnth/algrithm.htm#perfect
 
 
-const context = c.getContext('2d');
-const step = document.getElementById('step');
+  const context = c.getContext('2d');
+  const step = document.getElementById('step');
 
+  let x = 0;
+  let y = 0;
+  let width = 16;
+  let height = 15;
+  let length = width * height;
+  let size = 20;
 
+  // draw borders
 
-let x = 0;
-let y = 0;
-let width = 20;
-let height = 20;
-let size = 20;
+  const cells = [];
 
-// draw borders
+  let row = [];
+  cells.push(row);
+  let buffer = [];
 
-const cells = [];
+  function next() {
+    const cell = { };
+    let last = false;
 
-let row = [];
-cells.push(row);
-for (let i = 0; i < width; i++) {
-  let cell = {top: true};
-  if (i == width - 1) {
-    cell.right = true;
-  }
-  row.push(cell);
-}
+    row.push(cell);
 
-function render() {
-  context.fillStyle = '#FFF';
-  context.fillRect(0, 0, width * size, height * size);
+    if (row.length == width) {
+      last = true;
+      row = [];
+      cells.push(row);
+    }
 
-  context.fillStyle = '#AAA';
+    if (
+      !last &&
+      Math.random() < 0.5
+    ) {
+      last = true;
+    }
 
-  context.fillRect(0, 0, 1, height * size);
-  context.fillRect(0, 0, height * size, 1);
-  context.fillRect(height * size, 0, 1, height * size);
-  context.fillRect(0, height * size, height * size, 1);
+    buffer.push(cell);
 
+    if (last) {
+      cell.right = true;
 
-  cells.forEach((row, y) => {
-    row.forEach((cell, x) => {
-      context.fillStyle = cell.buffer ? '#FF0' : '#CFF';
-      context.fillRect(x * size + 1, y * size + 1, size - 2, size - 2);
-      context.fillStyle = '#000';
-      cell.top && context.fillRect(x * size, y * size, size-1, 1);
-      cell.right && context.fillRect(x * size + size, y * size, 1, size-1);
-    });
-  })
-}
+      const random = Math.floor(buffer.length * Math.random());
 
+      buffer.forEach((cell, index) => {
+        cell.top = index != random;
+      });
 
-row = [];
-cells.push(row);
-buffer = [];
+      buffer = [];
+      render();
 
-function next() {
-
-  const cell = {buffer: true};
-
-  let last = false;
-
-  row.push(cell);
-
-  if (row.length == width) {
-    last = true;
-    row = [];
-    cells.push(row);
+    }
+    setTimeout(next, 10);
   }
 
-  if (
-    !last &&
-    Math.random() < 0.5
-  ) {
-    last = true;
-  }
-
-  buffer.push(cell);
-
-  if (last) {
-    cell.right = true;
-
-    const randomIndex = Math.floor(buffer.length * Math.random());
-    // const randomIndex = 0;
-
-    buffer.forEach((cell, index) => {
-      cell.top = (index != randomIndex);
-      cell.buffer = false;
-    });
-
-    buffer = [];
-  }
-
-  render();
-}
-
-render();
-
-for (let i=0; i < width * height; i++) {
   next();
-}
+
+  function render() {
+    context.fillStyle = '#FFF';
+    context.fillRect(0, 0, 1024, 1024);
+    context.fillStyle = '#000';
+
+    cells.forEach((row, y) => {
+      row.forEach((cell, x) => {
+        if (cell.top) {
+          draw(x, y, true);
+        }
+        if (cell.right) {
+          draw(x+1, y, false);
+        }
+        if (x == 0) {
+          draw(x, y, false);
+        }
+        if (y == height) {
+          draw(x, y+1, true);
+        }
+      });
+    })
+  }
+
+  function draw (x, y, orientation) {
+    const width = orientation ? size + 10 : 10;
+    const height = orientation ? 10 : size + 10;
+    context.fillRect(x * size + 20, y * size + 20, width, height);
+  }
 
 
-step.addEventListener('click', next);
 
 </script>

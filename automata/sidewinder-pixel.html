@@ -1,0 +1,83 @@
+<body style='background:black'>
+<canvas id="c" width="370" height="370"></canvas>
+
+<script>
+
+  // https://weblog.jamisbuck.org/2011/2/3/maze-generation-sidewinder-algorithm
+  // http://www.astrolog.org/labyrnth/algrithm.htm#perfect
+
+  // The "Sidewinder" algorithm is one of the easiest way to draw a "perfect" maze (no loops and no isolation):
+
+  // Randomly carve a couple of cells to the right. Then go back and choose one of the last cells and carve to the top. Proceed until the end of the row and go to next.
+
+
+  const context = c.getContext('2d');
+  const step = document.getElementById('step');
+
+  let x = 0;
+  let y = 0;
+  let width = 32;
+  let height = 32;
+  let length = width * height;
+  let size = 10;
+
+  // draw borders
+
+  const cells = [];
+  let i = 2;
+
+  let last = i;
+
+  function next(){
+
+    const diff = (last - i) + 2;
+    const random = Math.floor(Math.random() * diff/2) * 2;
+    const randomLastIndex = last - random - width + 1;
+
+    if (i % width == 0) {
+      i += width;
+    }
+
+    if (
+      (i < width) ||
+      (i % width) &&
+      (Math.random() < 0.5)
+    ) {
+      cells[i] = true;
+    } else {
+      cells[randomLastIndex] = true;
+      last = i;
+    }
+
+    setTimeout(next, 10);
+    render();
+    i+=2;
+  }
+
+  next()
+
+  onkeypress = next
+
+  function render() {
+    context.fillStyle = '#000';
+    context.fillRect(0, 0, 1024, 1024);
+    context.fillStyle = '#FFF';
+
+    cells.find((cell, index) => {
+      let x = index % width;
+      let y = Math.floor(index / width);
+
+      if (cell || (x % 2 && !(y % 2)))
+
+      draw(x, y);
+    });
+  }
+
+  function draw (x, y) {
+    let width = size;
+    context.fillRect(x * size + width, y * size + width, width, width);
+  }
+
+
+
+</script>
