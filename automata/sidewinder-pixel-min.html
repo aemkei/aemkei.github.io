@@ -1,0 +1,20 @@
+<body>
+  <canvas id="c" width="330" height="330" style="border:40px solid"></canvas>
+
+  <script>
+
+    const x = c.getContext('2d');
+
+    for (W = 64, L = i = 2; i < 3e3; i += 1)
+      i % W || (i += W),
+        !(i % 2) ||
+        i < W ||
+        i % W &&
+        (i ^ 7 * i) % 3
+
+          ?
+          I = i : (
+            I = L - 2 * Math.round((L - i) / 4) - W + 1, L = i
+          ),
+          x.fillRect(I % W * 9, 9 * (0 | I / W), 9, 9)
+  </script>
