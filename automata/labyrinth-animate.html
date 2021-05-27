@@ -1,0 +1,107 @@
+<body style="background: #000;">
+  <canvas id="c" width="325" height="315" style="border:40px solid"></canvas>
+
+  See: http://www.astrolog.org/labyrnth/algrithm.htm#perfect
+
+  The "Sidewinder" algorithm is one of the easiest way to draw a "perfect" maze (no loops and no isolation):
+
+  Randomly carve a couple of cells to the right. Then go back and choose one of the last cells and carve to the top.
+  Proceed until the end of the row and go to next.
+
+  <script>
+
+    const context = c.getContext('2d');
+    const step = document.getElementById('step');
+
+    let width = 32;
+    let height = 32;
+    let size = 10;
+
+    const cells = [];
+
+    for (let last = i = 2; i < width*width; i+=2) {
+      const diff = (last - i) + 2;
+      // const random = Math.round(diff / 4) * 2;
+      const random = Math.round(diff / 4) * 2;
+      const randomLastIndex = last - random - width + 1;
+
+      if (i % width == 0) {
+        i += width;
+      }
+
+      if (
+        (i < width) ||
+        (i % width) &&
+        (Math.random() < 0.5)
+        // (Math.sin(i/15) < 0)
+      ) {
+        cells[i] = true;
+      } else {
+        cells[randomLastIndex] = true;
+        last = i;
+      }
+    }
+
+
+    context.fillStyle = '#000';
+    context.fillRect(0, 0, 1024, 1024);
+    context.fillStyle = '#666';
+
+    function f(i,x,y) {
+      return cells[i] || (x % 2 && !(y % 2));
+    }
+
+    const grid = [];
+    function draw(x, y) {
+      let s = size / 2;
+      let s2 = size / 2;
+      context.fillRect(x * s , y * s , s2, s2);
+    }
+
+
+    for (let index = 0; index < width * (width-1) * 2 - 1; index++) {
+      let i = Math.round(index / 2);
+      let x = i % width;
+      let y = Math.floor(i / width);
+
+      if (f(i,x,y)){
+        draw(x * 2, y * 2);
+        if (f(i + width, x, y + 1)){
+          draw(x * 2, y * 2);
+          draw(x * 2, y * 2 + 1);
+        }
+        if (f(i+1,x+1,y)){
+          draw(x * 2, y * 2);
+          draw(x * 2 + 1, y * 2);
+        }
+      }
+    }
+
+    for (let index = 0; index < 3000; index++) {
+      let i = Math.round(index / 2);
+      let x = i % width;
+      let y = Math.floor(i / width);
+
+      if (y == width) { continue }
+
+      if (!f(i,x,y)){
+        draw(x * 2, y * 2);
+
+        if (!f(i+1,x+1,y)){
+          draw(x * 2, y * 2);
+          draw(x * 2 + 1, y * 2);
+        }
+        if (y < width-1) {
+          if (!f(i + width, x, y + 1)){
+            draw(x * 2, y * 2);
+            draw(x * 2, y * 2 + 1);
+
+            draw(width * 2, y * 2 + 1);
+            draw(width * 2, y * 2 + 2);
+          }
+        }
+      }
+    }
+    draw(width * 2, 0);
+
+  </script>
