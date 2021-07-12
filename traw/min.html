@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRAW - Twitter Pixel Art Editor</title>
+  <style>
+    b {
+      display: inline-block;
+      line-height: 16px;
+      width: 16px;
+      height: 16px;
+      margin: 1px;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+<body>
+  <script>
+    for (x=132; x--;c='⬜') {
+      document.write(`<b onclick='${x>10 ? "innerText=c'>⬛" : `c="${i=[...'⬛⬜🟦🟩🟨🟧🟥🟪🟫'][x]}"'>${i||''}`}</b>${x%11?'':'<br>'}`);
+    }
+  </script>
+</body>
+</html>
+
+
+
