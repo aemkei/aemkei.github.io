@@ -1,36 +1,90 @@
-<script>
+<!DOCTYPE html>
+<html lang="en">
 
-
-  for (let y = 0; y < 11; y++) {
-    for (let x = 0; x < 11; x++) {
-      document.write(`<span onclick='update(this)'>⬛</span>`);
-    }
-    document.write('<br>');
-  }
-
-  function update(element) {
-    console.log(element);
-    element.innerText = currentColor;
-  }
-  const colors = [...'⬛⬜🟦🟩🟨🟧🟥🟪🟫'];
-
-  colors.forEach(color => {
-    document.write(`<span onclick='setColor("${color}")'>${color}</span>`);
-  });
-
-  let currentColor = '⬛';
-
-  function setColor(color){
-    currentColor = color;
-  }
-
-</script>
-<style>
-    span {
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TRAW - Twitter Pixel Art Editor</title>
+  <style>
+    div {
       display: inline-block;
+      line-height: 16px;
       width: 16px;
       height: 16px;
       margin: 1px;
       cursor: pointer;
+      color: rgba(0, 0, 0, 0);
+      border-radius: 3px;
+      float: left;
     }
-</style>
+  </style>
+</head>
+
+<body>
+
+  <script>
+
+    const colors = {
+      '⬛': '#293038',
+      '⬜': '#E7E8E9',
+      '🟦': '#53AEF0',
+      '🟩': '#79B358',
+      '🟨': '#FDCD57',
+      '🟧': '#F49202',
+      '🟥': '#DF2540',
+      '🟪': '#AC90D8',
+      '🟫': '#C36A4D',
+      '🌫️': '#E3E9EF', // fog
+      '🏻': '#F7DFCF', // light skin tone
+      '🏼': '#F3D3A3', // medium-light skin tone
+      '🏽': '#D6AD89', // medium skin tone
+      '🏾': '#B17F57', // medium-dark skin tine
+      '🏿': '#7D523B' // dark skin tone
+    };
+
+    // ✖️❌⭕➕➖
+    // ▫️▪️◽◾◻️◼️
+
+    for (let y = 0; y < 13; y++) {
+      for (let x = 0; x < 10; x++) {
+        document.write(`
+            <div
+              onclick='update(this)'
+              style='background:#293038'
+            >⬛</div>
+          `);
+      }
+      document.write(`<br>`);
+    }
+
+    function update(element) {
+
+      element.innerText = current.color;
+      element.style.background = current.hex;
+    }
+
+    document.write('<br>colors:<br>');
+
+    for (const [char, hex] of Object.entries(colors)) {
+      document.write(`
+          <div
+            onclick='setColor("${char}", "${hex}")'
+            style='background:${hex}'
+          >${char}</div>
+        `);
+    }
+
+
+    let current = '⬛';
+
+    function setColor(color, hex) {
+      current = { color, hex };
+    }
+
+  </script>
+
+
+</body>
+
+</html>
