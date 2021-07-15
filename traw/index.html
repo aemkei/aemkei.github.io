@@ -7,7 +7,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TRAW - Twitter Pixel Art Editor</title>
   <style>
-    div {
+    #drawing-area {
+      user-select: none;
+    }
+    #drawing-area div,
+    #color-picker div {
       display: inline-block;
       line-height: 16px;
       width: 16px;
@@ -16,14 +20,51 @@
       cursor: pointer;
       color: rgba(0, 0, 0, 0);
       border-radius: 3px;
-      float: left;
+    }
+
+    #color-picker div {
+      border-radius: 50%;
+    }
+    #color-picker div.selected {
+      border-radius: 3px;
+    }
+    #color-picker label {
+      display: block;
     }
   </style>
 </head>
 
 <body>
 
+  <div id="drawing-area"></div>
+
+  <div id="color-picker">
+    <label>Colors:</label>
+  </div>
+
+  <div>
+    <button id="copy">Copy</button>
+  </div>
+
+  <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
   <script>
+
+  function emojiUnicode(emoji) {
+    var comp;
+    if (emoji.length === 1) {
+      comp = emoji.charCodeAt(0);
+    }
+    comp = (
+      (emoji.charCodeAt(0) - 0xD800) * 0x400 +
+      (emoji.charCodeAt(1) - 0xDC00) + 0x10000
+    );
+    if (comp < 0) {
+      comp = emoji.charCodeAt(0);
+    }
+    return comp.toString("16");
+  };
+
+    const twemojiBase = 'https://abs-0.twimg.com/emoji/v2/svg';
 
     const colors = {
       '⬛': '#293038',
@@ -35,7 +76,6 @@
       '🟥': '#DF2540',
       '🟪': '#AC90D8',
       '🟫': '#C36A4D',
-      '🌫️': '#E3E9EF', // fog
       '🏻': '#F7DFCF', // light skin tone
       '🏼': '#F3D3A3', // medium-light skin tone
       '🏽': '#D6AD89', // medium skin tone
@@ -43,44 +83,93 @@
       '🏿': '#7D523B' // dark skin tone
     };
 
-    // ✖️❌⭕➕➖
-    // ▫️▪️◽◾◻️◼️
+    function render(element, color) {
+      element.innerText = current.color;
+      let id = twemoji.convert.toCodePoint(current.color);
+      element.style.backgroundImage = `url(${twemojiBase}/${id}.svg)`;
+    }
+
+    const current = {color: '⬛', hex: '#293038'};
+    const area = document.getElementById('drawing-area');
+    let mouseDown = false;
+
 
     for (let y = 0; y < 13; y++) {
       for (let x = 0; x < 10; x++) {
-        document.write(`
-            <div
-              onclick='update(this)'
-              style='background:#293038'
-            >⬛</div>
-          `);
+        const element = document.createElement('div');
+        render(element, current.color);
+        area.appendChild(element);
+
+        element.addEventListener('mousedown', () => {
+          update(element);
+          mouseDown = true;
+        });
+
+        element.addEventListener('mouseover', () => {
+          if (mouseDown) {
+            update(element);
+          }
+        });
       }
-      document.write(`<br>`);
+      const lineBreak = document.createElement('br');
+      area.appendChild(lineBreak);
     }
+
+    document.body.addEventListener('mouseup', () => {
+      mouseDown = false;
+    });
+
+    document.body.addEventListener('mouseleave', () => {
+      mouseDown = false;
+    });
 
     function update(element) {
-
-      element.innerText = current.color;
-      element.style.background = current.hex;
+      render(element, current.color);
     }
 
-    document.write('<br>colors:<br>');
+    const colorPicker = document.getElementById('color-picker');
 
-    for (const [char, hex] of Object.entries(colors)) {
-      document.write(`
-          <div
-            onclick='setColor("${char}", "${hex}")'
-            style='background:${hex}'
-          >${char}</div>
-        `);
+    const colorSwatches = [];
+
+    function selectColor(color) {
+      current.color = color;
+      current.hex = colors[color];
+
+      colorSwatches.forEach(swatch => {
+        if (swatch.color == color) {
+          swatch.element.classList.add('selected');
+        } else {
+          swatch.element.classList.remove('selected');
+        }
+      })
     }
 
+    for (const [color, hex] of Object.entries(colors)) {
+      const element = document.createElement('div');
+      element.innerText = color;
+      element.style.backgroundColor = hex;
 
-    let current = '⬛';
+      colorSwatches.push({
+        color,
+        hex,
+        element
+      });
 
-    function setColor(color, hex) {
-      current = { color, hex };
+      element.addEventListener('click', () => {
+        selectColor(color);
+      });
+      colorPicker.appendChild(element);
     }
+
+    selectColor('🟥');
+
+    document.getElementById('copy').addEventListener('click', () => {
+      const text = area.innerText
+        .split(/\n\n\n/g)
+        .map(s => s.replace(/\n/g, ''))
+        .join('\n');
+      navigator.clipboard.writeText(text);
+    });
 
   </script>
 
