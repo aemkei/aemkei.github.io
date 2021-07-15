@@ -7,9 +7,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TRAW - Twitter Pixel Art Editor</title>
   <style>
+    html,
+    body,
+    * {
+      font-family: 'Inconsolata', Monaco, Consolas, "Lucida Console", monospace;
+      font-size: 16px;
+    }
+
+    body.dark-mode {
+      color: #FFF;
+      background-color: black;
+    }
+
+    html div {
+      margin-bottom: 1em;
+    }
+
+    label, button {
+      margin-bottom: 0.5em;
+    }
+
     #drawing-area {
       user-select: none;
     }
+
     #drawing-area div,
     #color-picker div {
       display: inline-block;
@@ -25,9 +46,11 @@
     #color-picker div {
       border-radius: 50%;
     }
+
     #color-picker div.selected {
       border-radius: 3px;
     }
+
     #color-picker label {
       display: block;
     }
@@ -43,26 +66,14 @@
   </div>
 
   <div>
+    <label>Actions:</label>
     <button id="copy">Copy</button>
+    <button id="toggle-mode">Mode</button>
+    <button id="fill">Fill</button>
   </div>
 
   <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
   <script>
-
-  function emojiUnicode(emoji) {
-    var comp;
-    if (emoji.length === 1) {
-      comp = emoji.charCodeAt(0);
-    }
-    comp = (
-      (emoji.charCodeAt(0) - 0xD800) * 0x400 +
-      (emoji.charCodeAt(1) - 0xDC00) + 0x10000
-    );
-    if (comp < 0) {
-      comp = emoji.charCodeAt(0);
-    }
-    return comp.toString("16");
-  };
 
     const twemojiBase = 'https://abs-0.twimg.com/emoji/v2/svg';
 
@@ -84,21 +95,29 @@
     };
 
     function render(element, color) {
-      element.innerText = current.color;
-      let id = twemoji.convert.toCodePoint(current.color);
+      element.innerText = color;
+      let id = twemoji.convert.toCodePoint(color);
       element.style.backgroundImage = `url(${twemojiBase}/${id}.svg)`;
     }
 
-    const current = {color: '⬛', hex: '#293038'};
+    const current = { color: '⬛', hex: '#293038' };
     const area = document.getElementById('drawing-area');
     let mouseDown = false;
 
+    const hash = decodeURI(document.location.hash.slice());
+    const hashColors = [...hash.replace(/\n/g, '')];
 
-    for (let y = 0; y < 13; y++) {
-      for (let x = 0; x < 10; x++) {
+    const elements = [];
+
+    for (let y = 0; y < 11; y++) {
+      for (let x = 0; x < 11; x++) {
         const element = document.createElement('div');
-        render(element, current.color);
         area.appendChild(element);
+        elements.push(element);
+
+        const color = hashColors[elements.length] || current.color;
+        render(element, color);
+        console.log(color);
 
         element.addEventListener('mousedown', () => {
           update(element);
@@ -123,12 +142,16 @@
       mouseDown = false;
     });
 
+    function saveHash() {
+      document.location.hash = area.innerText;
+    }
+
     function update(element) {
       render(element, current.color);
+      saveHash();
     }
 
     const colorPicker = document.getElementById('color-picker');
-
     const colorSwatches = [];
 
     function selectColor(color) {
@@ -164,12 +187,19 @@
     selectColor('🟥');
 
     document.getElementById('copy').addEventListener('click', () => {
-      const text = area.innerText
-        .split(/\n\n\n/g)
-        .map(s => s.replace(/\n/g, ''))
-        .join('\n');
+      const text = area.innerText;
       navigator.clipboard.writeText(text);
     });
+
+    document.getElementById('toggle-mode').addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    document.getElementById('fill').addEventListener('click', () => {
+      elements.forEach(element => render(element, current.color));
+      saveHash();
+    });
+
 
   </script>
 
