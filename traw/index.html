@@ -20,6 +20,7 @@
     }
 
     body {
+      padding: 1em;
       width: 290px;
     }
 
@@ -59,7 +60,7 @@
       border-radius: 3px;
     }
 
-    #color-picker label {
+    label {
       display: block;
     }
   </style>
@@ -78,9 +79,10 @@
 
   <div>
     <label>Actions:</label>
-    <button id="copy">Copy</button>
-    <button id="toggle-mode">Mode</button>
     <button id="fill">Fill</button>
+    <button id="toggle-mode">Mode</button>
+    <button id="copy">Copy</button>
+    <button id="save">Save</button>
   </div>
 
   <script src="https://twemoji.maxcdn.com/v/latest/twemoji.min.js" crossorigin="anonymous"></script>
@@ -128,7 +130,6 @@
 
         const color = hashColors[elements.length] || current.color;
         render(element, color);
-        console.log(color);
 
         element.addEventListener('mousedown', () => {
           update(element);
@@ -153,13 +154,8 @@
       mouseDown = false;
     });
 
-    function saveHash() {
-      document.location.hash = area.innerText;
-    }
-
     function update(element) {
       render(element, current.color);
-      saveHash();
     }
 
     const colorPicker = document.getElementById('color-picker');
@@ -208,13 +204,11 @@
 
     document.getElementById('fill').addEventListener('click', () => {
       elements.forEach(element => render(element, current.color));
-      saveHash();
     });
 
-
+    document.getElementById('save').addEventListener('click', () => {
+      document.location.hash = area.innerText;
+    });
   </script>
-
-
 </body>
-
 </html>
