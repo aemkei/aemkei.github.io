@@ -19,6 +19,10 @@
       background-color: black;
     }
 
+    body {
+      width: 290px;
+    }
+
     html div {
       margin-bottom: 1em;
     }
@@ -29,6 +33,7 @@
 
     #drawing-area {
       user-select: none;
+      height: 200px;
     }
 
     #drawing-area div,
@@ -43,6 +48,9 @@
       border-radius: 3px;
     }
 
+    #color-picker{
+      height: 45px
+    }
     #color-picker div {
       border-radius: 50%;
     }
@@ -58,6 +66,9 @@
 </head>
 
 <body>
+
+  <h1>TRAW - Twitter Pixel Art Editor</h1>
+  <p>Draw colorful "square" emojis that are supported by Twitter and paste them into your Tweets.</p>
 
   <div id="drawing-area"></div>
 
