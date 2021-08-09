@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convert Script to HREF</title>
+</head>
+<body>
+
+  <textarea id="input" cols="80" rows="20">document.write(`
+<div style="max-width:400px;font-family:monospace">
+<b style='color:#06F'>This is an (almost!) empty document</b>
+<p>Everything you see here was injected via a script that has been encoded into the URL of this web page. The HTML source of the original document is only these 42 bytes:
+<pre>&ltscript><b>eval(unescape(location));</b>&lt/script></pre>
+<p>Go ahead and view the page source yourself! Also the network panel will tell you that there is nothing more.<p>
+<p>Now take a closer look at the URL and you will see an encoded newline character '%0A' after the hash followed by the encoded script.</p>
+<p><a href="https://twitter.com/aemkei">Read more …</a></p>
+<p>You are welcome! <br>— Martin</p>
+</div>
+`);
+</textarea>
+  <div>
+    <button id="convert">Convert</button>
+  </div>
+
+  <div id="output">
+
+  </div>
+  <script>
+    convert.addEventListener('click', () => {
+      output.innerHTML = escape('\n' + input.value)
+    });
+
+  </script>
+</body>
+</html>
+
