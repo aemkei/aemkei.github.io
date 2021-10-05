@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maze Type – Draw Your Op Art Pixel Labyrinth</title>
+  <style>
+
+    #area {
+      width: calc(20 * 20px);
+      display: grid;
+      grid-template-columns: repeat(20, 1fr);
+      grid-template-rows: repeat(20, 1fr);
+    }
+
+    #area div {
+      width: 20px;
+      height: 20px;
+      /* border: 1px solid black; */
+
+      background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 50%, black 50%, black 75%, transparent 75%, transparent 100%);
+
+      background-size: 20px 20px;
+      background-position: 0px 5px;
+    }
+
+    #area div.selected {
+      background-image: linear-gradient(-45deg, black 25%, transparent 25%, transparent 50%, black 50%, black 75%, transparent 75%, transparent 100%);
+    }
+
+    #area:hover div.selected {
+      background-color: blue;
+    }
+
+    #area:hover div.selected:hover {
+      background-color: red;
+    }
+
+    #area div:hover {
+      background-color: red;
+    }
+
+
+  </style>
+</head>
+<body>
+
+  <div id="area"></div>
+
+  <script>
+
+    const size = 20;
+    const area = document.getElementById('area');
+
+    for (let x = 0; x < size; x++) {
+      for (let y = 0; y < size; y++) {
+        const element = document.createElement('div');
+        area.appendChild(element);
+        element.addEventListener('click', (event) => {
+          element.classList.toggle('selected')
+        });
+      }
+    }
+
+  </script>
+
+</body>
+</html>
