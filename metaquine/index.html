@@ -1,0 +1,23 @@
+
+
+  <pre id=p>
+
+  <script>
+
+    setInterval(_=>{
+
+      for (o=y=0;y<16;y++) {
+        o += "\n";
+        for (x=0;x<30;x++) {
+          o += "#+"[0|(h=v=>Math.hypot(y-8+Math.sin(t/8/v)*3,x/2-7+Math.cos(t/9/v)*4))(9)*h(8)/9] || " ";
+        }
+      }
+
+      t++;
+
+      p.innerHTML = o;
+
+    }, t=1)
+
+
+  </script>
