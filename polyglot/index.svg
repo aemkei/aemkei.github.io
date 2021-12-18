@@ -1,0 +1,13 @@
+<!--
+  html * {background: url()}
+  document.write('<body><link href="#" rel=stylesheet>')
+  var html;
+  function url(){};
+  /**
+-->
+<svg xmlns="http://www.w3.org/2000/svg" onload="document.write('&lt;script src=#&gt;&lt;/script&gt;')">
+  <path d="M 10 10 H 90 V 90 H 10 Z"/>
+</svg>
+<!--
+  **/
+-->

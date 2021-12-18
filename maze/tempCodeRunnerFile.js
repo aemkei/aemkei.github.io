@@ -1,0 +1,1 @@
+X = (r,c,o=2*c+2,i=2*r*o+o,z=[],F=(p,i=Math.random()*4)=>[o,1,-o,-1].map((s,j,d)=>z[s=p+2*d[j+i&3]]>0&&(z[s]=z[(p+s)/2]=' ',F(s))))=>{for(;i--;)z[i]=i%o?8:`\n`;F(o+2);return z}

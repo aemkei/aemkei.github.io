@@ -1,0 +1,108 @@
+<meta charset='utf-8'>
+<style>
+  body {
+    padding: 0;
+    margin: 0;
+  }
+  #output * {
+    position: absolute;
+    top: 0;
+    margin: 0;
+    transition: all 0.2s;
+  }
+
+  #output canvas{
+    opacity: 0;
+  }
+
+  #output:hover canvas {
+    opacity: 1;
+  }
+
+  #output:hover pre {
+    color: #F00;
+  }
+</style>
+
+<div id="output"></div>
+<script>
+  var image = new Image(),
+  canvas = document.createElement("canvas"),
+  ctx = canvas.getContext("2d"),
+  cell = { width: 1, height: 1 },
+  pixels = 0;
+
+function clear(){
+  ctx.fillStyle = "#FFF";
+  ctx.fillRect(0, 0, cell.width, cell.height);
+}
+
+var xxx = "[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]][([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[+!+[]+[+[]]]+([][[]]+[])[+!+[]]+(![]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[])[+!+[]]+([][[]]+[])[+[]]+([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[])[+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[+!+[]+[+[]]]+(!![]+[])[+!+[]]](([][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]]+[])[!+[]+!+[]+!+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[+!+[]+[+[]]]+([][[]]+[])[+!+[]]+(![]+[])[!+[]+!+[]+!+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+(+(+!+[]+[+!+[]]+(!![]+[])[!+[]+!+[]+!+[]]+[!+[]+!+[]]+[+[]])+[])[+!+[]]+([![]]+[][[]])[+!+[]+[+[]]]+([][[]]+[])[+!+[]]+(![]+[])[+[]]+(!![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[+!+[]+[+[]]]+([][[]]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[!+[]+!+[]+[!+[]+!+[]]]+[!+[]+!+[]+!+[]+!+[]]+[!+[]+!+[]]+([+[]]+![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[]+[+[]]]+(![]+[])[!+[]+!+[]]+(![]+[])[!+[]+!+[]]])[!+[]+!+[]+[+[]]])()";
+
+var last = "";
+
+function getNearest(imageData){
+  var pixel = !imageData[1],
+    output;
+
+  pixels += pixel;
+
+  output = pixel ? xxx[pixels-1] || "" : " ";
+
+  if (output == ";" && last == " "){
+    pixels++;
+    output = xxx[pixels-1];
+  }
+
+  last = output;
+
+  return output;
+}
+
+
+var out = "",
+  width = 500,
+  height = 500,
+  scaledHeight = height * 0.92,
+  data, x, y;
+
+canvas.width = width;
+canvas.height = height;
+
+ctx.fillStyle = "white";
+ctx.fillRect(0,0,500,500);
+
+
+ctx.fillStyle = "black";
+ctx.font = "bold 160px Arial";
+ctx.fillText("?", 30, 120);
+
+
+
+var output = document.getElementById("output"),
+  pre = document.createElement("pre");
+
+output.style.width = width + "px";
+output.style.height = height + "px";
+
+output.appendChild(canvas);
+output.appendChild(pre);
+
+
+setTimeout(function(){
+  for (y = 0; y < scaledHeight; y += cell.height + 2){
+    for (x = 0; x < width; x += cell.width){
+      data = ctx.getImageData(x, y, cell.width, cell.height).data;
+      out += getNearest(data);
+    }
+
+    out += "\n";
+  }
+
+
+  pre.innerText = out;
+  console.log(pixels);
+}, 1000);
+
+
+</script>

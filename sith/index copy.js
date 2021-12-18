@@ -1,0 +1,1 @@
+[Q,PO,PC,D,_,B,,o,b,j,e,c]='"(). \\'+{},[t,r,u,e,f,a,l,s,e,u,n,d,e,f,i]=[T=!!o]+(F=!o)+o.o,R=r+e+t+u+r+n+_,D0=+F,D1=+T,D2=D1+D1,D3=D1+D2,D4=D2+D2,D6=D3+D3,D7=D6+D1,D8=D6+D2,X=[C=c+o+n+s+t+r+u+c+t+o+r][C][C],p=B+D1+D6+D0,XXX="'󠅡󠅬󠅥󠅲󠅴󠄨󠄱󠄩 '",code=u+n+e+s+c+a+p+e+PO+e+s+c+a+p+e+PO+XXX+PC+D+r+e+p+l+a+c+e+PO+"/"+u+".{"+D8+"}/"+B+D1+D4+D7+",''))",PC,PC,X(X(R+X(R+Q+code+Q)())())()

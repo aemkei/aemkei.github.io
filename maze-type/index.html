@@ -6,16 +6,15 @@
   <style>
 
     #area {
-      width: calc(20 * 20px);
+      width: calc(5 * 20px);
       display: grid;
-      grid-template-columns: repeat(20, 1fr);
-      grid-template-rows: repeat(20, 1fr);
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(5, 1fr);
     }
 
     #area div {
       width: 20px;
       height: 20px;
-      /* border: 1px solid black; */
 
       background-image: linear-gradient(45deg, black 25%, transparent 25%, transparent 50%, black 50%, black 75%, transparent 75%, transparent 100%);
 
@@ -25,18 +24,18 @@
 
     #area div.selected {
       background-image: linear-gradient(-45deg, black 25%, transparent 25%, transparent 50%, black 50%, black 75%, transparent 75%, transparent 100%);
+      background-color: #0FF;
     }
 
     #area:hover div.selected {
-      background-color: blue;
     }
 
     #area:hover div.selected:hover {
-      background-color: red;
+      /* background-color: blue; */
     }
 
     #area div:hover {
-      background-color: red;
+      background-color: #0FF;
     }
 
 
@@ -47,8 +46,7 @@
   <div id="area"></div>
 
   <script>
-
-    const size = 20;
+    const size = 5;
     const area = document.getElementById('area');
 
     for (let x = 0; x < size; x++) {

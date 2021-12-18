@@ -1,0 +1,14 @@
+<canvas id="c" width="1024" height="1024">
+<script>
+  const context = c.getContext('2d');
+  context.fillStyle = '#FFF';
+  context.fillRect(0, 0, 1024, 1024);
+  context.fillStyle = '#000';
+  for (var x = 0; x < 256; x++) {
+    for (var y = 0; y < 256; y++) {
+      if ((x * 64) % y * (x ^ y) < 77) {
+        context.fillRect(x*4, y*4, 4, 4);
+      }
+    }
+  }
+</script>

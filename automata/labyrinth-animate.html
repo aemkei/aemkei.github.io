@@ -21,7 +21,6 @@
 
     for (let last = i = 2; i < width*width; i+=2) {
       const diff = (last - i) + 2;
-      // const random = Math.round(diff / 4) * 2;
       const random = Math.round(diff / 4) * 2;
       const randomLastIndex = last - random - width + 1;
 
@@ -33,7 +32,6 @@
         (i < width) ||
         (i % width) &&
         (Math.random() < 0.5)
-        // (Math.sin(i/15) < 0)
       ) {
         cells[i] = true;
       } else {
@@ -42,10 +40,9 @@
       }
     }
 
-
     context.fillStyle = '#000';
     context.fillRect(0, 0, 1024, 1024);
-    context.fillStyle = '#666';
+    context.fillStyle = '#000';
 
     function f(i,x,y) {
       return cells[i] || (x % 2 && !(y % 2));
@@ -55,9 +52,16 @@
     function draw(x, y) {
       let s = size / 2;
       let s2 = size / 2;
+
+      let row = grid[y];
+      if (!row) {
+        row = [];
+        grid[y] = row;
+      }
+
+      row[x] = true;
       context.fillRect(x * s , y * s , s2, s2);
     }
-
 
     for (let index = 0; index < width * (width-1) * 2 - 1; index++) {
       let i = Math.round(index / 2);
@@ -104,4 +108,62 @@
     }
     draw(width * 2, 0);
 
+    let hue = 0;
+    function cycleHue(){
+      hue += 1;
+      context.fillStyle = `hsl(${hue},100%,50%)`;
+    }
+
+    context.fillStyle = '#006';
+
+    let x = 1;
+    let y = 0;
+
+    const cache = [[x, y]];
+    draw(x, y);
+    grid[y][x] = true;
+
+    const neighbors = [
+              [0, -1],
+      [-1, 0],          [+1, 0],
+              [0, +1]
+    ];
+
+    function findEmpty() {
+      const [dx, dy] = neighbors.find(([dx, dy]) => {
+        return grid[y + dy] && !grid[y + dy][x + dx];
+      });
+
+      return [
+        x + dx,
+        y + dy
+      ]
+    }
+
+
+    function next(){
+
+      try {
+        [x, y] = findEmpty();
+      } catch(e) {
+        [x, y] = [-9,- 9];
+      }
+
+
+      cycleHue();
+      draw(x, y);
+      cache.push([x, y])
+      grid[y][x] = true;
+
+
+      const start = cache[cache.length-100]
+      if (start) {
+        context.fillStyle = `#000`;
+        draw(start[0], start[1]);
+      }
+
+      setTimeout(next, 0);
+    }
+
+    next();
   </script>

@@ -1,0 +1,6 @@
+<canvas id=c><svg onload=
+setInterval('t<293&&c.
+getContext("2d").fillRect
+(150+t++/4*Math.cos(t),75
++t/4*Math.sin(t),4,4)',t=
+9)>        #valentinesday

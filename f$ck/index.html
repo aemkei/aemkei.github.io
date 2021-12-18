@@ -1,0 +1,194 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+<script id="_"></script>
+
+<script>
+
+// based on https://syllab.fr/projets/experiments/xcharsjs/5chars.id.html
+
+/**
+  $
+  [
+  ]
+  +
+  =
+**/
+
+
+
+
+
+function mapInt(int){
+	let digits = int.toString().split('');
+	return '+[' + digits.map(d => `[${MAP[d]}]`).join('+') + ']';
+}
+
+function mapStr(str){
+	let chars = str.split('');
+	for(let char of chars){
+		if(!(char in MAP)) throw new Error(`char ${char} is not available in ${str}`);
+	}
+	return chars.map(c => MAP[c]).join('+');
+}
+
+const MAP = {
+	0: `+[]`,
+	1: `++[[]][+[]]`,
+	2: `++[++[[]][+[]]][+[]]`,
+	3: `++[++[++[[]][+[]]][+[]]][+[]]`,
+	4: `++[++[++[++[[]][+[]]][+[]]][+[]]][+[]]`,
+	5: `++[++[++[++[++[[]][+[]]][+[]]][+[]]][+[]]][+[]]`,
+	6: `++[++[++[++[++[++[[]][+[]]][+[]]][+[]]][+[]]][+[]]][+[]]`,
+	7: `++[++[++[++[++[++[++[[]][+[]]][+[]]][+[]]][+[]]][+[]]][+[]]][+[]]`,
+	8: `++[++[++[++[++[++[++[++[[]][+[]]][+[]]][+[]]][+[]]][+[]]][+[]]][+[]]][+[]]`,
+	9: `++[++[++[++[++[++[++[++[++[[]][+[]]][+[]]][+[]]][+[]]][+[]]][+[]]][+[]]][+[]]][+[]]`,
+
+	// [][0] === undefined
+	u: `[[]+[][[]]][+[]][+[]]`,
+	n: `[[]+[][+[]]][+[]][++[[]][+[]]]`,
+	d: `[[]+[][+[]]][+[]][++[++[[]][+[]]][+[]]]`,
+	e: `[[]+[][+[]]][+[]][++[++[++[[]][+[]]][+[]]][+[]]]`,
+	f: `[[]+[][+[]]][+[]][++[++[++[++[[]][+[]]][+[]]][+[]]][+[]]]`,
+	i: `[[]+[][+[]]][+[]][++[++[++[++[++[[]][+[]]][+[]]][+[]]][+[]]][+[]]]`,
+
+	// +undefined+[] === "NaN"
+	N: `[+[][+[]]+[]][+[]][+[]]`,
+	a: `[+[]+[][+[]]+[]][+[]][++[[]][+[]]]`
+}
+
+// +("1e1000") === Infinity
+MAP[Infinity] = `+[${MAP[1]}+${MAP.e}${mapInt(1000)}]+[]`;
+
+Object.assign(MAP, {
+	I: `$$$$$$[${MAP[0]}]`,
+	t: `$$$$$$[${MAP[6]}]`,
+	y: `$$$$$$[${MAP[7]}]`,
+	"+": `[+[${MAP[1]}+${MAP.e}${mapInt(100)}]+[]][+[]][${MAP[2]}]`, // +("1e100")+"" === "1e+100"
+	".": `[+[${mapInt(11)}+${MAP.e}${mapInt(20)}]+[]][+[]][${MAP[1]}]` // +("11e20")+"" === "1.1e+21"
+});
+
+// []["find"] === function find() { [native code] }
+MAP[Array.prototype.find] = `[][${mapStr("find")}]`;
+
+Object.assign(MAP, {
+	c: `[$$$+[]][+[]][${MAP[3]}]`,
+	o: `[$$$+[]][+[]][${MAP[6]}]`,
+	v: `[$$$+[]][+[]][${mapInt(23)}]`,
+	" ": `[$$$+[]][+[]][${mapInt(8)}]`,
+	"(": `[$$$+[]][+[]][${mapInt(13)}]`,
+	")": `[$$$+[]][+[]][${mapInt(14)}]`,
+	"{": `[$$$+[]][+[]][${mapInt(16)}]`,
+	"}": `[$$$+[]][+[]][${mapInt(32)}]`,
+	"[": `[$$$+[]][+[]][${mapInt(18)}]`,
+	"]": `[$$$+[]][+[]][${mapInt(30)}]`
+});
+
+
+MAP["$.find"] = `[$[${mapStr("find")}]+[]][+[]]`;
+$$$$$$$ = eval(MAP["$.find"]);
+
+
+Object.assign(MAP, {
+  h: `$$$$$$$[${mapInt(303)}]`,
+  j: `$$$$$$$[${mapInt(603)}]`,
+  p: `$$$$$$$[${mapInt(60)}]`,
+  H: `$$$$$$$[${mapInt(402)}]`,
+  T: `$$$$$$$[${mapInt(70)}]`,
+  L: `$$$$$$$[${mapInt(624)}]`,
+  E: `$$$$$$$[${mapInt(192)}]`,
+  r: `$$$$$$$[${mapInt(18)}]`,
+  g: `$$$$$$$[${mapInt(94)}]`,
+  f: `$$$$$$$[${mapInt(0)}]`,
+  s: `$$$$$$$[${mapInt(0)}]`,
+
+  D: `$$$$$$$[${mapInt(51)}]`,
+  C: `$$$$$$$[${mapInt(117)}]`,
+  w: `[[]+$][+[]][${mapInt(23)}]`,
+  k: `[[]+$][+[]][${mapInt(25)}]`
+});
+
+// Introducting '=' character
+
+
+
+
+// MAP["constructor"] = mapStr("constructor");
+MAP["offsetParent"] = mapStr("offsetParent");
+
+
+
+// $``.offsetParent``[0] // HTML
+
+/* Introducing _
+
+// if we have <script id="_">
+// _.outerHTML += " <img src='' onerror='eval(`code !!!`)'>"
+//   */
+
+// NOT SURE HOW TO CALL THE CODE WITHOUT PARENTHESES
+// https://stackoverflow.com/a/35949617 eg:
+// $["toString"]=$.globalEval; $+[]
+// but how to pass arguments?
+
+
+
+MAP["String"] = `[[]+[]][+[]][$$$$][${mapStr("name")}]`;
+MAP["location"] = mapStr("location");
+MAP["outerHTML"] = mapStr("outerHTML");
+
+
+/* AT THIS POINT WE HAVE
+
+ 0123456789
+ abcdefgijlmnoprstuvy
+ ABCDFHILMNPRST
+ {}[]() +
+
+ Bounty for: w V U
+
+ window = _.ownerDocument.defaultView
+ window['location']="javascript:alert(1)"
+
+
+*/
+
+/* Shortcuts assignments */
+$$$$$$ = eval(MAP[Infinity]);
+$$$ = eval(MAP[Array.prototype.find]);
+$$$$ = eval(MAP["constructor"]);
+$$$$$ = eval(MAP["outerHTML"]);
+$$ = ",";
+
+
+function encode(input){
+	let charcodes = [];
+	for(var c=0; c<input.length; c++){
+		charcodes.push(`[${mapInt(input.charCodeAt(c))}][+[]]`);
+	}
+
+	return `
+	 [$$$$$$$ = ${MAP["$.find"]}] +
+	 [$$$$$$ = ${MAP[Infinity]}]
+	+[$$$ = ${MAP[Array.prototype.find]}]
+	+[$$$$ = ${MAP["constructor"]}]
+	+[$$$$$ = ${MAP["outerHTML"]}]
+	+[$$=[+[]]]+[$$[++[[]][+[]]]=+[]]+[$$=[$$+[]][+[]][++[[]][+[]]]]
+	+[_[$$$$$]+=${mapStr(`<img src="u" onerror="eval(`)}+${MAP["String"]}+${mapStr(".fromCharCode(")}
+	+[ []+ ${ charcodes.join(`+$$+`) } ][+[]]+ ${ mapStr(`))">`)}]`
+	.replace(/\s/g, "");
+}
+
+
+const MAPVAL = {};
+Object.keys(MAP).forEach(key => {
+	try {
+		MAPVAL[key] = eval(MAP[key])
+	} catch(e){
+		console.error("Failed evaluating "+key, e);
+	}
+
+});
+console.log(MAPVAL);
+
+
+</script>

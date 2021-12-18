@@ -1,0 +1,1 @@
+setInterval(_=>{for(Y=y,x=80;x-=2;)for(Y=(Y+x*x+9)%30,p(x,Y,(X="\33[")+`37m${C(y*x)}`),o=7;--o;)p(x,Y-o,X+`38;5;${52-6*o}m${C((x*7))}`);y++},y=99,C=_=>String.fromCharCode(12450+_%32),p=((o,x,_)=>x<24&&console.log(X+`40m${X}${x};${o}H${_}`)))
