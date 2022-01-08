@@ -1,0 +1,26 @@
+<body onload='' bgcolor=X>
+  <pre id=p></pre>
+
+  <script>
+    setInterval(f = n => {
+      o = "";
+      t++;
+      i = 0;
+
+      f = (f + "")
+        .replace(/\n/g, '')
+        .replace(/\s/g, '');
+
+        for (y=0; y<16; y++) {
+          for (x=0; x<40; x++) {
+            g = 0 | (y - t/(x**5%29+8) + 32 * t) % 32;
+            c = `0 ${g} 0`;
+            if (g == 9) c = "#FFF"
+            o += (f[i%100]).fontcolor(c);
+            i++;
+          }
+          o += "\n";
+        }
+      p.innerHTML = o
+    }, t = 9)
+  </script>

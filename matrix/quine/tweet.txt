@@ -1,0 +1,78 @@
+THE #MATRIX
+An animated quine in only 187 bytes of HTML+JS
+
+<body onload='setInterval(f=_=>{for(t++,o=i=0,w=35;i<384;o+=i++%+w?(f+f+f)[i].fontcolor(g==9?"#FFF":[0,g,0]):"\n")g=0|(i/w-t/((i%w)**5%w+3)+w*t)%w;p.innerHTML=o},t=9)'bgcolor=X><pre id=p>
+
+http://aem1k.com/matrix/quine/
+
+💊
+
+----
+
+If you look close, you will see that the underlying code is an animated version of the JavaScript source itself. This is what is called a "Quine".
+
+Here is a sample frame of the output:
+
+-----
+
+https://latex.codecogs.com/eqneditor/editor.php
+f(x,y,t) = (y - \cfrac{t}{x^5 \mod{H}} + H*t)\mod{H}
+
+
+
+The hearth of this piece is my "matrix equation":
+
+f(x,y,t) = (y - t/(x⁵ % H) + H*t) % H
+
+Where:
+
+- x: column
+- y: row
+- t: time
+- H: height
+
+`(x⁵ % H)` sets a pseudo random speed per column
+`(y - t/speed)` computes the distance
+`(distance + H*t) % H` loops the animation
+
+
+-----
+
+Instead of running a loops for `x` and `y` …
+
+for (y = 0; y < H; y++) {
+  for (x = 0; x < W; x++) { ... }
+}
+
+… it is shorter to merge that into one:
+
+for (i = 0; i < W*H; i++)
+
+To get back the 2D position we can use:
+
+x = i % W
+y = i % H
+
+
+---
+
+This is the HTML boilerplate that wraps the code:
+
+<body onload='setInterval(code)'bgcolor=X><pre id=p>
+
+Note: We can skip the space before an attribute and quotes around some values. `bgcolor` is deprecated but working way of adding color. `X` is invalid and  converted to black.
+
+
+----
+
+
+To colorize symbols, we call the .fontcolor() method. This is deprecated but still works in most browsers.
+
+For the matrix code, it uses white `#FFF` for the first character and a fading green eg. `[0,5,0]`. Invalid HEX codes are replaced with 0s so the output is `000500`.
+
+fontcolor.html
+
+
+---
+
+Here is the commented source code:

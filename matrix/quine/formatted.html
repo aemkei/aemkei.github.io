@@ -1,0 +1,39 @@
+<body onload='                  // run on start
+  setInterval(                  // main loop
+    f = _ => {                  // function to call every frame
+      for (                     // run through every character
+        t++,                    // increase time
+        o =                     // initialize empty output
+        i = "",                 // reset char index
+        w = 34;                 // set line width
+
+        i++ < 398;              // render output 3 times
+
+        o +=                    // add new char to output
+          i % w ?               // check for end of line
+            (f+f+f)[            // convert function to string
+              i                 // get char at index
+            ].fontcolor(        // colorize output
+              g == 9 ?          // if distance is 9
+                "#FFF" :        // ... use white or
+                [0,g,0]         // otherwise a fading green
+            ) : "\n"            // add line breaks between rows
+      )
+      g =                       // get green value
+        0 | (                   // convert to integer
+          i / w -               // get y position of char
+          t / (                 // compute offset based on time
+            (
+              i % w             // for the current column (= x)
+            ) ** 5 % w          // ... set pseudo random pace
+              + 3               // and slow down a bit
+          ) +
+          w * t                 // start with a high value
+        ) % w;                  // loop values
+        p.innerHTML = o         // render HTML in <pre> tag
+      },
+    t = 9                       // delay 9ms between frames
+  )'
+  bgcolor=X                     // use black background
+>
+<pre id=p>                      // use monospace font
