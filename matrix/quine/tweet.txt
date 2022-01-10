@@ -65,6 +65,16 @@ Note: We can skip the space before an attribute and quotes around some values. `
 
 ----
 
+Note: The code could be golfed down to 167, but then we loose the white color and random speed:
+
+<body onload='setInterval(f=_=>{for(t++,o=i=0,w=25;i<225;o+=i++%+w?(f+f)[i].fontcolor([0,g,0]):"\n")g=0|(i/w-t/9+i**3%w+w*t)%w;p.innerHTML=o},t=9)'bgcolor=X><pre id=p>
+
+
+MOOVIE
+
+
+----
+
 
 To colorize symbols, we call the .fontcolor() method. This is deprecated but still works in most browsers.
 
