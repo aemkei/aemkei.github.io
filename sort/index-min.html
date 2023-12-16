@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sort</title>
+  <style>
+    body {
+      padding: 40px; 
+      background: #000;
+      color: #FFF;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <pre id="p"></pre>
+  <script>
+
+    f=x=>{for(s=[..."f="+f],S=[],i=245;i>0;i--)S[i]=[...s],s.forEach((o,i)=>{l=s[i-1],l>o&&(s[i]=l,s[i-1]=o)});i=1,setInterval(o=>{i++,p.innerHTML=S[i].map((o,i)=>(i%23?"":"\n")+o.fontcolor(/\w/.test(o)?(9>=o?"#0FF":"#FF0"):"#F0F")).join("")},99);},f()
+
+  </script>
+</body>
+</html>
