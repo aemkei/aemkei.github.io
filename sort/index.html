@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sort</title>
+  <style>
+    body {
+      padding: 40px; 
+      background: #000;
+      color: #FFF;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <pre id="p"></pre>
+  <script>
+
+    f=_=>{
+      s = [...('J'+f).replace(/[\n|\s]*/g,'')];
+      console.log(s)
+
+      S = [];
+
+      for (m=i=300;i>0;i--){
+        S[i]=[... s];
+        s.forEach((c,i)=> { 
+          l = s[i-1];
+          if (l > c) {
+            s[i] = l;
+            s[i-1] = c;
+          }
+        })
+      }
+
+      i=1;
+      x=_=>{
+        i++;
+        p.innerHTML = S[i].map((c,i)=> {
+          return (i%30?'':'\n') + c.fontcolor(/\w/.test(c)?'#FFF':'#F00')
+        }).join(''); 
+        setTimeout(x,50);
+      }
+      x();
+    
+    }
+
+    f()
+
+  </script>
+</body>
+</html>
