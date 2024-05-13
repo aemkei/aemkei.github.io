@@ -1,3 +1,27 @@
+<script>
+r=a=>setInterval(X=>{N=j=o='\n';
+  for(y=5; y--;){
+    o+=N;
+    for (x=62;x--;) {
+      d = x/8 | 0;
+      i = (x/2|0)%4 + y*3;
+      t = (D = Date()[23-d]) < ':' ? D : 10;  
+      c = (x/2)%4<3 && [31599,5961,25255,29647,23497,31118,31215,29330,31727,31695,1040][t] & 1 << i;
+      o+= (r+"")[j++].fontcolor(c?'#FF0':'#335')
+    }
+  }
+  
+  document.body.innerHTML='<pre>&lt'+(S='script>')+o+N+N+'&lt/'+S;
+},9)
+r();
+
+r=(r+"").replace(/\s/g, '');
+r=r+"##########" +r;
+
+</script>
+
+
+
 <style>
   body {
     background-color: black;
@@ -5,24 +29,3 @@
     padding:2em
   }
 </style>
-
-<script>
-r=a=>setInterval(X=>{j=o='';
-  for (y=7; y--;) {
-    o+="\n";
-    for (x=64;x--;) {
-      d = x/8 | 0;
-      i = (x/2|0)%4 + (y-1)*3;
-      t = (D = Date()[23-d]) < ':' ? D : 10;  
-      c = (x/2)%4<3 && '\u7B6F\u1749\u62A7\u73CF\u5BC9\u798E\u79EF\u7292\u7BEF\u7BCF\u0410'.charCodeAt(t) & 1 << i;
-      o+= R[j++].fontcolor(c?'#FF0':'#335')
-    }
-  }
-  
-  document.body.innerHTML='<pre>&lt'+(S='script>')+o+'\n&lt/'+S;
-},10)
-R=(r+"").replace(/\s/g, '');
-R=R+R;
-
-r();
-</script>
