@@ -1,33 +1,18 @@
-for(i=15;i++<24;)console.log(Date()[i]);
-
 o='';
-for(d=11; d--;){
-  for(i=16;i--;){
-    o += (' #'[('筯቉珧珏寉秏积牉篯篏'.charCodeAt(d)||65)&1<<i&&1]) +  ('\n'[i%3] || '')
+for (y=5; y--;) {
+  o+="\n";
+  for (x=32;x--;) {
+    d = x/4 | 0;
+    i = x%4 + y*3;
+    t = (D = Date()[23-d]) < ':' ? D : 10;  
+    c = (x%4>2) ? " " : ' #'[
+      '筯቉珧珏寉秏积牉篯篏А'.charCodeAt(t) & 1 << i &&1
+    ] || ' ';  
+    o+= c+c
   }
 }
 
 console.log(o);
 
-console.log('-----')
+setInterval(x=>{o='';for(y=5;y--;o+="\n")for(x=38;x--;)o+=x%5>2?" ":' #'['㭮ᙉ狧掎寉禎㦮犒㯮㯎А'.charCodeAt((D=Date()[23-(x/5|0)])<':'?D:10)&1<<(x%5+y*3)&&1]||' ';console.log(o);},999)
 
-o='';
-for(d=15;d++<24;)
-for(i=16;i--;)
-o+=(' #'['筯቉珧珏寉秏积牉篯篏'.charCodeAt(Date()[d])&1<<i&&1]) +  ('\n'[i%3] || '')
-console.log(o);
-
-
-console.log('-----')
-
-o='';
-for(d=15;d++<23;)
-for(i=16;i--;)
-o+=(
-  ' #'[
-    '筯቉珧珏寉秏积牉篯篏А'.charCodeAt(
-      (D = Date()[d])<':'?D:10
-    ) & 1 << i &&1
-  ]
-) +  ('\n'[i%3] || '')
-console.log(o);
