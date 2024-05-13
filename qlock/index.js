@@ -14,5 +14,25 @@ for (y=5; y--;) {
 
 console.log(o);
 
-setInterval(x=>{o='';for(y=5;y--;o+="\n")for(x=38;x--;)o+=x%5>2?" ":' #'['㭮ᙉ狧掎寉禎㦮犒㯮㯎А'.charCodeAt((D=Date()[23-(x/5|0)])<':'?D:10)&1<<(x%5+y*3)&&1]||' ';console.log(o);},999)
+function r(){
+  j=o='';
+  r=(r+"").replace(/\s/g, '');
+  r=r+r;
+  for (y=5; y--;) {
+    o+="\n";
+    for (x=32;x--;) {
+      d = x/4 | 0;
+      i = x%4 + y*3;
+      t = (D = Date()[23-d]) < ':' ? D : 10;  
+      c = x%4<3 && '筯ᝉ抧珏寉禎积犒篯篏А'.charCodeAt(t) & 1 << i;  
+      j++;
+      o+= c?r[j]: ' '
+      j++;
+      o+= c?r[j]: ' '
+    }
+  }
+  
+  console.log(o);
+}
 
+r();
