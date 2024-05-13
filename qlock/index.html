@@ -1,23 +1,5 @@
 <script>
-r=a=>setInterval(X=>{N=j=o='\n';
-  for(y=5; y--;){
-    o+=N;
-    for (x=62;x--;) {
-      d = x/8 | 0;
-      i = (x/2|0)%4 + y*3;
-      t = (D = Date()[23-d]) < ':' ? D : 10;  
-      c = (x/2)%4<3 && [31599,5961,25255,29647,23497,31118,31215,29330,31727,31695,1040][t] & 1 << i;
-      o+= (r+"")[j++].fontcolor(c?'#FF0':'#335')
-    }
-  }
-  
-  document.body.innerHTML='<pre>&lt'+(S='script>')+o+N+N+'&lt/'+S;
-},9)
-r();
-
-r=(r+"").replace(/\s/g, '');
-r=r+"##########" +r;
-
+(r=a=>setInterval(X=>{for(N=j=o='\n',y=5;y--;o+=N)for(x=62;x--;)c=x/2%4<3&&[31599,5961,25255,29647,23497,31118,31215,29330,31727,31695,1040][(D=Date()[23-(x/8|0)])<10?D:10]&1<<((x/2|0)%4+y*3),o+=(`(r=${r})()`)[j++].fontcolor(c?'#FF0':'#339'),document.body.innerHTML=`<pre>&lt${S='script>'}`+o+'\n&lt/'+S},9))()
 </script>
 
 
@@ -25,7 +7,7 @@ r=r+"##########" +r;
 <style>
   body {
     background-color: black;
-    color: #FFF;
-    padding:2em
+    color: #FFf;
+    padding: 2em
   }
 </style>
