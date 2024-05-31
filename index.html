@@ -1,295 +1,384 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>aem1k - JS Hacks &amp; Creativity</title>
-    <meta name="description" content="Pure JavaScript Hacks and Creative Coding. Created by Martin Kleppe aka @aemkei.">
-    <meta name="theme-color" content="#222222" />
-    <meta name="viewport" content="width=560px" />
-    <meta name="twitter:card" content="summary_large_image"></meta>
-    <meta name="twitter:creator" content="@aemkei" />
-    <meta property="og:title" content="aem1k - JS Hacks &amp; Creativity" />
-    <meta property="og:description" content="Pure JavaScript Hacks and Creative Coding. Created by Martin Kleppe aka @aemkei." />
-    <meta property="og:image" content="https://aem1k.com/preview.png" />
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+<head>
+  <title>aem1k - JS Hacks &amp; Creativity</title>
+  <meta name="description" content="Pure JavaScript Hacks and Creative Coding. Created by Martin Kleppe aka @aemkei.">
+  <meta name="theme-color" content="#222222" />
+  <meta name="viewport" content="width=560px" />
+  <meta name="twitter:card" content="summary_large_image">
+  </meta>
+  <meta name="twitter:creator" content="@aemkei" />
+  <meta property="og:title" content="aem1k - JS Hacks &amp; Creativity" />
+  <meta property="og:description"
+    content="Pure JavaScript Hacks and Creative Coding. Created by Martin Kleppe aka @aemkei." />
+  <meta property="og:image" content="https://aem1k.com/preview.png" />
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Mono&display=swap" rel="stylesheet">
+  <style>
+    html,
+    body,
+    * {
+      font-family: "Fira Mono", monospace;
+      font-size: 14px;
+      word-wrap: break-word;
+      text-size-adjust: none;
+    }
 
-    <style>
-      html, body, * {
+    .markdown,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    pre,
+    code,
+    blockquote,
+    em,
+    strong,
+    #globe,
+    code {
+      line-height: 20px;
+      font-weight: normal;
+      font-style: normal;
+    }
 
-        font-family: "Fira Mono", monospace;
-        font-size: 14px;
-        word-wrap: break-word;
-        text-size-adjust: none;
-      }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    pre,
+    code,
+    blockquote,
+    ol,
+    ul,
+    li,
+    p,
+    section,
+    header,
+    footer {
+      float: none;
+      margin: 0;
+      padding: 0;
+    }
 
-      .markdown,h1,h2,h3,h4,h5,h6,pre,code,blockquote,em,strong,#globe,code {
-        line-height: 20px;
-        font-weight: normal;
-        font-style: normal;
-      }
-      h1,h2,h3,h4,h5,h6,pre,code,blockquote,ol,ul,li,p,section,header,footer {
-        float: none;
-        margin: 0;
-        padding: 0;
-      }
-      h1,p,ul,ol,pre,blockquote {
-        margin-top: 20px;
-        margin-bottom: 20px;
-      }
-      h1 {
-        position: relative;
-        display: inline-block;
-        display: table-cell;
-        padding: 20px 0 40px;
-        margin: 0;
-        overflow: hidden;
-      }
-      h1:after {
-        content: "====================================================================================================";
-        position: absolute;
-        bottom: 20px;
-        left: 0;
-      }
-      h1 + * {
-        margin-top: 0;
-      }
-      h2,h3,h4,h5,h6 {
-        position: relative;
-        margin-bottom: 20px;
-      }
-      h2:before,h3:before,h4:before,h5:before,h6:before {
-        content: "## ";
-        display: inline;
-      }
-      h3:before {
-        content: "### ";
-      }
-      h4:before {
-        content: "#### ";
-      }
-      h5:before {
-        content: "##### ";
-      }
-      h6:before {
-        content: "###### ";
-      }
-      li {
-        position: relative;
-        display: block;
-        padding-left: 34px;
-        padding-left: 2ch;
-        line-height: 18px;
-      }
-      li:after {
-        position: absolute;
-        top: 0;
-        left: 0;
-      }
-      ul > li:after {
-        content: "*";
-      }
-      ol {
-        counter-reset: ol;
-      }
-      ol > li:after {
-        content: counter(ol) ".";
-        counter-increment: ol;
-      }
-      pre {
+    h1,
+    p,
+    ul,
+    ol,
+    pre,
+    blockquote {
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      position: relative;
+      display: inline-block;
+      display: table-cell;
+      padding: 20px 0 40px;
+      margin: 0;
+      overflow: hidden;
+    }
+
+    h1:after {
+      content: "====================================================================================================";
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+    }
+
+    h1+* {
+      margin-top: 0;
+    }
+
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    h2:before,
+    h3:before,
+    h4:before,
+    h5:before,
+    h6:before {
+      content: "## ";
+      display: inline;
+    }
+
+    h3:before {
+      content: "### ";
+    }
+
+    h4:before {
+      content: "#### ";
+    }
+
+    h5:before {
+      content: "##### ";
+    }
+
+    h6:before {
+      content: "###### ";
+    }
+
+    li {
+      position: relative;
+      display: block;
+      padding-left: 34px;
+      padding-left: 2ch;
+      line-height: 18px;
+    }
+
+    li:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    ul>li:after {
+      content: "*";
+    }
+
+    ol {
+      counter-reset: ol;
+    }
+
+    ol>li:after {
+      content: counter(ol) ".";
+      counter-increment: ol;
+    }
+
+    pre {
       /*  margin-left: 34px;
         padding-left: 4ch;*/
-      }
-      blockquote {
-        position: relative;
-        padding-left: 17px;
-        padding-left: 2ch;
-        overflow: hidden;
-      }
-      blockquote:after {
-        content: ">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>";
-        white-space: pre;
-        position: absolute;
-        top: 0;
-        left: 0;
-        font-size: 14px;
-        line-height: 20px;
-      }
-      strong:before,strong:after {
-        content: "__";
-        display: inline;
-      }
-      em:before,em:after {
-        content: "*";
-        display: inline;
-      }
-      a {
-        text-decoration: none;
-      }
-      a:before {
-        content: "[";
-        display: inline;
-        color: #999;
-      }
-      a:after {
+    }
+
+    blockquote {
+      position: relative;
+      padding-left: 17px;
+      padding-left: 2ch;
+      overflow: hidden;
+    }
+
+    blockquote:after {
+      content: ">\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>\A>";
+      white-space: pre;
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    strong:before,
+    strong:after {
+      content: "__";
+      display: inline;
+    }
+
+    em:before,
+    em:after {
+      content: "*";
+      display: inline;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    a:before {
+      content: "[";
+      display: inline;
+      color: #999;
+    }
+
+    a:after {
       /*  content: "](" attr(href) ")";*/
-        content: "]";
-        display: inline;
-        color: #999;
-      }
-      code {
-        font-weight: 100;
-      }
-      code:before,code:after {
-        content: "`";
-        display: inline;
-      }
-      pre code:before,pre code:after {
-        content: none;
-      }
-      hr {
-        position: relative;
-        height: 20px;
-        font-size: 0;
-        line-height: 0;
-        overflow: hidden;
-        border: 0;
-        margin-bottom: 20px;
-      }
-      hr:after {
-        content: "----------------------------------------------------------------------------------------------------";
-        position: absolute;
-        top: 0;
-        left: 0;
-        font-size: 14px;
-        line-height: 20px;
-        width: 100%;
-        word-wrap: break-word;
-        color: #333;
-      }
-      @-moz-document url-prefix() {
-        h1 {
-          display: block;
-        }
-      }
-      .markdown-ones ol > li:after {
-        content: "1.";
-      }
+      content: "]";
+      display: inline;
+      color: #999;
+    }
 
-      html, body {
-        background: #222;
-        color: #FFF;
-        margin: 0;
-      }
+    code {
+      font-weight: 100;
+    }
 
-      #container {
-        width: 600px;
-        padding: 30px 30px 30px 30px;
-        background: #090909;
-      }
+    code:before,
+    code:after {
+      content: "`";
+      display: inline;
+    }
 
-      * {
-        font-weight: normal;
-      }
+    pre code:before,
+    pre code:after {
+      content: none;
+    }
 
+    hr {
+      position: relative;
+      height: 20px;
+      font-size: 0;
+      line-height: 0;
+      overflow: hidden;
+      border: 0;
+      margin-bottom: 20px;
+    }
+
+    hr:after {
+      content: "----------------------------------------------------------------------------------------------------";
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 14px;
+      line-height: 20px;
+      width: 100%;
+      word-wrap: break-word;
+      color: #333;
+    }
+
+    @-moz-document url-prefix() {
       h1 {
-        opacity: 0;
-        position: absolute;
-        top: 0;
+        display: block;
       }
+    }
 
-      h2 {
-        color: #FF00FF;
-      }
+    .markdown-ones ol>li:after {
+      content: "1.";
+    }
 
-      h3 {
-        color: #00FF66;
-      }
+    html,
+    body {
+      background: #222;
+      color: #FFF;
+      margin: 0;
+    }
 
-      pre i {
-        color: #999;
-        font-style: normal;
-      }
+    #container {
+      width: 600px;
+      padding: 30px 30px 30px 30px;
+      background: #090909;
+    }
 
-      pre b {
-        color: yellow;
-      }
+    * {
+      font-weight: normal;
+    }
 
-      a {
-        color: #FFF;
-      }
+    h1 {
+      opacity: 0;
+      position: absolute;
+      top: 0;
+    }
 
-      a.link,li a {
-        color: #00CCFF
-      }
+    h2 {
+      color: #FF00FF;
+    }
 
-      pre#photo, pre#photo * {
-        font-size: 10px;
-        line-height: 12px;
-        color: yellow;
-      }
+    h3 {
+      color: #00FF66;
+    }
 
-      pre#photo b {
-        color: white;
-      }
+    pre i {
+      color: #999;
+      font-style: normal;
+    }
 
-      pre#logo {
-        line-height: 10px
-      }
+    pre b {
+      color: yellow;
+    }
 
-      #mandel {
-        line-height: 16px;
-      }
+    a {
+      color: #FFF;
+    }
 
-      #globe {
-        line-height: 17px;
-      }
+    a.link,
+    li a {
+      color: #00CCFF
+    }
 
-      #deathstar {
-        font-family: Monaco;
-        font-size: 14px;
-        line-height: 17px;
-      }
+    pre#photo,
+    pre#photo * {
+      font-size: 10px;
+      line-height: 12px;
+      color: yellow;
+    }
 
-      #hebrew {
-        width: 360px;
-      }
+    pre#photo b {
+      color: white;
+    }
 
-      #aleph {
-        font-size: 0.9em;
-        line-height: 1.2em;
-      }
+    pre#logo {
+      line-height: 10px
+    }
 
-      #ffconf {
-        line-height: 1em;
-        color: yellow;
-      }
+    #mandel {
+      line-height: 16px;
+    }
 
-      #pacman {
-        line-height: 0.9;
-        letter-spacing: 0.1em;
-        font-size: 14px;
-      }
+    #globe {
+      line-height: 17px;
+    }
 
-      #qlock {
-        color: #666;
-      }
+    #deathstar {
+      font-family: Monaco;
+      font-size: 14px;
+      line-height: 17px;
+    }
 
-      /* latin */
-      @font-face {
-        font-family: 'Inconsolata';
-        font-style: normal;
-        font-weight: 400;
-        font-stretch: 100%;
-        src: url(https://fonts.gstatic.com/s/inconsolata/v19/QldgNThLqRwH-OJ1UHjlKENVzkWGVkL3GZQmAwLYxYWI2qfdm7Lpp4U8WR32kXWdycuJDA.woff) format('woff');
-        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="container">
+    #hebrew,
+    #hebrew b {
+      width: 360px;
+      font-size: 16px;
+      font-family: sans-serif;
+    }
+
+    #aleph {
+      font-size: 0.9em;
+      line-height: 1.2em;
+    }
+
+    #ffconf {
+      line-height: 1em;
+      color: yellow;
+    }
+
+    #pacman {
+      line-height: 0.9;
+      letter-spacing: 0.1em;
+      font-size: 14px;
+    }
+
+    #qlock {
+      color: #666;
+    }
+
+    #fire {
+      line-height: 1.2em;
+    }
+
+    /* latin */
+    @font-face {
+      font-family: 'Inconsolata';
+      font-style: normal;
+      font-weight: 400;
+      font-stretch: 100%;
+      src: url(https://fonts.gstatic.com/s/inconsolata/v19/QldgNThLqRwH-OJ1UHjlKENVzkWGVkL3GZQmAwLYxYWI2qfdm7Lpp4U8WR32kXWdycuJDA.woff) format('woff');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="container">
     <pre>
                                     __
                                   <b>_</b><i>/</i>\ \
@@ -304,7 +393,7 @@
 
     <h1>aem1k</h1>
     <h2>JavaScript Hacks and Creative Coding</h2>
-    <p>Created by Martin Kleppe aka @aemkei.</p>
+    <p>Created by Martin Kleppe aka <a href="https://x.com/aemkei">@aemkei</a>.</p>
 
     <h3>Projects</h3>
     <ul>
@@ -312,6 +401,11 @@
       <li><a href="http://www.jsfuck.com/">JSFuck.com</a> - write any JavaScript with 6 characters: []()!+</li>
       <li><a href="https://aem1k.com/aurebesh.js/">aurebesh.js</a> - translate JavaScript to other writing systems</li>
       <li><a href="https://aem1k.com/qlock/">Qlock</a> - JavaScript quine clock</li>
+      <li><a href="https://tixy.land/">tixy.land</a> - minimalist code golfing environment</li>
+      <li><a href="https://x.com/aemkei/status/1378106731386040322">Alien Art</a> - simple formulas to create bit fields
+      </li>
+      <li><a href="https://aem1k.com/meta/quine/">Meta</a> - meta balls quine JS
+      </li>
       <li><a href="https://aem1k.com/void/">// VOID</a> - invisible variables and code</li>
       <li><a href="http://incept10n.com/">INCEPT10N</a> - JPEG = CSS = JS = HTML Polyglot</li>
       <li><a href="/theseus">Theseus</a> - create and solve a maze</li>
@@ -325,8 +419,8 @@
       <li><a href="/life">Life</a> - Game of Life in 176 bytes of HTML+JS
       <li><a href="/0">Invisible Code</a> - hidden source (Chrome only)
       <li><a href="/4">Four</a> - hidden Tetris in an octal layout
-      <li><a href="https://github.com/codegolf/pac-man">Pac-Man</a> - old-school game in < 512 bytes
-      <li><a href="https://gist.github.com/aemkei/1672254">Binary Tetris</a> - Tetris in 140 bytes of JavaScript</li>
+      <li><a href="https://github.com/codegolf/pac-man">Pac-Man</a> - old-school game in < 512 bytes <li><a
+            href="https://gist.github.com/aemkei/1672254">Binary Tetris</a> - Tetris in 140 bytes of JavaScript</li>
       <li><a href="https://github.com/aemkei/katakana.js">Katakana.js</a> - JavaScript with Japanese characters</li>
       <li><a href="/fire">FÌRE</a> - fire animation in 128 bytes of JavaScript</li>
       <li><a href="/water">wãter</a> - wave in 128 bytes using combining characters</li>
@@ -336,10 +430,10 @@
 
     <h3>More Examples</h3>
 
-<article>
-<a class="link" href="/world">Spin the globe</a> - Hello World 1K
+    <article>
+      <a class="link" href="/world">Spin the globe</a> - Hello World 1K
 
-<pre id="globe">
+      <pre id="globe">
 eval(z='p="<"+"pre>"/*<b> ,.oq#+     ,._, </b>*/;for(y in n="zw24l6k\
 4e3t4jnt4qj24xh2 x/*<b> =<,m#F^    A W###q. </b>*/42kty24wrt413n243n\
 9h243pdxt41csb yz/*<b> #K       q##H######Am </b>*/43iyb6k43pk7243nm\
@@ -357,11 +451,11 @@ it(B = "\\\\")./*<b>           G####B" #       </b>*/join(B+B).split\
 +61*y-1]).fontcolor/*<b>         TP         </b>*/(/\\w/.test(S)&&"#\
 03B");document.body.innerHTML=p+=B+"\\n"}setTimeout(z)')//
 </pre>
-<hr>
+      <hr>
 
-<a class="link" href="http://jsfuck.com">JSFuck</a> - Write JS with 6 Chars
+      <a class="link" href="http://jsfuck.com">JSFuck</a> - Write JS with 6 Chars
 
-<pre>
+      <pre>
 (![]+[])[+!+[]]+(![]+[])[!+[]+!+[]]+(!![]+[])
 [!+[]+!+[]+!+[]]+(!![]+[])[+!+[]]+(!![]+[])[+
 []]+(![]+[][(![]+[])[+[]]+([![]]+[][[]])[+!+[
@@ -373,14 +467,14 @@ it(B = "\\\\")./*<b>           G####B" #       </b>*/join(B+B).split\
 +(!![]+[])[+!+[]]])[!+[]+!+[]+[+[]]] // <b>()+[]!</b>
 </pre>
 
-<hr>
+      <hr>
 
 
 
 
-<a class="link" href="/qlock/">Qlock</a> - Quine Clock
+      <a class="link" href="/qlock/">Qlock</a> - Quine Clock
 
-<pre id="qlock">
+      <pre id="qlock">
 (r=(<b>)</b><b>=</b>&gt;s<b>e</b><b>t</b><b>I</b><b>n</b>terval(t=&gt;{f<b>o</b><b>r</b><b>(</b><b>j</b><b>=</b><b>o</b>="<b>\</b><b>n</b><b>"</b><b>,</b><b>y</b><b>=</b>5;y--;docu<b>m</b><b>e</b><b>n</b><b>t</b><b>.</b><b>b</b>od<b>y</b><b>[</b>"i<b>n</b><b>n</b>"
 +"<b>e</b><b>r</b><b>H</b><b>T</b>ML"]="<b>&lt;</b><b>p</b>re&gt;&amp;<b>l</b><b>t</b>"+(S<b>=</b><b>"</b>script<b>&gt;</b><b>\</b>n")+o+"\<b>n</b><b>\</b>n&amp;lt/"+S<b>)</b><b>f</b>or<b>(</b><b>x</b>=-<b>0</b><b>1</b>;
 <b>6</b><b>3</b>-!<b>y</b><b>&gt;</b>x++;<b>o</b><b>+</b>=`(r=${r})()<b>`</b><b>[</b><b>j</b><b>+</b>+].f<b>o</b><b>n</b><b>t</b><b>c</b><b>o</b><b>l</b>or(c?'#FF0<b>'</b><b>:</b><b>"</b><b>#</b><b>4</b><b>4</b>4"<b>)</b><b>)</b><b>c</b><b>=</b><b>x</b><b>/</b>2
@@ -388,11 +482,11 @@ it(B = "\\\\")./*<b>           G####B" #       </b>*/join(B+B).split\
 D=Da<b>t</b><b>e</b>()<b>[</b><b>1</b><b>6</b><b>+</b><b>(</b><b>x</b>/8|0)])?30<b>:</b><b>D</b><b>*</b><b>3</b>,i+3<b>)</b><b>,</b><b>3</b><b>6</b><b>)</b><b>&amp;</b>1&lt;&lt;(x/2|0)<b>%</b><b>4</b><b>+</b><b>3</b><b>*</b><b>y</b>},100)<b>)</b><b>(</b>)
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="/deathstar">ЗВЕЗДА СМЕРТИ</a> - Death Star
+      <a class="link" href="/deathstar">ЗВЕЗДА СМЕРТИ</a> - Death Star
 
-<pre id="deathstar">
+      <pre id="deathstar">
                    Зв
                   езда
                  &lt;bOdY
@@ -415,11 +509,11 @@ D=Da<b>t</b><b>e</b>()<b>[</b><b>1</b><b>6</b><b>+</b><b>(</b><b>x</b>/8|0)])?30
 </bOdY>
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="/שלום-עולם">שלום-עולם</a> - Hebrew JavaScript
+      <a class="link" href="/שלום-עולם">שלום-עולם</a> - Hebrew JavaScript
 
-<pre dir="rtl" id="hebrew">
+      <pre dir="rtl" id="hebrew">
 <b>// שלום עולם</b>
 א="",ב=!א+א,ג=!ב+א,ד=א+{},ה=ב[א++]
 ו=ב[ח=א],ט=++ח+א,כ=ד[ח+ט],ב[כ+=ד[
@@ -427,11 +521,11 @@ D=Da<b>t</b><b>e</b>()<b>[</b><b>1</b><b>6</b><b>+</b><b>(</b><b>x</b>/8|0)])?30
 ]+ו][כ](ג[א]+ג[ח]+ב[ט]+ו+ה+"(א)")()
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="/katakana">Katakana</a> - Translate JS into Japanese
+      <a class="link" href="/katakana">Katakana</a> - Translate JS into Japanese
 
-<pre id="katakana">
+      <pre id="katakana">
 ウ=""   ,ア=   <b>  !ウ+   </b>  ウ,ネ     =!ア     +ウ,    ホ=ウ
 +{},    ヌ=ア  <b>  [ウ++  </b>  ],セ=     ア[ミ    =ウ]    ,ハ=
 ++ミ    +ウ,   <b>  ヘ=ホ  </b>  [ミ+ハ    ],ア[    ヘ+=    ホ[ウ
@@ -442,11 +536,12 @@ D=Da<b>t</b><b>e</b>()<b>[</b><b>1</b><b>6</b><b>+</b><b>(</b><b>x</b>/8|0)])?30
               <b>   )()   </b>
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="https://twitter.com/aemkei/status/1262872762621837314">Hieroglyphs.js</a> - JavaScript from 2000 BC
+      <a class="link" href="https://twitter.com/aemkei/status/1262872762621837314">Hieroglyphs.js</a> - JavaScript from
+      2000 BC
 
-<pre>
+      <pre>
 𓅂='',𓂀=!𓅂+𓅂,𓁄=!𓂀+𓅂,𓊎=𓅂+{},𓆣=𓂀[𓅂++]
 
 𓊝=𓂀[𓇎=𓅂],𓏢=++𓇎+𓅂,𓆗=𓊎[𓇎+𓏢],𓂀[𓆗+=𓊎[𓅂]+(
@@ -456,11 +551,11 @@ D=Da<b>t</b><b>e</b>()<b>[</b><b>1</b><b>6</b><b>+</b><b>(</b><b>x</b>/8|0)])?30
 [𓆗](𓁄[𓅂]+𓁄[𓇎]+𓂀[𓏢]+𓊝+𓆣+'`𓅂 𓂀 𓁄 𓆣 𓊝`')``
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="https://twitter.com/aemkei/status/1263392479023435781">Confusables</a> - All Vars are X
+      <a class="link" href="https://twitter.com/aemkei/status/1263392479023435781">Confusables</a> - All Vars are X
 
-<pre>
+      <pre>
 var <b>ⵝ</b> = ''
 var <b>Ⲭ</b> = !ⵝ+ⵝ
 var <b>ᚷ</b> = !Ⲭ+ⵝ
@@ -476,11 +571,11 @@ X+𐊐+ꓫ[ⵝ]+𐊴][X](ᚷ[
 ⵝ]+ᚷ[Х]+Ⲭ[Χ]+𐊴+𐊐+
 "`XXX`")()
 </pre>
-<hr>
+      <hr>
 
-<a class="link" href="/mandelcode">Mandelcode</a> - Fractal Quine, Zooming into JavaScript
+      <a class="link" href="/mandelcode">Mandelcode</a> - Fractal Quine, Zooming into JavaScript
 
-<pre id="mandel">
+      <pre id="mandel">
                                   E
                                  =  1
                               ,   z=1.07 ;
@@ -502,11 +597,11 @@ X+𐊐+ꓫ[ⵝ]+𐊴][X](ᚷ[
                                   2
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="/void">// VOID</a> - Invisible Variables and Code
+      <a class="link" href="/void">// VOID</a> - Invisible Variables and Code
 
-<pre>
+      <pre>
   <b>&lt;</b>script>   <b>/</b>/[   <b>=</b>""],='"',=   <b>=</b>=,===  <b>,</b>=+,=+
    <b>,</b>=+,=+,  <b>=</b>{},  <b>=</b>+,=+,=+,=+,=  <b>.</b>+,=[]  <b>,</b>=[],=[]
     <b>,</b>=[],=[ <b>]</b>,=[  <b>]</b>,=[],=[],=[]  <b>,</b>="\\"  <b>+</b>")(",=[],
@@ -516,11 +611,11 @@ X+𐊐+ꓫ[ⵝ]+𐊴][X](ᚷ[
         <b>+</b>)+",'"+   <b>"</b>'"+++)())(   <b>)</b>+)())  <b>(</b>)&lt;/script>
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="/const/">const</a> - The only Constant is Change
+      <a class="link" href="/const/">const</a> - The only Constant is Change
 
-<pre id="const" style="font-family:'Courier New'">
+      <pre id="const" style="font-family:'Courier New'">
    <b>const</b>       <b>cοnst</b> =    '<b>const</b>';
 ([ <b>cоnst</b> ,     <b>conѕt</b> ]=    <b>cοnst</b> ,
  [ <b>соnst</b> ,     <b>сonѕt</b> ,     <b>cоnѕt</b> ,
@@ -535,11 +630,11 @@ X+𐊐+ꓫ[ⵝ]+𐊴][X](ᚷ[
    ``
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="/five/">$five</a> - Write JS with Only 5 Different Characters
+      <a class="link" href="/five/">$five</a> - Write JS with Only 5 Different Characters
 
-<pre>
+      <pre>
 [<b>$$</b>=[+[]]]+[<b>$$</b>[++[[]][+[]]]=+[]]+[<b>$$</b>=[<b>$$</b>1[]][+[]][++[[]]
 [+[]]]]+[<b>$$$</b>=[<b>$</b>[[[]+[][+[]]][+[]][++[++[++[++[[]][+[]]][
 +[]]][+[]]][+[]]]+[[]+[][+[]]][+[]][++[++[++[++[++[[]][+
@@ -550,11 +645,35 @@ X+𐊐+ꓫ[ⵝ]+𐊴][X](ᚷ[
 ...
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="/sic/">sic</a> - Encode JS with 2 Different Characters
+      <a class="link" href="/fire/quine/">Fire</a> - A Flame Shaped Quine
 
-<pre>
+      <pre id="fire">
+          nt               
+        inner              
+       7+578]              
+     (x=a[i]               
+     ]+a[i+                
+    color(5&lt;x&amp;&amp;"           
+     HTML=hfor(h=          
+       =89;<b>i</b><b>+</b>+&lt;63          
+      ~((<b>a</b><b>[</b><b>i</b><b>]</b><b>+</b>a[i  ]+      
+      )/<b>4</b><b>)</b><b>)</b><b>&amp;</b><b>&amp;</b><b>e</b>[i%142]      
+      &amp;<b>"</b><b>#</b><b>F</b><b>F</b><b> </b><b>"</b>):"\n")p      
+     r<b>(</b><b>h</b><b>=</b><b>"</b><b>"</b><b>,</b><b>a</b>[I++*I%       
+   i+<b>+</b><b>&lt;</b><b>6</b><b>3</b><b> </b><b>;</b>h+=i%3 ?        
+   i<b>]</b><b>+</b><b>a</b><b>[</b><b>i</b><b>+</b>1<b>]</b><b>+</b>a[i 29]+      
+  )<b>&amp;</b><b>&amp;</b><b>e</b><b>[</b><b>i</b><b>%</b><b>1</b><b>4</b><b>2</b><b>]</b>.  n<b>t</b><b>c</b>o       
+  F "):<b>"</b><b>\\</b><b>n</b><b>"</b>)p  n<b>n</b><b>e</b><b>r</b><b>H</b>       
+      I<b>+</b><b>+</b>*I   +57<b>8</b><b>]</b>        
+                      
+      </pre>
+      <hr>
+
+      <a class="link" href="/sic/">sic</a> - Encode JS with 2 Different Characters
+
+      <pre>
 [C=B=[]].__proto__[C.B]=T=new Proxy(B,{get:
 (_,N)=>(B+=+!N,B[6]&&(+B||eval(C),C+=String.
 fromCharCode(parseInt(B,2)),B=[]),T)});
@@ -572,11 +691,11 @@ fromCharCode(parseInt(B,2)),B=[]),T)});
 [[]]][[][ <b>[]]][[][[]] ][[][ []]][[][[]]</b> ][[][[]]]
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="/oo/">ꝏ</a> - Encode JavaScript with Only One Symbol
+      <a class="link" href="/oo/">ꝏ</a> - Encode JavaScript with Only One Symbol
 
-<pre>
+      <pre>
 <b>with</b> (<b>ꝏ</b>())
 ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
@@ -587,11 +706,11 @@ ooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 ...
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="https://twitter.com/aemkei/status/1176593953757499395">l33t</a> - Write Code Like a Hacker
+      <a class="link" href="https://twitter.com/aemkei/status/1176593953757499395">l33t</a> - Write Code Like a Hacker
 
-<pre>
+      <pre>
 with (<b>l33t</b>()) {
   <b>c0ns0l3.w4rn</b>('<b>l33t</b>');
   <b>al3rt</b>(<b>'w00t'</b>);
@@ -603,11 +722,11 @@ function l33t(p=this){return new Proxy(p
 [a])))?p.apply?p.bind(t):l33t(p):p})}
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="/filler">Filler</a> - Hidden and almost Invisible Variables
+      <a class="link" href="/filler">Filler</a> - Hidden and almost Invisible Variables
 
-<pre id="filler">
+      <pre id="filler">
 /ㅤ/-[ㅤ=''],ﾠ=!ㅤ+ㅤ,ㅤㅤ=!ﾠ+ㅤ,ㅤﾠ=ㅤ+{}
 ﾠㅤ=ﾠ[ㅤ++],ﾠﾠ=ﾠ[ﾠㅤㅤ=ㅤ],ﾠㅤﾠ=++ﾠㅤㅤ+ㅤ
 ㅤㅤㅤ=ㅤﾠ[ﾠㅤㅤ+ﾠㅤﾠ],ﾠ[ㅤㅤㅤ+=ㅤﾠ[ㅤ]+(ﾠ.ㅤㅤ+ㅤﾠ)
@@ -615,11 +734,11 @@ function l33t(p=this){return new Proxy(p
 [ㅤㅤㅤ](ㅤㅤ[ㅤ]+ㅤㅤ[ﾠㅤㅤ]+ﾠ[ﾠㅤﾠ]+ﾠﾠ+ﾠㅤ+"(ㅤ)")()
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="/aleph">א The Aleph</a> - Life out of a Single Symbol
+      <a class="link" href="/aleph">א The Aleph</a> - Life out of a Single Symbol
 
-<pre id="aleph">
+      <pre id="aleph">
                                א
                             &lt;script>
                              <b>א ='אֲֲֲֲֲֲֲֲֲֲֲֲֲֲֲֲֲֲֲֲֲֲֲֲֲֲֲ֤֤֧֥֤֦֣֤֥֦֤֥֦֦֤֤֥֦֦֦֤֥֤֥֤֧֤֦֥֧֦֥֤֧֥֤֥֤֤֧֥֥֧֥֣֣֣֥֥֤֥֧֥֦֣֦֧֦֦֦֧֣֥֥֥֥֥֧֣֥֥֣֧֥֤֣֤֦֥֦֦֥֧֦֣֤֦֥֦֦֥֧֧֥֥֤֣֣֥֤֥֧֦֧֧֤֣֣֥֣֥֧֥֤֧֧֦֣֧֥֧֥֤֤֧֤֤֣֣֥֣֥֤֦֦֧֥֧֥֤֤֧֦֦֤֥֥֤֥֦֧֤֥֦֧֦֣֥֥֤֦֥֧֦֥֤֤֧֥֦֥֤֥֧֥֦֥֧֣֤֥֧֥֥֦֧֤֥֥֥֥֥֥֥֧֧֥֣֥֧֣֥֤֤֥֣֧֥֤֣֣֥֥֣֤֥֣֥֥֣֤֣֣֥֥֥֤֥֣֥֧֣֤֤֥֧֤֣֦֥֥֥֤֥֥֦֦֤֥֦֤֥֧֤֤֧֥֦֥֥֦֥֦֤֥֦֤֥֤֧֥֥֤֧֥֤֧֧֥֠֡֠֠֡֡֡֡֡֡֡֡֡֡֡֡֡֡֡֠֠֠֡֡֡֠֠֡֡֠֡֠֡֠֡֠֠֡֡֠֡֡֠֠֠֠֠֠֠֡֡֠֠֠֡֠֠֠֠֡֡֠֠֠֠֠֡֡֡֠֠֠֠֠֡֠֠֡֡֡֠֠֡֠֠֡֡֡֡֡֠֡֡֠֠֠֠֡֡֡֡֡֡֡֡֠֠֠֠֡֠֠֠֠֡֡֠֠֠֠֠֠֡֠֡֡֡֡֠֠֡֠֠֠֠֡֠֠֠֡֠֠֠֠֠֡֠֠֠֡֠֠֠֠֡֠֡֠֠֡֡֠֠֡֡֡֡֡֠֡֡֠֡֡֡֡֡֠֡֡֠֡֡֡֡֡֡֡֡֠֡֡֡֡֡֠֡֡֡֡֡֡֡֡֠֡֡֡֡֡֠֡֠֠֠֠֡֠֡֠֡'
@@ -643,11 +762,11 @@ function l33t(p=this){return new Proxy(p
 "(/"+(ל=".{5}(.)")+ל+ל+"/\\147,'\\\\\\\\$1$2$3')"+ה)())()+ה)())()</script>
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="/theseus">Theseus</a> - A Maze Generator and Solver
+      <a class="link" href="/theseus">Theseus</a> - A Maze Generator and Solver
 
-<pre><b>
+      <pre><b>
 S="\40\n";M="map";i=991;for(z
 =       [                   ]
 ;   i   ;   )z[--i]=i%30?   8
@@ -663,11 +782,11 @@ f   )       /               2
 F(32);z+=S[1]//aem1k.com/maze
 </b></pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="/polyglot/">Polyglot</a> - CSS = JS = HTML
+      <a class="link" href="/polyglot/">Polyglot</a> - CSS = JS = HTML
 
-<pre>
+      <pre>
 <b>/** CSS **/</b>
 html * { color: red }
 <b>/** JS **/</b>
@@ -677,11 +796,11 @@ document.write('<'+'link href="#" rel="stylesheet">');
 // &lt;script src="#"></script>
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="http://jsbin.com/egiqul/195">Tweetris</a> - Play Binary Tetris
+      <a class="link" href="http://jsbin.com/egiqul/195">Tweetris</a> - Play Binary Tetris
 
-<pre>
+      <pre>
 function(a,b,c,d){d+
 =c;return[d&lt;0|a&b&lt;&lt;d    // .##..
 ?a=parseInt((a|b&lt;&lt;c)    // .....
@@ -691,11 +810,11 @@ Date&2|1).replace('v    // .##..
 d]}      <b>// tweetris</b>    // .####
 </0|a&b<<d></pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="/ffconf">ffconf</a> - 2015 Animated Starfield
+      <a class="link" href="/ffconf">ffconf</a> - 2015 Animated Starfield
 
-<pre id="ffconf">
+      <pre id="ffconf">
 
      &lt;body text=#EE3 bgcolor=000 id=p
     style="perspective:4.0em;display:
@@ -718,11 +837,11 @@ orm:trans     late3d(     0,0,"+(z+b\
 aem1k.com/ffconf'&lt;/script>-ffconf
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="https://aem1k.com/symmetry/">Symmetry</a> - Symmetric JavaScript
+      <a class="link" href="https://aem1k.com/symmetry/">Symmetry</a> - Symmetric JavaScript
 
-<pre>
+      <pre>
  {(.0-{}-0.)}  <b>    xXXx    </b>     =wYYw=
   ([]+!!+[])   <b>  [0.**.0]  </b>    +[([])]+
   (''+!!+'')   <b>[0-~+!!+~-0]</b>  +([]+[]+[])+
@@ -734,26 +853,25 @@ aem1k.com/ffconf'&lt;/script>-ffconf
    (')YY(')    <b> [""+~~+""] </b>    //-!!-\\
 </pre>
 
-<hr>
+      <hr>
 
-<a class="link" href="https://github.com/codegolf/pac-man">Pac-Man</a> - Play in < 512 Bytes
+      <a class="link" href="https://github.com/codegolf/pac-man">Pac-Man</a> - Play in < 512 Bytes <pre id="pacman">
+        ############# // &lt;pre id=p>&lt;script>l="";for(i in L=[a=8191,b=
+        # # .# // 4161,c=5981,d=5125,5493,5397,5589,d,c,b,a])l
+        # ### # ###.# // +=L[i].toString(2).replace(/1/g,4).replace(/
+        # # <b>X</b> .#.# // 0/g,2)+3;l=l.split(""),w=14,x=76,X=48,e=d=k=
+        # # # ###.#.# // D=!setInterval(onkeydown=function(a){if(a)k=
+        # # # <b>o</b> #.#.# // a.which;else if(!e){for(l[x]=0,l[x+=d=k-37>>
+        # # ### #.#.# // 2||4&l[x+(o=k%2?k-38:(k-39)*w)]?4&l[x+d]?0:d
+        # # ......#.# // :o],e|=8&l[x],l[x]=1,l[X]&=7,h=D%4,h=h%2?h-2
+        # ### #.###.# // :(h-1)*w,4&l[X+h]?D++:e|=1&l[X+=h],l[X]|=8,h
+        #.....#.....# // =i=0;153>i;)h+=" o.\n# x"[8&l[++i]||l[i]];
+        ############# // p.innerHTML=h}},250)</script>
+        </pre>
 
-<pre id="pacman">
-############# // &lt;pre id=p>&lt;script>l="";for(i in L=[a=8191,b=
-#     #    .# // 4161,c=5981,d=5125,5493,5397,5589,d,c,b,a])l
-# ### # ###.# // +=L[i].toString(2).replace(/1/g,4).replace(/
-# # <b>X</b>    .#.# // 0/g,2)+3;l=l.split(""),w=14,x=76,X=48,e=d=k=
-# # # ###.#.# // D=!setInterval(onkeydown=function(a){if(a)k=
-# # # <b>o</b> #.#.# // a.which;else if(!e){for(l[x]=0,l[x+=d=k-37>>
-# # ### #.#.# // 2||4&l[x+(o=k%2?k-38:(k-39)*w)]?4&l[x+d]?0:d
-# # ......#.# // :o],e|=8&l[x],l[x]=1,l[X]&=7,h=D%4,h=h%2?h-2
-# ### #.###.# // :(h-1)*w,4&l[X+h]?D++:e|=1&l[X+=h],l[X]|=8,h
-#.....#.....# // =i=0;153>i;)h+=" o.\n#   x"[8&l[++i]||l[i]];
-############# // p.innerHTML=h}},250)</script></pre>
+        <hr>
 
-<hr>
-
-<pre>
+        <pre>
 <b>try</b>        {
 <b>to</b>         }
 <b>catch</b>      (
@@ -765,39 +883,53 @@ aem1k.com/ffconf'&lt;/script>-ffconf
 <b>!</b>          '}
 </pre>
 
-<hr>
+        <hr>
 
 
-    <h3>Selected Talks</h3>
-    <ul>
+        <h3>Selected Talks</h3>
+        <ul>
 
-      <li><a href="http://2013.jsconf.eu/speakers/martin-kleppe-1024-seconds-of-js-wizardry.html">1024+ Seconds of JS Wizardry</a> - JSConf.eu 2013</li>
-      <li><a href="https://speakerdeck.com/aemkei/code-calligrams">Code Calligrams</a> - ffconf Brighton 2015</li>
-      <li><a href="https://speakerdeck.com/aemkei/holyjs-3l3m3nt5">Elements</a> - HolyJS Moscow 2016</li>
-      <li><a href="https://speakerdeck.com/aemkei/the-aleph">The Aleph</a> - YGLF Tel Aviv 2015</li>
-      <li><a href="https://speakerdeck.com/aemkei/jsconf-budapest-invisible-code">Invisible Code</a> - JSConf Budapest 2015</li>
-      <li><a href="https://speakerdeck.com/aemkei/fronttalks">Mona</a> - FrontTalks Russia 2015</li>
-      <li><a href="https://speakerdeck.com/aemkei/creative-coding-jsunconf">Creative Coding</a> - JSUnconf 2015</li>
-      <li><a href="https://speakerdeck.com/aemkei/fdconf-2015-self-modifying-code">Self Modifying Code</a> - FDConf Belarus 2015</li>
-      <li><a href="https://www.youtube.com/watch?v=G11vj2XiAtg">The Art of Less</a> - JSConf.asia 2014</li>
-      <li><a href="https://speakerdeck.com/aemkei/byte-shifting-london-js-conf">Byte Shifting</a> - London JS Conf 2014</li>
-      <li><a href="https://speakerdeck.com/aemkei/jscamp-dot-ro-minified-javascript-craziness">xxx.min.js</a> - JSCamp Romania 2014</li>
-      <li><a href="https://www.youtube.com/watch?v=SinHLo5J0dg">The Dark Side</a> - FEOC San Francisco 2014</li>
-      <li><a href="https://speakerdeck.com/aemkei/wherecamp-berlin-earth-view-martin-kleppe">Earth View</a> - WhereCamp Berlin 2015</li>
-      <li><a href="https://speakerdeck.com/aemkei/code-the-road-berlin">Google Maps Visualization</a> - Code the Road 2015</li>
-      <li><a href="https://docs.google.com/presentation/d/1azRe7gmmfaGs_QMNIMm4NUoDylf0wXjdqGjj9wH4z-Q/present">Binary Love</a> - HH.js 2012</li>
-      <li><a href="http://slideshare.net/aemkei/google-maps-api-devfest-karlsruhe">Google Maps API</a> - GDG DevFest 2012</li>
-      <li><a href="https://docs.google.com/a/ubilabs.net/present/view?id=dds45w4x_88gz75dkgn">JS Golf Lessons</a> - FrOSCon 2011</li>
-      <li><a href="http://lanyrd.com/profile/aemkei/sessions/">Full Speaking History</a> - All Sessions at Lanyrd</li>
-      <li><a href="https://www.youtube.com/playlist?list=PLttm25JhpvA7V0Ol0_ryuRRR_45_L0bLH">Recoreded Talks</a> - Available on YouTube</li>
-      <li><a href="http://esoteric.codes/post/157780744195/interview-with-martin-kleppe">Interview</a> - on ESOTERIC.CODES</li>
-      <li><a href="http://blog.honeypot.io/working-as-a-developer-at-ubilabs/">Interview</a> - with Honeypot.io</li>
-      <li><a href="https://soundcloud.com/radiojspodcast/radiojs-31#t=50:36/">RadioJS</a> - Podcast</li>
-    </ul>
+          <li><a href="http://2013.jsconf.eu/speakers/martin-kleppe-1024-seconds-of-js-wizardry.html">1024+ Seconds of
+              JS Wizardry</a> - JSConf.eu 2013</li>
+          <li><a href="https://speakerdeck.com/aemkei/code-calligrams">Code Calligrams</a> - ffconf Brighton 2015</li>
+          <li><a href="https://speakerdeck.com/aemkei/holyjs-3l3m3nt5">Elements</a> - HolyJS Moscow 2016</li>
+          <li><a href="https://speakerdeck.com/aemkei/the-aleph">The Aleph</a> - YGLF Tel Aviv 2015</li>
+          <li><a href="https://speakerdeck.com/aemkei/jsconf-budapest-invisible-code">Invisible Code</a> - JSConf
+            Budapest 2015</li>
+          <li><a href="https://speakerdeck.com/aemkei/fronttalks">Mona</a> - FrontTalks Russia 2015</li>
+          <li><a href="https://speakerdeck.com/aemkei/creative-coding-jsunconf">Creative Coding</a> - JSUnconf 2015</li>
+          <li><a href="https://speakerdeck.com/aemkei/fdconf-2015-self-modifying-code">Self Modifying Code</a> - FDConf
+            Belarus 2015</li>
+          <li><a href="https://www.youtube.com/watch?v=G11vj2XiAtg">The Art of Less</a> - JSConf.asia 2014</li>
+          <li><a href="https://speakerdeck.com/aemkei/byte-shifting-london-js-conf">Byte Shifting</a> - London JS Conf
+            2014</li>
+          <li><a href="https://speakerdeck.com/aemkei/jscamp-dot-ro-minified-javascript-craziness">xxx.min.js</a> -
+            JSCamp Romania 2014</li>
+          <li><a href="https://www.youtube.com/watch?v=SinHLo5J0dg">The Dark Side</a> - FEOC San Francisco 2014</li>
+          <li><a href="https://speakerdeck.com/aemkei/wherecamp-berlin-earth-view-martin-kleppe">Earth View</a> -
+            WhereCamp Berlin 2015</li>
+          <li><a href="https://speakerdeck.com/aemkei/code-the-road-berlin">Google Maps Visualization</a> - Code the
+            Road 2015</li>
+          <li><a
+              href="https://docs.google.com/presentation/d/1azRe7gmmfaGs_QMNIMm4NUoDylf0wXjdqGjj9wH4z-Q/present">Binary
+              Love</a> - HH.js 2012</li>
+          <li><a href="http://slideshare.net/aemkei/google-maps-api-devfest-karlsruhe">Google Maps API</a> - GDG DevFest
+            2012</li>
+          <li><a href="https://docs.google.com/a/ubilabs.net/present/view?id=dds45w4x_88gz75dkgn">JS Golf Lessons</a> -
+            FrOSCon 2011</li>
+          <li><a href="http://lanyrd.com/profile/aemkei/sessions/">Full Speaking History</a> - All Sessions at Lanyrd
+          </li>
+          <li><a href="https://www.youtube.com/playlist?list=PLttm25JhpvA7V0Ol0_ryuRRR_45_L0bLH">Recoreded Talks</a> -
+            Available on YouTube</li>
+          <li><a href="http://esoteric.codes/post/157780744195/interview-with-martin-kleppe">Interview</a> - on
+            ESOTERIC.CODES</li>
+          <li><a href="http://blog.honeypot.io/working-as-a-developer-at-ubilabs/">Interview</a> - with Honeypot.io</li>
+          <li><a href="https://soundcloud.com/radiojspodcast/radiojs-31#t=50:36/">RadioJS</a> - Podcast</li>
+        </ul>
 
-    <h3>Photo</h3>
+        <h3>Photo</h3>
 
-    <pre id="photo">
+        <pre id="photo">
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNdyssoooyNMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
 MMMMMMMMMMMMMMMMMMMMMMMMMMMMMNy/..`  ``` ``..--/+/+yydNMMMMMMMMMMMMMMMMMMMMMMMMM
@@ -836,17 +968,17 @@ ms:                                          <b>```</b>
 
     </pre>
 
-    <h3>Contact</h3>
-    <ul>
-      <li><a href="http://twitter.com/aemkei">Twitter</a> - Follow @aemkei</li>
-      <li><a href="mailto:kleppe@gmail.com">Email</a> - Drop me some lines!</li>
-    </ul>
+        <h3>Contact</h3>
+        <ul>
+          <li><a href="http://twitter.com/aemkei">Twitter</a> - Follow @aemkei</li>
+          <li><a href="mailto:kleppe@gmail.com">Email</a> - Drop me some lines!</li>
+        </ul>
 
-    <hr>
+        <hr>
 
 
 
-<pre id="logo">
+        <pre id="logo">
       <b>#</b>
       <b>#</b>
      <b>##</b>
@@ -858,9 +990,10 @@ ms:                                          <b>```</b>
 # # # <b>#</b> #  #
 </pre>
 
-20XX - Martin Kleppe <a href="http://www.ubilabs.net">Ubilabs</a>
+        20XX - Martin Kleppe <a href="http://www.ubilabs.net">Ubilabs</a>
 
   </div>
 
-  </body>
+</body>
+
 </html>
