@@ -256,6 +256,12 @@ pre#logo {
   font-size: 14px;
 }
 
+
+pre#qlock {
+  color: #666;
+}
+
+
 /* latin */
 @font-face {
   font-family: 'Inconsolata';
