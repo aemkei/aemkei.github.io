@@ -24,15 +24,25 @@ D=Date()[16+(x/8|0)])?30:D*3,i+3),36)&1<<(x/2|0)%4+3*y},100))()
   body {
     background-color: black;
     color: #FFf;
-    padding: 9vw;
     font-size: 2vw;
+    height: 100%;
+    margin: 0;
+    padding: 0;
   }
 
-  @media screen and (min-width: 1000px) {
+  pre {
+    margin: auto;
+    width: 38em;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    margin-top: -5.5em;
+    margin-left: -19em;
+  }
+
+  @media screen and (min-width: 900px) {
     body {
-      font-size: 20px;
+      font-size: 18px;
     }
   }
-  
-
 </style>
