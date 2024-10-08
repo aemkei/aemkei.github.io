@@ -12,6 +12,9 @@
       background-color: #000;
       color: #F0F;
     }
+    a:visited, a:link {
+      color: #F0F;
+    }
     script {
       display: block;
       color: #FF0
@@ -26,55 +29,48 @@
 
 <h1> INVISIBLE.js 🫥 </h1> 
 
-  A deferred JavaScript payload 
-  to write invisible code.
-
-  It combines these features:
-
-  - with statement
-  - tagged template literals
-  - function hoisting
-  - proxies traps
-  - unqualified identifiers
-  - automatic semicolon insertion 
-  - invisible hangul fillers
-  - Unicode escape sequence
-  - binary encoding
-  - code evaluation
+  A hoisted JavaScript payload 
+  to write invisible code:
 
   &lt;script&gt;
 
-  <script defer>
-    with (ㅤ`` ) {
-      ㅤㅤㅤㅤㅤㅤㅤ
-      ㅤㅤ
-      ㅤㅤㅤㅤㅤㅤㅤ
-      ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
-      ㅤㅤㅤㅤㅤㅤㅤ
-      ㅤㅤㅤㅤㅤㅤ
-      ㅤㅤㅤㅤㅤㅤㅤㅤ
-      ㅤㅤㅤ
-      ㅤㅤㅤㅤㅤㅤㅤㅤ
-      ㅤㅤㅤㅤㅤ
-      ㅤㅤㅤ
-      ㅤㅤㅤㅤㅤㅤㅤㅤㅤ
-      ㅤㅤㅤㅤ
-      ㅤㅤ
-      ㅤㅤㅤ
-      ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
-      ㅤ
-      ㅤ
-    }
+  <script>
+  with (ㅤ`` ) {
+    ㅤㅤㅤㅤㅤㅤㅤ
+    ㅤㅤ
+    ㅤㅤㅤㅤㅤㅤㅤ
+    ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
+    ㅤㅤㅤㅤㅤㅤㅤ
+    ㅤㅤㅤㅤㅤㅤ
+    ㅤㅤㅤㅤㅤㅤㅤㅤ             // this
+    ㅤㅤㅤ                      // is
+    ㅤㅤㅤㅤㅤㅤㅤㅤ        // invisible
+    ㅤㅤㅤㅤㅤ                 // code
+    ㅤㅤㅤ
+    ㅤㅤㅤㅤㅤㅤㅤㅤㅤ
+    ㅤㅤㅤㅤ
+    ㅤㅤ
+    ㅤㅤㅤ
+    ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ
+    ㅤ
+    ㅤ
+  } // encode and run an `alert(1);`
 
-    function \u3164(){return f="",p=[]
-    ,new Proxy({},{has:(t,n)=>(p.
-    push(n.length-1),2==p.length&&
-    (p[0]||p[1]||eval(f),f+=String
-    .fromCharCode(p[0]<<4|p[1]),p=
-    []),!0)})}
+
+  // hoisted parser
+  function \u3164(){return f="",p=[]  
+  ,new Proxy({},{has:(t,n)=>(p.push(
+  n.length-1),2==p.length&&(p[0]||p[
+  1]||eval(f),f+=String.fromCharCode
+  (p[0]<<4|p[1]),p=[]),!0)})}//aem1k
   </script>
 
   &lt;/script&gt;
 
   HINT: Select the script tag to see the underlying code.
+
+  This code is an example of a JavaScript obfuscation technique that uses a invisible Hangul filler characters (U+3164) in combination with JavaScript's with statement and a Proxy object to encode and evaluate a hidden payload.
+
+  Read more about it <a href="">on Twitter</a>.
+
 </body>
