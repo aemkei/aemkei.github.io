@@ -1,0 +1,111 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>INVISIBLE.js - Encode and Execute Invisible Code</title>
+  <meta name="description"
+    content="An encoder and tiny payload to hide JavaScript code. Created by Martin Kleppe aka @aemkei.">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <meta name="theme-color" content="#222222" />
+  <meta property="og:title" content="INVISIBLE.js - Encode and Execute Invisible Code" />
+  <meta property="og:description" content="An encoder and tiny payload to hide JavaScript code" />
+  <meta property="og:image" content="http://aem1k.com/invisible/encoder/preview-large.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@aemkei" />
+  <meta property="twitter:image" content="http://aem1k.com/invisible/encoder/preview-large.png" />
+  <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+  <link href='styles.css' rel='stylesheet' type='text/css' />
+</head>
+
+<body>
+  <div id="container">
+    <h1>INVISIBLE.js</h1>
+    <h2>Encode and Execute Invisible Code</h2>
+
+    <p>
+      An tiny (116 bytes) bootstrap code to hide JavaScript. 
+      It uses a Proxy trap to run JavaScript. When the invisible property is accessed, its name is converted to binary, decoded into text, and executed with eval.
+    </p>
+    <p>
+      Created by
+      Martin Kleppe aka <a href="https://twitter.com/aemkei">@aemkei</a>.
+    </p>
+
+    <div>
+      <p>
+        <h3>Example</h3>
+        <textarea id="input">alert("invisible")</textarea>
+        <a href="#" id="convert">Click to Convert ↓↓↓↓↓</a>
+        <span id="count">...</span>
+        <textarea id="output" cols=10 onclick="this.select();">
+</textarea>
+        <div id="your-output">↑ Run <a href="#" id="run">the code</a> on this site.</div>
+      </p>
+
+      <hr>
+
+      <h3 id="explanation">Explanation</h3>
+
+      <pre>
+// use a Proxy
+<b>new Proxy({}, {</b>
+  // property trap
+  <b>get: (_, n) => </b>
+    // execute code
+    <b>eval([...n]</b>
+      // convert to 0 and 1
+      <b>.map(n => +("ﾠ" > n)).join(``)</b>
+      // get eight bit sequences
+      <b>.replace(/.{8}/g, n => </b>
+        // convert binary to string
+        <b>String.fromCharCode(+("0b" + n))</b>
+      <b>)</b>
+    <b>).</b>
+<b>})</b>
+      </pre>
+
+      <p>
+        <b>Proxy and get Trap</b>: A `Proxy` object is created with a `get` trap, which intercepts any attempt to access a property. When a property is accessed on this proxy, the trap receives the property name as input.
+      </p>
+      <p>
+        <b>Invisible Character Encoding</b>: The property name is made up of specific invisible characters. Each character in the name is compared against a reference invisible character (e.g., a half-width space character), and the result of this comparison is used to produce either a 1 or a 0. This effectively encodes binary data based on the presence or absence of each invisible character in the property name.
+      </p>
+      <p>
+        <b>Binary to Text Conversion</b>: The resulting binary sequence is joined into a single string, which is then grouped into segments of 8 bits, representing individual bytes. Each byte is then converted into its corresponding ASCII character.
+      </p>
+      <p>
+        <b>Code Accumulation and Evaluation</b>: The decoded characters from each accessed property name are accumulated into a larger string, representing executable JavaScript code. Once all characters are decoded, this string is passed to `eval`, which executes the code.
+      </p>
+      <p>
+        <b>Obfuscation</b>: This approach obfuscates the actual code by hiding it within seemingly blank or meaningless property names. The use of a `Proxy` and `eval` enables this hidden code to be executed without any readable JavaScript code directly visible in the source.
+      </p>
+
+      <h3 id="relatedlinks">Related Links</h3>
+
+      <ul>
+        <li>Follow<a href="https://twitter.com/aemkei">@aemkei</a> on Twitter</li>
+        <li>Visit <a href="https://aem1k.com">aem1k.com</a> for more hacks</li>
+      </ul>
+
+      <hr>
+
+      <pre id="logo">
+      <b>#</b>
+      <b>#</b>
+     <b>##</b>
+      <b>#</b> #
+   ## <b>#</b> #
+ ## # <b>#</b> # #
+# # # <b>#</b> ##
+# # # <b>#</b> # #
+# # # <b>#</b> #  #
+</pre>
+      2024 - Martin Kleppe
+
+    </div>
+    <script src="index.js"></script>
+
+</body>
+
+</html>
