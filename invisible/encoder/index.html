@@ -65,16 +65,16 @@
       </pre>
 
       <p>
-        <b>Proxy and get Trap</b>: A `Proxy` object is created with a `get` trap, which intercepts any attempt to access a property. When a property is accessed on this proxy, the trap receives the property name as input.
+        <b>Proxy Trap</b>: A `Proxy` object is created with a `get` trap, which intercepts any attempt to access a property. When a property is accessed on this proxy, the trap receives the property name as input.
       </p>
       <p>
-        <b>Invisible Character Encoding</b>: The property name is made up of specific invisible characters. Each character in the name is compared against a reference invisible character (e.g., a half-width space character), and the result of this comparison is used to produce either a 1 or a 0.
+        <b>Invisible Character Encoding</b>: The property name is made up of specific invisible characters. Each character in the name is compared against a reference invisible character (Hangul filler), and the result of this comparison is used to produce either a 1 or a 0.
       </p>
       <p>
         <b>Binary to Text Conversion</b>: The resulting binary sequence is joined into a single string, which is then grouped into segments of 8 bits, representing individual bytes. Each byte is then converted into its corresponding ASCII character.
       </p>
       <p>
-        <b>Code Accumulation and Evaluation</b>: The decoded characters from each accessed property name are accumulated into a larger string, representing executable JavaScript code. Once all characters are decoded, this string is passed to `eval`, which executes the code.
+        <b>Code Evaluation</b>: The decoded characters from each accessed property name are accumulated into a larger string, representing executable JavaScript code. Once all characters are decoded, this string is passed to `eval`, which executes the code.
       </p>
       <p>
         <b>Obfuscation</b>: This approach obfuscates the actual code by hiding it within seemingly blank or meaningless property names. The use of a `Proxy` and `eval` enables this hidden code to be executed without any readable JavaScript code directly visible in the source.
