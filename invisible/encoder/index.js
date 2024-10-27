@@ -11,15 +11,13 @@ function convert(input) {
 }
 
 const library = `new Proxy({},{get:(_,n)=>eval([...n].map(n=>+("ﾠ">n)).join\`\`.replace(/.{8}/g,n=>String.fromCharCode(+("0b"+n))))}).
-//// invisible code start ////
-`
-
+// INVISIBLE CODE STARTS HERE`;
 
 function convertInput(){
   const newValue = convert(document.getElementById('input').value);
   document.getElementById('output').value = `${library}
-  ${newValue}
-//// invisible code end ////`;
+${newValue}
+// INVISIBLE CODE ENDS HERE`;
 }
 
 document.getElementById('input').addEventListener('input', (event) => {
