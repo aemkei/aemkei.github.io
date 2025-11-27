@@ -1,0 +1,17 @@
+t=c.getContext`2d`;for(i=1e4;i--;t.fillStyle=`hsl(0,0%,${9/Math.abs(Math.hypot(x=i%99/50-1,y=i/99/50-1)-.5+.01/(x-y))}%)`)t.fillRect(i%99,i/99|0,1,1)
+t=c.getContext`2d`;for(i=1e4;i--;t.fillStyle=`hsl(0,0%,${1/(Math.hypot(x=i%99/50-1,y=i/99/50-1)-.5+.01/(x-y))**2}%)`)t.fillRect(i%99,i/99|0,1,1)
+t=c.getContext`2d`;for(i=1e4;i--;t.fillStyle=`hsl(0,0%,${16/((x=i%99/25-2,y=i/99/25-2,x*x+y*y)-1+.08/(x-y))**2}%)`)t.fillRect(i%99,i/99|0,1,1)
+for(i=1e4;i--;(t=c.getContext`2d`).fillStyle=`hsl(0,0%,${16/((x=i%99/25-2,y=i/99/25-2,x*x+y*y)-1+.08/(x-y))**2}%)`)t.fillRect(i%99,i/99|0,1,1)
+for(i=1e4;i--;)t.fillStyle=.09/((x=i%99/25-2,y=i/99/25-2,x*x+y*y)-1+.08/(x-y))**2>Math.random()?'#fff':'#000't.fillRect(i%99,i/99|0,1,1)
+for(i=1e4;i--;).09/((x=i%99/25-2,y=i/99/25-2,x*x+y*y)-1+.08/(x-y))**2>Math.random()||c.getContext`2d`.fillRect(i%99,i/99|0,1,1)
+for(i=1e4;i--;).09/((x=i%99/25-2,y=i/99/25-2,x*x+y*y)-1+.08/(x-y))**2>Math.random()||c.getContext`2d`.fillRect(i%99,i/99|0,1,1)
+for(i=1e4;i--;).2/Math.abs(Math.hypot(x=i%99/50-1,y=i/99/50-1)-.5+.01/(x-y))>Math.random()||c.getContext`2d`.fillRect(i%99,i/99|0,1,1)
+for(i=1e4;i--;).1/Math.abs(Math.hypot(x=i%99/50-1,y=i/5e3-1)-.5+.02/(x-y))>Math.random()||c.getContext`2d`.fillRect(i%99,i/99|0,1,1)
+for(i=1e4;i--;).1>Math.random()*Math.abs(Math.hypot(x=i%99/50-1,y=i/5e3-1)-.5+.02/(x-y))||c.getContext`2d`.fillRect(i%99,i/99|0,1,1)
+for(i=1e4;i--;).1>(M=Math).random()*M.abs(M.hypot(x=i%99/50-1,y=i/5e3-1)-.5+.02/(x-y))||c.getContext`2d`.fillRect(i%99,i/99|0,1,1)
+with(Math)for(i=1e4;i--;).1>random()*abs(hypot(x=i%99/50-1,y=i/5e3-1)-.5+.02/(x-y))||c.getContext`2d`.fillRect(i%99,i/99|0,1,1)
+s=0;with(Math)for(i=1e4;i--;)b.innerHTML=s+=(i%100?"":"\n")+("@#x."[abs(hypot(x=i%100/50-1,y=i/5e3-1)-.5+.02/(x-y))*20|0]||".")
+with(Math)for(s=i=1e4;i--;)b.innerHTML=s+=(i%100?"":"\n")+(".x#"[abs(hypot(x=i%100/50-1,y=i/5e3-1)-.5-.02/(x-y))*9|0]||"@")
+with(Math)for(s=i=1e4;i--;i%100||(s+="\n"))b.innerHTML=s+=".x#"[abs(hypot(x=i%100/50-1,y=i/5e3-1)-.5-.02/(x-y))*9|0]||"@"
+with(Math)for(s=i=6e3;i--;k||(s+="\n"))k=i%100,b.innerHTML=s+=".x#"[abs(hypot(k/60-1,i/3e3-1)-.5-1/(k-i/60))*9|0]||"@"
+with(Math)for(i=1e4;i--;).1>random()*abs(hypot((k=i%100)/50-1,i/5e3-1)-.5-1/(k-i/100))||c.getContext`2d`.fillRect(k,i/100|0,1,1)

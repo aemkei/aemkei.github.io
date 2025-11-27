@@ -1,0 +1,28 @@
+<canvas id=c><script>with(Math)for(i=1e4;i--;).1>random()*abs(hypot((k=i%100)/50-1,i/5e3-1)-.5-1/(k-i/100))||c.getContext`2d`.fillRect(k,i/100|0,1,1)</script>
+
+
+
+
+
+<title>Black Hole in 160 Bytes</title>
+<meta name="description" content="HTML + JavaScript version by @aemkei. Original shader by @XorDev">
+<meta property="og:image" content="https://aem1k.com/blackhole/preview.png">
+<style>
+  body { 
+    background: #000;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  canvas {
+    background-color: #FFF;
+    clip-path: inset(0 400px 100px 0);
+    width: 600px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    margin-top: -100px;
+    margin-left: -100px;
+  }
+</style>
