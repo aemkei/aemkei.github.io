@@ -1,13 +1,10 @@
-<canvas id=c><script>with(Math)for(i=1e4;i--;).1>random()*abs(hypot((k=i%100)/50-1,i/5e3-1)-.5-1/(k-i/100))||c.getContext`2d`.fillRect(k,i/100|0,1,1)</script>
+<canvas id=c><script>with(Math)for(i=5e4;i--;).05>random()*abs(hypot((k=i%300)/150-1,Y=i/4e4-.6)-.4+.01/Y)||c.getContext`2d`.fillRect(k,i/300|0,1,1)</script>
 
-
-
-
-<title>Black Hole in 160 Bytes</title>
+<title>Black Hole in 157 Bytes</title>
 <meta name="description" content="HTML + JavaScript version by @aemkei. Original shader by @XorDev">
 <meta property="og:image" content="https://aem1k.com/blackhole/preview.png">
 
-<meta property="og:title" content="Black Hole in 160 Bytes">
+<meta property="og:title" content="Black Hole in 157 Bytes">
 <meta property="og:description" content="HTML + JavaScript version by @aemkei. Original shader by @XorDev">
 <meta name="twitter:card" content="summary" />
 
@@ -21,12 +18,11 @@
 
   canvas {
     background-color: #FFF;
-    clip-path: inset(0 400px 100px 0);
     width: 600px;
     top: 50%;
     left: 50%;
     position: absolute;
-    margin-top: -100px;
-    margin-left: -100px;
+    margin-top: -150px;
+    margin-left: -300px;
   }
 </style>
