@@ -20,3 +20,4 @@ for(i=5e4;i--;).07>i/9%1*(h=Math.hypot)(h((k=i%300)/150-1,Y=i/4e4-.6)-.4+.01/Y)|
 for(i=5e4;i--;c.getContext`2d`.fillRect(k=i%300,i/300|0,.07<i/9%1*h(h(k/150-1,Y=i/4e4-.6)-.4+.01/Y),1))h=Math.hypot
 for(i=5e4;i--;c.getContext`2d`.fillRect(k=i%300,i/300,i%9*h(h(k/150-1,Y=i/4e4-.6)-.4+.01/Y),1))h=Math.hypot
 for(i=1e4;i--;c.getContext`2d`.fillRect(k=i%99,i/99,i%6*h(h(k/50-1,Y=i/5e3-1)-.4+.01/Y),1))h=Math.hypot
+for(i=5e4;i--;c.getContext`2d`.fillRect(k=i%299,i/301,h(h(k/22-6,Y=i/6e3-4)-2+.2/Y),1))h=Math.hypot

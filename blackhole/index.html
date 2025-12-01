@@ -1,12 +1,10 @@
-<canvas id=c><script>for(i=5e4;i--;c.getContext`2d`.fillRect(k=i%300,i/300,i%9*h(h(k/150-1,Y=i/4e4-.6)-.4+.01/Y),1))h=Math.hypot</script>
+<canvas id=c><svg onload=for(i=5e4;i--;c.getContext`2d`.fillRect(k=i%299,i/301,h(h(k/22-6,Y=i/6e3-4)-2+.2/Y),1))h=Math.hypot>
 
-
-
-<title>Black Hole in 137 Bytes</title>
+<title>Black Hole in 125 Bytes</title>
 <meta name="description" content="HTML + JavaScript version by @aemkei. Original shader by @XorDev">
 <meta property="og:image" content="https://aem1k.com/blackhole/preview.png">
 
-<meta property="og:title" content="Black Hole in 137 Bytes">
+<meta property="og:title" content="Black Hole in 125 Bytes">
 <meta property="og:description" content="HTML + JavaScript version by @aemkei. Original shader by @XorDev">
 <meta name="twitter:card" content="summary" />
 
@@ -26,7 +24,10 @@
     left: 50%;
     margin-left: -300px;
     font-family: 'Courier New', Courier, monospace;
-    font-size: 14.8px;
+  }
+
+  b {
+    color: #FF0;
   }
 
   canvas {
@@ -43,9 +44,7 @@
 </canvas>
 
 <pre>
-A Black Hole in 137 bytes:
-
-&lt;canvas id=c>&lt;script>for(i=5e4;i--;c.getContext`2d`.fillRect(k=i%300,
-i/300,i%9*h(h(k/150-1,Y=i/4e4-.6)-.4+.01/Y),1))#h=Math.hypot&lt;/script>
-
+// <b>Black Hole</b> in 125 bytes:
+&lt;canvas id=c>&lt;svg onload=for(i=5e4;i--;c.getContext`2d`.fillRect
+(k=i%299,i/301,h(h(k/22-6,Y=i/6e3-4)-2+.2/Y),1))h=Math.hypot>
 </pre>
