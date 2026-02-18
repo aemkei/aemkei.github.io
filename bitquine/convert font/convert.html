@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PNG Pixel Reader</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { background-color: #111; color: #eee; font-family: monospace; }
+        canvas { image-rendering: pixelated; background: #222; border: 1px solid #444; }
+        .pixel-grid { display: grid; gap: 1px; }
+    </style>
+</head>
+<body class="p-6">
+
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6">
+        
+        <!-- Left Column: Controls & Input -->
+        <div class="space-y-6">
+            <div>
+                <h1 class="text-2xl font-bold mb-2 text-green-400">PNG Pixel Reader</h1>
+                <p class="text-sm text-gray-400 mb-4">
+                    Extracts pixel data using a standard grid layout.<br>
+                    <span class="opacity-50">Defaults: 3x5 chars, 1px spacing, 32 chars/row, 96 total.</span>
+                </p>
+                
+                <div class="bg-gray-800 p-4 rounded-lg border border-gray-700">
+                    <label class="block mb-2 font-bold text-white">Select Image</label>
+                    <input type="file" id="fileInput" accept="image/*" class="block w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-green-600 file:text-white hover:file:bg-green-700 cursor-pointer"/>
+                </div>
+            </div>
+
+            <!-- Configuration Summary (Read-only) -->
+            <div class="bg-gray-800 p-4 rounded-lg border border-gray-700 opacity-75">
+                <label class="block mb-2 font-bold text-white text-sm uppercase tracking-wide">Active Settings</label>
+                <div class="grid grid-cols-2 gap-4 text-xs text-gray-400">
+                    <div>Block Size: <span class="text-white">3x5 px</span></div>
+                    <div>Spacing: <span class="text-white">1 px</span></div>
+                    <div>Row Length: <span class="text-white">32 chars</span></div>
+                    <div>Total Count: <span class="text-white">96 chars</span></div>
+                    <div>Logic: <span class="text-blue-300">Standard Grid</span></div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold mb-2">Reconstructed Strip</h2>
+                <div class="overflow-auto border border-gray-600 bg-gray-900 p-4">
+                    <!-- Strip Canvas -->
+                    <canvas id="stripCanvas" class="h-10"></canvas>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">All characters drawn in a single line (no spacing).</p>
+            </div>
+        </div>
+
+        <!-- Right Column: Visualization -->
+        <div class="space-y-6">
+            <div>
+                <h2 class="text-xl font-bold mb-2">Canvas Preview</h2>
+                <div class="relative overflow-auto border border-gray-600" style="max-height: 300px;">
+                    <!-- The Main Canvas -->
+                    <canvas id="mainCanvas"></canvas>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">Red squares indicate reading positions.</p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-bold mb-2">Extracted Data</h2>
+                <div id="outputContainer" class="bg-black p-4 rounded border border-gray-700 font-mono text-xs overflow-auto" style="max-height: 200px; min-height: 100px;">
+                    Upload an image to see data...
+                </div>
+                <button onclick="copyOutput()" class="mt-2 text-xs text-green-400 underline hover:text-green-300">Copy to Clipboard</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    const fileInput = document.getElementById('fileInput');
+    const canvas = document.getElementById('mainCanvas');
+    const stripCanvas = document.getElementById('stripCanvas');
+    const ctx = canvas.getContext('2d');
+    const stripCtx = stripCanvas.getContext('2d');
+    const outputContainer = document.getElementById('outputContainer');
+    
+    // Hardcoded Configuration
+    const CONFIG = {
+        charW: 3,
+        charH: 5,
+        count: 96,
+        spacing: 1,
+        charsPerRow: 32,
+        threshold: 128
+    };
+
+    let currentImage = null;
+
+    // --- 1. Initialization & Event Listeners ---
+
+    // Load default placeholder on start
+    window.onload = () => {
+        createPlaceholderImage();
+    };
+
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+                currentImage = img;
+                processImage();
+            };
+            img.src = event.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+
+    // --- 2. Main Processing Logic ---
+
+    function createPlaceholderImage() {
+        // Create a placeholder that matches 32 chars per line x 3 lines
+        // 32 chars * (3w + 1s) = 128px wide
+        // 3 lines * (5h + 1s) = 18px high (approx)
+        const tempC = document.createElement('canvas');
+        tempC.width = 128;
+        tempC.height = 32;
+        const tCtx = tempC.getContext('2d');
+        
+        // Fill black
+        tCtx.fillStyle = 'black';
+        tCtx.fillRect(0,0,128,32);
+        
+        tCtx.fillStyle = 'white';
+        
+        const cw = CONFIG.charW;
+        const ch = CONFIG.charH;
+        const sp = CONFIG.spacing;
+        const perRow = CONFIG.charsPerRow;
+
+        // Draw 96 chars with random pixels to demonstrate grid
+        for(let i=0; i<CONFIG.count; i++) {
+            const col = i % perRow;
+            const row = Math.floor(i / perRow);
+            
+            const startX = col * (cw + sp);
+            const startY = row * (ch + sp);
+
+            // Draw a simple dot pattern based on index to make them distinct
+            // Top-left dot
+            tCtx.fillRect(startX, startY, 1, 1);
+            // Center dot if even
+            if (i % 2 === 0) tCtx.fillRect(startX + 1, startY + 2, 1, 1);
+            // Bottom-right dot
+            tCtx.fillRect(startX + 2, startY + 4, 1, 1);
+        }
+
+        const img = new Image();
+        img.onload = () => {
+            currentImage = img;
+            processImage();
+        };
+        img.src = tempC.toDataURL();
+    }
+
+    function processImage() {
+        if (!currentImage) return;
+
+        // 1. Setup Main Canvas
+        canvas.width = currentImage.width;
+        canvas.height = currentImage.height;
+        ctx.drawImage(currentImage, 0, 0);
+
+        // 2. Setup Strip Canvas
+        stripCanvas.width = CONFIG.count * CONFIG.charW;
+        stripCanvas.height = CONFIG.charH;
+        // Fill strip with background color (black) to start
+        stripCtx.fillStyle = 'black'; 
+        stripCtx.fillRect(0, 0, stripCanvas.width, stripCanvas.height);
+
+        // 3. Get Data
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imageData.data;
+        const width = imageData.width;
+
+        let outputHTML = '';
+        let extractedBits = [];
+
+        // 4. Visualization Style for Main Canvas
+        ctx.fillStyle = 'rgba(255, 0, 0, 0.5)'; // Red overlay for read pixels
+
+        // 5. Loop
+        for (let c = 0; c < CONFIG.count; c++) {
+            
+            // Calculate Grid Position (Source)
+            const gridCol = c % CONFIG.charsPerRow;
+            const gridRow = Math.floor(c / CONFIG.charsPerRow);
+            const originX = gridCol * (CONFIG.charW + CONFIG.spacing);
+            const originY = gridRow * (CONFIG.charH + CONFIG.spacing);
+
+            let charBits = [];
+            for (let y = 0; y < CONFIG.charH; y++) {
+                let rowStr = "";
+                for (let x = 0; x < CONFIG.charW; x++) {
+                    
+                    const pixelX = originX + x;
+                    const pixelY = originY + y;
+                    
+                    // Standard RGBA index
+                    const index = (pixelY * width + pixelX) * 4;
+
+                    // Read Pixel
+                    let val = 0;
+                    if (index < data.length && index >= 0) {
+                        const r = data[index];
+                        const g = data[index + 1];
+                        const b = data[index + 2];
+                        val = (r + g + b) / 3;
+                    }
+
+                    // Check Threshold (Dark = 1, Light = 0)
+                    const isWhite = val > CONFIG.threshold;
+                    charBits.push(isWhite ? 0 : 1);
+                    rowStr += isWhite ? '<span class="text-gray-700">0</span>' : '<span class="text-green-400">1</span>';
+
+                    // Visualize Reading on Main Canvas (Red Overlay)
+                    ctx.fillRect(pixelX, pixelY, 1, 1);
+
+                    // Draw to Strip Canvas (Reconstruction)
+                    // We draw White for '0' (isWhite) and Black for '1' (Dark) to match source appearance
+                    stripCtx.fillStyle = isWhite ? 'white' : 'black';
+                    stripCtx.fillRect((c * CONFIG.charW) + x, y, 1, 1);
+                }
+                outputHTML += rowStr + '<br>';
+            }
+            outputHTML += '<br>'; // Spacing between chars in output
+            extractedBits.push(charBits);
+        }
+
+        outputContainer.innerHTML = outputHTML;
+    }
+
+    function copyOutput() {
+        const text = outputContainer.innerText.replace(/\n\n/g, '\n'); // clean up empty lines
+        navigator.clipboard.writeText(text);
+        alert('Copied to clipboard!');
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!--- https://gemini.google.com/app/d0d834dc6bfffbfb -->
+
+<pre id=o></pre>
+<canvas id=c hidden></canvas>
+<script>
+  // W=480 (96 chars * 5px), height updated to 7
+  c.width=W=480,i=new Image,i.src="data:image/webp;base64,UklGRiwBAABXRUJQVlA4TCABAAAv34EBAA8w//M///MfeIBj29qxxzYqO3X+LvYMWKm2bTup0v2awV8ZsV3ZtvHz+W6cbwgR/Z+Apo3RzH0p/j70hH9rTxgD/q00oGnDk7tXB6CpZHYz3oLDAFWhEzam3U7eJ7y+sAkbbtlKy30R0f/UGjRlCEV7tE4YDY26UDWt0Oh440LEhUpTGHdnW7YSMcorE+/vP4BFdZWhCZ5VWrrXjh/kHtj6qzi3e1AvJDz4e+TE3Q+Xro3LeCl1DyOsjIiMTVAoiNYJD/lFGv7OPY2O71uFX6iqCqPueCX7cmlmSIWmkRW1Bmgy4VEdRvHu2qzN2eXcE7A/btMy5JRszu2LVchOKgvbmHt2MpqgyNRLcYDfGRw84Y+E79oTaxaUhgw=",i.onload=_=function(){
+    // Setup context and cache pixel data
+    g=c.getContext`2d`,g.drawImage(i,0,0),u=g.getImageData(0,0,W,7).data;
+    
+    // Animation loop: v_shift is the vertical pixel shift
+    v_shift=0;
+    setInterval(() => {
+      t="";
+      s=(_+"").toUpperCase(); // String to render (the function source)
+      
+      // Render exactly 5 lines worth of vertical pixels (35 pixels)
+      for(y=0; y<35; y++){
+        p_y = y + v_shift; // Virtual vertical pixel position
+        r = p_y / 7 | 0;   // Current text row index
+        my = p_y % 7;      // Y-pixel coordinate within the character
+        
+        for(x=0; x<84; x++){ // 12 characters * 7 pixels wide = 84px
+          mx = x % 7;   // X-pixel coordinate within the character slot
+          
+          // Calculate character index based on 12 chars per line
+          c_idx = (r * 12 + (x / 7 | 0)) % s.length;
+          
+          // Check for horizontal spacing (mx > 4) or font data transparency
+          t += mx > 4 || u[4 * (my * W + 5 * (s.charCodeAt(c_idx) - 32) + mx)] ? " " : "#";
+        }
+        t += "\n";
+      }
+      
+      o.innerHTML = t;
+      v_shift++; // Increment vertical shift
+    }, 50);
+  }
+</script>
