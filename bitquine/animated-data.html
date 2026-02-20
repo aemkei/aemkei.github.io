@@ -1,0 +1,77 @@
+<!--- https://gemini.google.com/app/d0d834dc6bfffbfb -->
+<body bgcolor=0>
+<pre id=o>
+<script>
+  s=o[H="innerHTML"].toUpperCase().replace(/\s\s|\n/g, "")
+
+  // Generate the bitmap data string 'D' by decoding the original webp image
+
+  OFF = 34;
+
+  i = new Image;
+  i.onload = _ => {
+    c = document.createElement`canvas`;
+    c.width = 480; c.height = 7;
+    g = c.getContext`2d`;
+    g.drawImage(i, 0, 0);
+    u = g.getImageData(0, 0, 480, 7).data;
+    
+    // Build the 480-character string 'D' (96 characters * 5 columns)
+    for (D = "", x = 0; x < 480; x++) {
+      for (B = y = 0; y < 7; y++) {
+        // Read the red channel; black text (R<128) means the bit is 1
+        B |= (u[(y * 480 + x) * 4] < 128 ? 1 : 0) << y;
+      }
+      // Apply the +32 offset to ensure all characters are printable
+      D += String.fromCharCode(B + OFF);
+    }
+
+
+
+    console.log(D);
+
+    D = '"""""""""")")"F F FFL¡L42*&Xkk`j"")""">Dc""cD>""6*6""*>*""bB""*****""B""B2*&$>TLH>BF`BBFDTLF6DLL6.,**`PLLL4>LLL2$$T,(6LLL6&LLL>""J"""bJ"""*6""66666""6*"$#s+(`cou@^444^`LLL6>DDD6`DDD>`LLLD`,,,$>DLL:`***`DD`DD2BBD@`*6DD`BBBB`&*&``&*2`>DDD>`,,,&>DDD~`,,,V&LLL2$$`$$@BBB@02B20`2*2`D6*6D$&Z&$DTLHD"¡cc"$&*2B"cc¡""$#$"bbbbb"$#"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""*Xc"""¡"""cX*"*&**&""'
+    
+    v = 0;
+    setInterval(_ => {
+      // Render exactly 5 lines worth of vertical pixels (35 pixels)
+      for(
+        t = y = ""; 
+        y < 35; 
+        y++
+      ){
+        O = y + v;       // Virtual vertical pixel position
+        
+        for(
+          x = 0; 
+          x < 98;
+          x++
+        ){ 
+          X = x % 7;   // X-pixel coordinate within the character slot
+          
+          // Calculate character index based on 12 chars per line
+          C=s[
+            (
+              (O / 7 | 0) * 12 + (x / 7 | 0)
+            ) % s.length
+          ];
+          
+          // Fetch the column's 7-bit mask from the data string, subtracting the 32 offset
+          B = X < 5 ? D[A="charCodeAt"]((C[A](0) - 32) * 5 + X) - OFF : 0;
+          
+          // Check for horizontal spacing (X > 4) OR if the Y-th bit is NOT set (0)
+          t += X > 4 || !((B >> (O % 7)) & 1) ? " " : "#".fontcolor(
+            1**C ? '#0FF' : /\w/.test(C) ? '#F0F' : "#FF0"
+          );
+        }
+        t += "\n";
+      }
+      
+      o[H] = t;
+      v++;
+    }, 60);
+  }
+  
+  // The original font image
+  i.src="data:image/webp;base64,UklGRiwBAABXRUJQVlA4TCABAAAv34EBAA8w//M///MfeIBj29qxxzYqO3X+LvYMWKm2bTup0v2awV8ZsV3ZtvHz+W6cbwgR/Z+Apo3RzH0p/j70hH9rTxgD/q00oGnDk7tXB6CpZHYz3oLDAFWhEzam3U7eJ7y+sAkbbtlKy30R0f/UGjRlCEV7tE4YDY26UDWt0Oh440LEhUpTGHdnW7YSMcorE+/vP4BFdZWhCZ5VWrrXjh/kHtj6qzi3e1AvJDz4e+TE3Q+Xro3LeCl1DyOsjIiMTVAoiNYJD/lFGv7OPY2O71uFX6iqCqPueCX7cmlmSIWmkRW1Bmgy4VEdRvHu2qzN2eXcE7A/btMy5JRszu2LVchOKgvbmHt2MpqgyNRLcYDfGRw84Y+E79oTaxaUhgw=";
+</script>
