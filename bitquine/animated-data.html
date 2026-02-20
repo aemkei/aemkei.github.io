@@ -7,8 +7,6 @@
 
   // Generate the bitmap data string 'D' by decoding the original webp image
 
-  var OFF = 34;
-
   i = new Image;
   i.onload = _ => {
     c = document.createElement`canvas`;
@@ -29,66 +27,63 @@
         B |= (u[(y * 480 + x) * 4] < 128 ? 1 : 0) << y;
       }
       // Apply the +32 offset to ensure all characters are printable
-      D += String.fromCharCode(B + OFF);
+      D += String.fromCharCode(B + 34);
     }
 
 
-    console.log(D);
+    console.log(D.replace(/""/g, 1));
 
     D = '""P"""("("6`6`6FL¡L4D2*&D6LL>J""(""">Dc""cD>""6*6""*>*""bB""*****""B""B2*&$>TLH>BF`BBFDTLF6DLL6.,**`PLLL4>LLL2$$T,(6LLL6&LLL>""J"""bJ"""*6D"66666"D6*"&$L,&^dlv:^444^`LLL6>DDD6`DDD>`LLLD`,,,$>DLL:`***`DD`DD2BBD@`*6DD`BBBB`&*&``&*2`>DDD>`,,,&>DDD~`,,,V&LLL2$$`$$@BBB@02B20`2*2`D6*6D$&Z&$DTLHD"¡cc"$&*2B"cc¡""&$&"""""""&$"""*Xc"""¡"""cX*"*&**&"""""'
     
     v = 0;
-    // setInterval(_ => {
+    setInterval(_ => {
       // Render exactly 5 lines worth of vertical pixels (35 pixels)
       for(
         t = y = ""; 
         y < 35; 
+        t += "\n",
         y++
       ){
-        O = y + v;       // Virtual vertical pixel position
         
         for(
+          O = y + v,       // Virtual vertical pixel position
           x = 0; 
           x < 98;
           x++
         ){ 
-          X = x % 7;   // X-pixel coordinate within the character slot
           
           // Calculate character index based on 12 chars per line
           C = s[
-            (
-              (
-                O / 7 | 0
-              ) * 14 + (
-                x / 7 | 0
-              )
-            ) % s.length
-          ];
+            (2*(O-O%7)+x/7)%s.length^0
+          ],
 
           // Fetch the column's 7-bit mask from the data string, subtracting the 32 offset
-          B = X < 5 ? D[
+          B = x % 7 < 5 && D[
             A = "charCodeAt"
           ](
             (
               (
-                c = C[A](0) - 33
+                c = C[A]()    // get the char code
+                - 33          // skip control charactes
               ) - (
-                (c > 64) && 26
+                26 * (c > 64) // skip lowercase characters
               )
-            ) * 5 + X 
-          ) - OFF : 0;
+            ) * 5 + x % 7
+          ) - 34,
           
           // Check for horizontal spacing (X > 4) OR if the Y-th bit is NOT set (0)
-          t += X > 4 || !((B >> (O % 7)) & 1) ? " " : "#".fontcolor(
+
+
+          t += B >> O % 7 & 1 ? "#".fontcolor(
             1**C ? '#0FF' : /\w/.test(C) ? '#F0F' : "#FF0"
-          );
+          ) : " ";
         }
-        t += "\n";
+    
       }
       
       o[H] = t;
       v++;
-    // }, 60);
+    }, 60);
   }
   
   // The original font image
