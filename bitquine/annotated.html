@@ -1,0 +1,62 @@
+<body bgcolor=0> // Sets the background color to black (0 coerces to #000000 in legacy HTML attribute parsing).
+  <pre id=o> // Enforces a monospace font for character alignment and creates a global JS variable 'o'.
+    <script>                    // start executions
+      s = o[                    // get content string of pre tag
+        H = "innerHTML"         // cache "innerHTML" for future DOM updates
+      ].toUpperCase(            // we only keep uppercase sprites in our font
+        v = 0                   // initialize our frame counter
+      ), 
+      
+      setInterval(L=>{          // main render loop
+        for (                   // handle the Y-axis (rows of text)
+          t = y = "";           // initialize output buffer and row counter
+          y < 50;               // render 50 rows of text pixels
+          t += "\n",            // append a newline a row finishes
+          y++                   // increment the row counter
+        ) 
+          for (                 // handle the X-axis (columns of text grid)
+            O = y + v,          // vertical offset with frame counter
+            x = 0;              // initialize the column counter 'x' to 0
+            x < 98;             // render 14 characters per line * 7 columns
+            x++                 // increment the column counter
+          ) 
+            C = s[              // get target character
+              (                 // begin index calculation from 2D coordinates
+                2 * (           // 2-pixel gap between characters
+                  O-O%7         // snaps to the top of the 7px char row
+                ) + x / 7       // gets character index
+              ) % s.length      // loop text
+              ^ 0               // byte saving for Math.floor()
+            ],
+
+            B = x % 7 < 5       // check if drawing a character or gap  
+              &&
+                                // highly compressed 5x7 bitmap font data:
+              '1P1"("("6`6`6FL¡L4D2*&D6LL>J1(1">Dc1cD>16*61*>*1bB1*****1B1B2*&$>TLH>BF`BBFDTLF6DLL6.,**`PLLL4>LLL2$$T,(6LLL6&LLL>1J1"bJ1"*6D"66666"D6*"&$L,&^dlv:^444^`LLL6>DDD6`DDD>`LLLD`,,,$>DLL:`***`DD`DD2BBD@`*6DD`BBBB`&*&``&*2`>DDD>`,,,&>DDD~`,,,V&LLL2$$`$$@BBB@02B20`2*2`D6*6D$&Z&$DTLHD"¡cc"$&*2B"cc¡1&$&111"&$1"*Xc1"¡1"cX*"*&**&"' 
+              .replace(         // decompress the font on the fly
+                /1/g, '""'      // replace '1's with '""' (empty gaps)
+              )[ 
+                A =             // cache the method name
+                "charCodeAt"    // get ASCII value of the character
+              ](                // execute the charCodeAt method 
+                5 * (           // character sprite takes 5 columns of data
+                  c = C[A]()    // get ASCII value of the character
+                  - 33          // offset to skip control characters
+                ) - 130 * (     // skip 26 * 5 cols ...
+                  c > 64        // for lowercase letters
+                ) + x % 7       // add the current pixel column
+              ) - 34,           // offset for control characters
+              t += B >>         // shift by the current row pixel
+                O % 7 & 1 ?     // if the pixel is ON ...
+                "#"             // render a "#" block
+                  .fontcolor(   // colorize the block
+                  1 ** C ?      // if C is a number ...
+                    "#0FF" :    // Cyan for numbers
+                    c>31&c<58 ? // if C is a letter ...
+                      "#F0F" :  // Magenta for standard letters
+                      "#FF0"    // Yellow for everything else
+                ) : " ";        // blank if the pixel is OFF
+          o[H] = t,             // rendered back into the DOM via innerHTML
+          v++                   // increment frame for scroll animation
+      }, 60)                    // update every 60ms
+    </script>
