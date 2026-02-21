@@ -1,0 +1,19 @@
+<pre id="p">
+<script>
+  let o = '';
+  for (let i=0; i<32*32; i++){
+    // o += "⟍⟋"[0|(Math.random()*2)]
+    o += "⟍⟋"[0|(Math.random()*2)]
+    if (i%32 ==0) o+="\n";
+  }
+  p.innerHTML = o;
+</script>
+
+<style>
+  body {
+    background: #000;
+    color: #FF0;
+    line-height: 20px;
+    font-size: 22px;
+  }
+</style>

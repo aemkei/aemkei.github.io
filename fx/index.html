@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Canvas Demo</title>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="400" height="400" style="background-color:black"></canvas>
+    <script>
+      var canvas = document.getElementById("myCanvas");
+      var context = canvas.getContext("2d");
+      context.beginPath();
+      context.strokeStyle = "white";
+      context.lineWidth = 2;
+      for (var x = 0; x <= canvas.width; x++) {
+        var y = 200 + 50 * Math.sin(x * 0.1);
+        if (x == 0) {
+          context.moveTo(x, y);
+        } else {
+          context.lineTo(x, y);
+        }
+      }
+      context.stroke();
+    </script>
+  </body>
+</html>

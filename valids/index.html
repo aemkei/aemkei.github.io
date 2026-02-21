@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sort</title>
+  <style>
+    body {
+      padding: 40px;
+      background: #000;
+      color: #FF0;
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <pre id="p"></pre>
+  <script>
+
+    j = 128 + 5000;
+    setInterval(_ => {
+      let output = '';
+      for (i = 1; i <= 16*8; i++) {
+
+        c = String.fromCharCode(j++);
+        try {
+          eval (c + '=1;');
+          output += c
+          if (j%64 == 0) {
+            output += "\n"
+          }
+          if (j%128*64 == 0) {
+            output += j
+          }
+        } catch (e) {}
+      }
+      node = document.createElement('div');
+      node.innerText = output;
+
+      p.appendChild(node);
+    }, 50);
+
+  </script>
+</body>
+
+</html>

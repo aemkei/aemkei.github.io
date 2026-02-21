@@ -1,0 +1,28 @@
+
+
+<style>
+  body {
+    background: #000;
+    color: #FF0;
+    line-height: 20px;
+    font-size: 22px;
+  }
+</style>
+
+<pre id="p">
+  <script>
+  
+    I=1;
+  
+    setInterval(function(){
+      I+=2;
+      let o = '';
+      for (let y=0; y<32; y++){
+        for (let x=0; x<32; x++){
+          o += "⟍⟋"[((x^y)%(I%16))%2]
+        }
+        o+="\n";
+      }
+      p.innerHTML = o;
+    }, 100);
+  </script>

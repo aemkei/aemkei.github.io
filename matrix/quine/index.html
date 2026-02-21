@@ -1,15 +1,1 @@
-<body onload='setInterval(f=_=>{for(t++,o=i=0,w=35;i<384;o+=i++%+w?(f+f+f)[i].fontcolor(g==9?"#FFF":[0,g,0]):"\n")g=0|(i/w-t/((i%w)**5%w+3)+w*t)%w;p.innerHTML=o},t=9)'bgcolor=X><pre id=p>
-
-
-
-
-
-<!-- used for sharing only -->
-</pre>
-<title>MATRIX QUINE - 187 Bytes of HTML and JavaScript</title>
-<meta name="viewport" content="width=300, initial-scale=1" />
-<meta name="description" content="An animated quine by Martin Kleppe (aka @aemkei) that renders its own source code." />
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Matrix Quine">
-<meta name="twitter:description" content="An animated quine by Martin Kleppe (aka @aemkei) that renders its own source code.">
-<meta name="twitter:image" content="https://aem1k.com/matrix/quine/preview.png">
+<body onload='setInterval(f=_=>{for(t++,o=i=0,w=35;i<384;o+=i++%w?(f+f+f)[i].fontcolor(g^9?[0,g,0]:"#FFF"):"\n")g=0|(i/w-t/((i%w)**5%w+3)+w*t)%w;p.innerHTML=o},t=9)'bgcolor=X><pre id=p>

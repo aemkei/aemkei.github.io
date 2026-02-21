@@ -1,0 +1,29 @@
+
+
+<style>
+  body {
+    background: #000;
+    color: #FF0;
+    line-height: 20px;
+    font-size: 22px;
+  }
+</style>
+
+<pre id="p">
+  <script>
+  
+    I=1;
+  
+    let o = '';
+    for (let y=0; y<16; y++){
+      for (let x=0; x<16; x++){
+        // v = Math.hypot(x-7.5,y-7.5)<6;
+        // v = ((x*y)%3);
+        v = (Math.sin(x*y)<0);
+        o += "⟍⟋"[+!v];
+      }
+      o+="\n";
+    }
+    p.innerHTML = o;
+
+  </script>

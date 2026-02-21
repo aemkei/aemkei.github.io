@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    html, body {
+      background: black;
+      color: #fff;
+    }
+    pre {
+      font-weight: bold;
+      margin: 5em;
+      line-height: 1.2em;
+    }
+
+  </style>
+</head>
+<body>
+  <script src="layout.js"></script>
+  <pre><script>
+      document.write(
+        output.map(c => {
+
+          let color = {
+            '[': '#0FF',
+            ']': '#0FF',
+            '+': '#F0F',
+            '!': '#FFF',
+            '(': '#FF0',
+            ')': '#FF0'
+          }[c] || "#FFF";
+
+          
+
+          return (c || "").fontcolor(color);
+        }).join('')
+      );
+
+    </script>
+  </pre>
+</body>
+</html>

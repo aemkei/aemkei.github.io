@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sort</title>
+  <style>
+    body {
+      padding: 40px;
+      background: #000;
+      color: #FF0;
+      font-size: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <pre id="p"></pre>
+  <script>
+
+
+    j = 32133;
+    setInterval(_ => {
+      j += 16
+      let output = '';
+      for (i = 1; i <= 16*8; i++) {
+        output += String.fromCharCode(j+i)
+        if (i%16 == 0) {
+          output += "\n"
+        }
+      }
+
+      p.innerHTML = output;
+    }, 50);
+
+
+  </script>
+</body>
+
+</html>

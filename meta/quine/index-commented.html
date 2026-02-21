@@ -1,0 +1,55 @@
+<body
+  onload='                                      // run on start
+    setInterval(                                // main loop
+      f =                                       // main function
+      n => {                                    // an "undefined" parameter
+        for (
+          t++,                                  // increase frame counter
+          o =                                   // output
+          i = 1;                                // character index
+          i++ < 476;                            // ~ 30 * 16 chars
+          o +=                                  // append to output
+            i % 30 ? (                          // check for new line
+              [
+                (f + f)[                        // convert function to string
+                  i                             // get character at position
+                ],
+                "o"                             // ... or return "o"
+              ][
+                c =                             // store value
+                  0 |                           // convert to integer
+                  (h =                          // distance function
+                    v =>                        // parameter to control position
+                      (M=Math)                  // shortcut to "Math"
+                        .hypot(                 // square root (distance)
+                          i / 30 - 7 +          // centered x position
+                            3 *                 // scale by factor 3
+                            M.sin(              // lissajous component A
+                              t / 8 / v         // frequency A
+                            ),
+                          i % 30 / 2 - 7 +      // centered y position
+                            4 *                 // scale by factor 4
+                            M.cos(              // lissajous component B
+                              t / 9 / v         // frequency B
+                            )
+                        )
+                  )(7) *                        // fist meta ball
+                  h(9) *                        // second meta ball
+                  h(6)                          // third meta ball
+                  / 52                          // keep values in range
+              ] || "."                          // use "." for smaller values
+            ).fontcolor(                        // colorize output
+              c ?                               // check if value != 0
+                c > 2 :                         // true = black, false = pink
+                n                               // "undefined" = green
+            ) : "\n"                            // add new line at and of line
+        );
+        p.innerHTML = o                         // render to element with id=p
+      },
+      t = 1                                     // 1 ms delay between frames
+    )'
+  bgcolor=X
+>
+<pre
+  id=p
+>

@@ -1,0 +1,11 @@
+Time for a new mind-bending project! 
+
+#QLOCK — A JavaScript Quine Clock
+
+aem1k.com/qlock 
+
+It displays the current time in a seven-segment style, embedded within its own JavaScript source code.
+
+🕔 🕝 🕢 🕤 🕑 🕜 
+
+(321 bytes)

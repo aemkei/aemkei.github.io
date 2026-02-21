@@ -8,6 +8,7 @@ const digits = `
 console.log(digits);
 
 const chars = [];
+const numbers = [];
 
 for (let i = 0; i < 11; i++) {
   console.log('++++');
@@ -29,6 +30,7 @@ for (let i = 0; i < 11; i++) {
   const char = String.fromCharCode(number);
 
   chars.push(char);
+  numbers.push(number);
 
   console.log(data);
   console.log(binary);
@@ -40,32 +42,20 @@ string = chars.join('');
 console.log(string);
 console.log("-----------------------");
 
-string.split('').map((char, number) => {
+string.split('').map((char) => {
   const code = char.charCodeAt(0);
-  const binary = code.toString(2);
-
   let symbol = ' ';
 
   for (i = 7; i--;) {
     const b = code & (1 << i);
-    const s = b && 1 ? ['|', '_', '|', '|', '_', '|', '_'][i] : ' ';
+    const s = b && 1 ? '|_||_|_'[i] : ' ';
     symbol += s + ((((i == 6) || (i == 3)) ? '\n' : ''));
   }
   console.log(symbol);
 });
 
-console.log(string);
+console.log(chars);
+console.log(numbers);
 
-string.split('').map((char, number) => {
-  const code = char.charCodeAt(0);
-  const binary = code.toString(2);
 
-  let symbol = ' ';
-
-  for (i = 7; i--;) {
-    const b = code & (1 << i);
-    const s = b && 1 ? '###' : '   ';
-    symbol += s + ((((i == 6) || (i == 3)) ? '\n' : ''));
-  }
-  console.log(symbol);
-});
+chars.map(o=>{for(a="",i=8;i--;)a+=(o.charCodeAt``&1<<i?"|_||_|_"[i]:" ")+(6==i||3==i?"\n":"");console.log(a)})

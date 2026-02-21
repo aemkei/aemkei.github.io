@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sort</title>
   <style>
     body {
-      padding: 40px; 
+      padding: 40px;
       background: #000;
       color: #FFF;
       font-size: 20px;
     }
   </style>
 </head>
+
 <body>
   <pre id="p"></pre>
   <script>
 
-    f=x=>{for(s=[..."f="+f],S=[],i=270;i>0;i--)S[i]=[...s],s.forEach((o,i)=>{l=s[i-1],l>o&&(s[i]=l,s[i-1]=o)});i=0,setInterval(_=>{i++,p.innerHTML=S[(j=i%900)>500?770-j:j>0?j:0].map((o,i)=>(i%25?"":"\n")+o.fontcolor(/\w/.test(o)?(9>=o?"#0FF":"#FF0"):"#F0F")).join("")},25);},f()
+f=n=>{s=[..."f="+f],k=0,setInterval(o=>{k++,p.innerHTML=s.map((o,t)=>(t%21?"":"\n")+(c=String.fromCharCode(Math.max(33,Math.min(o.charCodeAt(0),k-((t*3)%58))))).fontcolor(/\w/.test(c)?9>=o?"#0FF":"#FF0":"#F0F")).join("")},70)},
+
+f()
 
   </script>
 </body>
+
 </html>

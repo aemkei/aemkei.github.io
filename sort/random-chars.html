@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sort</title>
+  <style>
+    body {
+      padding: 40px;
+      background: #000;
+      color: #FFF;
+      font-size: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <pre id="p"></pre>
+  <script>
+
+    f = x => {
+      s = [...("f=" + f).replace(/\s/g, '')];
+
+      // (j = i % 900) > 500 ? 770 - j : j > 0 ? j : 0
+      j = 0,
+        setInterval(_ => {
+          j+=10,
+            p.innerHTML = s.map((o, i) => (i % 25 ? "" : "\n") +
+              (c = String.fromCharCode(o.charCodeAt(0) - j)).fontcolor(
+                /\w/.test(o) ? (9 >= o ? "#0FF" : "#FF0") : "#F0F"
+              )
+            ).join("")
+        }, 50);
+    }, f()
+
+  </script>
+</body>
+
+</html>
