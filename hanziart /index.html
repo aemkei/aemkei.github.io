@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hanzi Art</title>
+<meta name="description" content="Draw images with Chinese characters, like ASCII art.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;900&family=Noto+Serif+SC:wght@400;900&family=Noto+Sans+KR:wght@400;900&family=Noto+Serif+KR:wght@400;900&family=Noto+Sans+JP:wght@400;900&family=Noto+Serif+JP:wght@400;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f4;
+    --fg: #1b1a18;
+    --muted: #8a857c;
+    --line: #e2ddd3;
+    --tile: #ffffff;
+    --accent: #c8321e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #141413;
+      --fg: #f1eee8;
+      --muted: #8d887f;
+      --line: #2e2c29;
+      --tile: #1d1c1a;
+      --accent: #ff6b4f;
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Noto Sans SC", system-ui, sans-serif;
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 400px);
+  }
+  .stage {
+    position: sticky; top: 0;
+    height: 100vh;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .stage.drag { outline: 2px dashed var(--accent); outline-offset: -12px; }
+  canvas#out { display: block; max-width: 100%; max-height: 100%; }
+  aside {
+    border-left: 1px solid var(--line);
+    padding: 28px 24px 40px;
+    display: flex; flex-direction: column; gap: 22px;
+  }
+  h1 { margin: 0; font-size: 28px; font-weight: 900; letter-spacing: .02em; }
+  h1 span { color: var(--accent); }
+  .sub { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+  h2 {
+    margin: 0 0 10px; font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .12em; color: var(--muted);
+  }
+  .emojis { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 6px; }
+  .emojis button {
+    font-size: 24px; height: 44px; border-radius: 10px;
+    border: 1px solid var(--line); background: var(--tile); cursor: pointer;
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+    transition: transform .1s;
+  }
+  .emojis button:hover { transform: scale(1.08); }
+  .emojis button.on { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .row { display: flex; gap: 8px; align-items: center; }
+  input[type=text], textarea, select {
+    font: inherit; font-size: 14px; color: var(--fg);
+    background: var(--tile); border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 10px; width: 100%;
+  }
+  textarea { resize: vertical; min-height: 64px; font-size: 16px; line-height: 1.4; }
+  .btn {
+    font: inherit; font-size: 13px; font-weight: 700; white-space: nowrap;
+    padding: 8px 12px; border-radius: 8px; cursor: pointer;
+    border: 1px solid var(--line); background: var(--tile); color: var(--fg);
+  }
+  .btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .btn:hover { border-color: var(--muted); }
+  label.slider { display: grid; grid-template-columns: 90px 1fr 36px; gap: 10px; align-items: center; font-size: 14px; }
+  label.slider output { text-align: right; color: var(--muted); font-variant-numeric: tabular-nums; }
+  input[type=range] { width: 100%; accent-color: var(--accent); }
+  .toggles { display: flex; flex-wrap: wrap; gap: 6px; }
+  .toggles label {
+    font-size: 13px; padding: 6px 10px; border-radius: 999px;
+    border: 1px solid var(--line); background: var(--tile); cursor: pointer; user-select: none;
+  }
+  .toggles input { display: none; }
+  .toggles label:has(input:checked) { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+  .controls { display: flex; flex-direction: column; gap: 10px; }
+  .hint { font-size: 12px; color: var(--muted); margin: 6px 0 0; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  @media (max-width: 760px) {
+    body { grid-template-columns: 1fr; }
+    .stage { position: static; height: auto; min-height: 60vh; padding: 16px; }
+    aside { border-left: 0; border-top: 1px solid var(--line); padding: 20px 16px 32px; }
+  }
+</style>
+</head>
+<body>
+<main class="stage" id="stage">
+  <canvas id="out"></canvas>
+</main>
+
+<aside>
+  <div>
+    <h1>漢字 <span>Art</span></h1>
+    <p class="sub">Images drawn with Chinese characters, matched by ink density and stroke shape.</p>
+  </div>
+
+  <section>
+    <h2>Source</h2>
+    <div class="emojis" id="emojis"></div>
+    <div class="row" style="margin-top:10px">
+      <input type="text" id="custom" placeholder="Any emoji or character…" maxlength="8">
+      <button class="btn" id="useCustom">Use</button>
+    </div>
+    <div class="row" style="margin-top:8px">
+      <button class="btn" id="upload">Upload image…</button>
+      <input type="file" id="file" accept="image/*" hidden>
+    </div>
+    <p class="hint">You can also drop or paste an image.</p>
+  </section>
+
+  <section class="controls">
+    <h2>Characters</h2>
+    <select id="preset"></select>
+    <textarea id="chars" spellcheck="false"></textarea>
+    <p class="hint" id="status" style="margin:0"></p>
+  </section>
+
+  <section class="controls">
+    <h2>Render</h2>
+    <label class="slider">Columns <input type="range" id="cols" min="12" max="120" value="48"><output></output></label>
+    <label class="slider">Contrast <input type="range" id="contrast" min="0.5" max="3" step="0.05" value="1.3"><output></output></label>
+    <label class="slider">Exposure <input type="range" id="exposure" min="-0.5" max="0.5" step="0.01" value="0"><output></output></label>
+    <label class="slider">Shape <input type="range" id="shape" min="0" max="1" step="0.05" value="0.6"><output></output></label>
+    <label class="slider">Line height <input type="range" id="lineHeight" min="1" max="2" step="0.05" value="1.2"><output></output></label>
+    <div class="toggles">
+      <label><input type="checkbox" id="color" checked>Color</label>
+      <label><input type="checkbox" id="invert">Invert</label>
+      <label><input type="checkbox" id="serif">Serif</label>
+      <label><input type="checkbox" id="bold">Bold</label>
+    </div>
+  </section>
+
+  <section class="controls">
+    <h2>Export</h2>
+    <p class="hint" style="margin:0">Match Line height to the app you paste into, so the copied text keeps the shape shown here. Rich-text apps get that line height applied automatically.</p>
+    <div class="actions">
+      <button class="btn primary" id="savePng">Save PNG</button>
+      <button class="btn" id="copyText">Copy text</button>
+    </div>
+  </section>
+</aside>
+
+<script>
+(() => {
+  const EMOJIS = ['🐼','🐉','🌸','🍜','🏮','🐟','🌊','🗻','😀','🐱','🦊','🐧','🍎','🌻','☯️','🌙','🎋','🚀','❤️','🍄'];
+
+  // Full-width space = empty cell
+  const SPACE = '　';
+  const PRESETS = {
+    'Stroke gradient': '　一二三丁十七人入八九了力刀又口土士大女子小山川工干弓中木水火日月王天夫太犬生石田白目示立耳米羊言車金長門雨青風食馬魚鳥麻黑龍齒鬱龘',
+    'Nature 自然': '　一丶山川水火木林森日月星雨雪雲風花草竹石土田禾米虫魚鳥龍鳳',
+    'Numbers 數字': '　一二三四五六七八九十百千万億',
+    'Elements 五行': '　金木水火土',
+    'Dense 密': '　丶一亠口日目田囗回車國圖團靈龍麤爨齉龘',
+    'Love 愛': '　心必忍思恩恋愛情慶戀',
+  };
+  const span = (a, b) => { let s = ''; for (let cp = a; cp <= b; cp++) s += String.fromCodePoint(cp); return s; };
+  // Every ideograph in the CJK Unified Ideographs block (U+4E00–U+9FFF, 20,992 chars)
+  const HANZI = span(0x4E00, 0x9FFF);
+  PRESETS['All Hanzi 全部 (20,992)'] = '　' + HANZI;
+  // Everything that is drawn one em wide in CJK fonts. Anything that turns out not to be
+  // exactly full width (combining marks etc.) is dropped by the width check in rebuildGlyphs.
+  PRESETS['Full-width 全角 · かな · 한글'] = '　' + [
+    [0x2E80, 0x2E99], [0x2E9B, 0x2EF3],   // CJK radicals supplement
+    [0x2F00, 0x2FD5],                     // Kangxi radicals
+    [0x3001, 0x303F],                     // CJK symbols & punctuation
+    [0x3041, 0x3096], [0x3099, 0x309F],   // Hiragana
+    [0x30A0, 0x30FF],                     // Katakana
+    [0x3105, 0x312F],                     // Bopomofo
+    [0x3131, 0x318E],                     // Hangul compatibility jamo
+    [0x3190, 0x31E3],                     // Kanbun, Bopomofo ext, CJK strokes
+    [0x31F0, 0x31FF],                     // Katakana phonetic ext
+    [0x3200, 0x33FF],                     // Enclosed CJK, CJK compatibility (㊀ ㌀)
+    [0xAC00, 0xD7A3],                     // Hangul syllables
+    [0xF900, 0xFA6D], [0xFA70, 0xFAD9],   // CJK compatibility ideographs
+    [0xFF01, 0xFF60], [0xFFE0, 0xFFE6],   // Full-width ASCII & symbols
+  ].map(([a, b]) => span(a, b)).join('') + HANZI;
+
+  const $ = id => document.getElementById(id);
+  const out = $('out'), ctx = out.getContext('2d');
+  const stage = $('stage');
+
+  let source = { kind: 'emoji', value: '🐼' };
+  let glyphs = [];        // {ch, f:[9], mean}
+  let grid = null;        // {cols, rows, cells:[{ch, r,g,b}]}
+  let renderToken = 0;
+
+  // ---------- UI setup ----------
+  const emojiBox = $('emojis');
+  EMOJIS.forEach(e => {
+    const b = document.createElement('button');
+    b.textContent = e; b.title = e;
+    b.onclick = () => setSource({ kind: 'emoji', value: e });
+    emojiBox.appendChild(b);
+  });
+  function markEmoji() {
+    [...emojiBox.children].forEach(b =>
+      b.classList.toggle('on', source.kind === 'emoji' && b.textContent === source.value));
+  }
+
+  const presetSel = $('preset');
+  Object.keys(PRESETS).forEach(k => presetSel.add(new Option(k, k)));
+  presetSel.add(new Option('Custom', 'custom'));
+  $('chars').value = PRESETS['Stroke gradient'];
+  presetSel.onchange = () => {
+    if (presetSel.value !== 'custom') $('chars').value = PRESETS[presetSel.value];
+    rebuildGlyphs();
+  };
+  let charsTimer;
+  $('chars').oninput = () => {
+    presetSel.value = 'custom';
+    clearTimeout(charsTimer);
+    charsTimer = setTimeout(rebuildGlyphs, 250);
+  };
+
+  document.querySelectorAll('label.slider').forEach(l => {
+    const inp = l.querySelector('input'), o = l.querySelector('output');
+    const show = () => o.textContent = inp.value;
+    show();
+    inp.addEventListener('input', () => { show(); schedule(); });
+  });
+  ['color', 'invert'].forEach(id => $(id).onchange = schedule);
+  ['serif', 'bold'].forEach(id => $(id).onchange = rebuildGlyphs);
+
+  $('useCustom').onclick = () => {
+    const v = $('custom').value.trim();
+    if (v) setSource({ kind: 'emoji', value: v });
+  };
+  $('custom').onkeydown = e => { if (e.key === 'Enter') $('useCustom').click(); };
+  $('upload').onclick = () => $('file').click();
+  $('file').onchange = e => e.target.files[0] && loadFile(e.target.files[0]);
+
+  stage.addEventListener('dragover', e => { e.preventDefault(); stage.classList.add('drag'); });
+  stage.addEventListener('dragleave', () => stage.classList.remove('drag'));
+  stage.addEventListener('drop', e => {
+    e.preventDefault(); stage.classList.remove('drag');
+    const f = e.dataTransfer.files[0];
+    if (f && f.type.startsWith('image/')) loadFile(f);
+  });
+  window.addEventListener('paste', e => {
+    const item = [...(e.clipboardData?.items || [])].find(i => i.type.startsWith('image/'));
+    if (item) loadFile(item.getAsFile());
+  });
+
+  function loadFile(file) {
+    const img = new Image();
+    img.onload = () => setSource({ kind: 'image', value: img });
+    img.src = URL.createObjectURL(file);
+  }
+
+  // the radial reveal animation only plays when the source changes
+  function setSource(s) { source = s; animate = true; markEmoji(); schedule(); }
+
+  // ---------- Fonts & glyph features ----------
+  // SC first; KR and JP fill in Hangul and the enclosed/squared CJK symbols SC lacks
+  const families = () => ['SC', 'KR', 'JP'].map(s => `Noto ${$('serif').checked ? 'Serif' : 'Sans'} ${s}`);
+  const fontFamily = () => families().map(f => `"${f}"`).join(',') + ($('serif').checked ? ', serif' : ', sans-serif');
+  const fontWeight = () => $('bold').checked ? 900 : 400;
+  const fontFor = px => `${fontWeight()} ${px}px ${fontFamily()}`;
+
+  function uniqueChars(str) {
+    const set = [...new Set([...str.replace(/[\s]/g, '')])];
+    return [SPACE, ...set.filter(c => c !== SPACE)];
+  }
+
+  // Code point ranges each web font family covers, read from its @font-face unicode-range.
+  const coverage = new Map();
+  function covers(family) {
+    if (!coverage.has(family)) {
+      const ranges = [...document.fonts]
+        .filter(f => f.family.replace(/["']/g, '') === family)
+        .flatMap(f => f.unicodeRange.split(',').map(r => {
+          const [a, b] = r.trim().replace(/^U\+/i, '').split('-').map(x => parseInt(x, 16));
+          return [a, b ?? a];
+        }));
+      coverage.set(family, ranges);
+    }
+    const ranges = coverage.get(family);
+    return ch => { const cp = ch.codePointAt(0); return ranges.some(([a, b]) => cp >= a && cp <= b); };
+  }
+  // Load each family only for the characters the families before it don't cover,
+  // so a Hanzi-only set never downloads the KR/JP fonts.
+  async function loadFonts(chars) {
+    let rest = chars.filter(c => c !== SPACE);
+    for (const fam of families()) {
+      if (!rest.length) break;
+      const has = covers(fam);
+      const mine = rest.filter(has);
+      if (mine.length) try { await document.fonts.load(`${fontWeight()} 32px "${fam}"`, mine.join('')); } catch (e) {}
+      rest = rest.filter(c => !has(c));
+    }
+  }
+
+  let glyphToken = 0, glyphMeans = new Float32Array(0);
+  async function rebuildGlyphs() {
+    const token = ++glyphToken;
+    const status = $('status');
+    const fmt = x => x.toLocaleString('en-US');
+    let chars = uniqueChars($('chars').value);
+    status.textContent = `Loading fonts for ${fmt(chars.length - 1)} characters…`;
+    await loadFonts(chars);
+    if (token !== glyphToken) return;
+
+    // Keep only full-width characters, so every row lines up as text. Noto Sans KR
+    // draws Hangul 0.92em wide, but it still takes a full-width cell (as in monospace
+    // text), so accept 0.9–1em. This drops zero-width combining marks and characters
+    // that fell back to some narrow system glyph.
+    const mc = document.createElement('canvas').getContext('2d');
+    mc.font = fontFor(100);
+    const before = chars.length;
+    chars = chars.filter(ch => {
+      if (ch === SPACE) return true;
+      const w = mc.measureText(ch).width;
+      return w >= 90 && w <= 101;
+    });
+    const skipped = before - chars.length;
+    const n = chars.length;
+
+    // Render glyphs into an atlas, a chunk at a time, and read each chunk back once.
+    const S = 24, PER_ROW = 64, ROWS = 32, CHUNK = PER_ROW * ROWS;
+    const c = document.createElement('canvas');
+    const W = c.width = PER_ROW * S, H = c.height = ROWS * S;
+    const g = c.getContext('2d', { willReadFrequently: true });
+    const list = [];
+    for (let start = 0; start < n; start += CHUNK) {
+      const part = chars.slice(start, start + CHUNK);
+      g.clearRect(0, 0, W, H);
+      g.font = fontFor(S * 0.92);
+      g.textAlign = 'center'; g.textBaseline = 'middle'; g.fillStyle = '#000';
+      part.forEach((ch, i) => g.fillText(ch, (i % PER_ROW + .5) * S, ((i / PER_ROW | 0) + .5) * S + S * 0.04));
+      const d = g.getImageData(0, 0, W, H).data;
+      part.forEach((ch, i) => {
+        const ox = (i % PER_ROW) * S, oy = (i / PER_ROW | 0) * S;
+        const f = new Array(9).fill(0);
+        for (let y = 0; y < S; y++) {
+          const row = ((y * 3 / S) | 0) * 3, base = ((oy + y) * W + ox) * 4 + 3;
+          for (let x = 0; x < S; x++) f[row + ((x * 3 / S) | 0)] += d[base + x * 4];
+        }
+        for (let k = 0; k < 9; k++) f[k] /= 255 * S * S / 9;
+        list.push({ ch, f, mean: f.reduce((a, b) => a + b) / 9 });
+      });
+      if (n > CHUNK) {
+        status.textContent = `Measuring ${fmt(Math.min(n, start + CHUNK))} / ${fmt(n)}…`;
+        await new Promise(r => setTimeout(r));
+        if (token !== glyphToken) return;
+      }
+    }
+    // normalize so the densest glyph has mean 1; mean is recomputed from the clipped
+    // sub-cells so the pruning bound in compute() stays exact
+    const maxMean = Math.max(...list.map(g => g.mean)) || 1;
+    list.forEach(g => {
+      g.f = g.f.map(v => Math.min(1, v / maxMean));
+      g.mean = g.f.reduce((a, b) => a + b) / 9;
+    });
+    glyphs = list.sort((a, b) => a.mean - b.mean);
+    glyphMeans = Float32Array.from(glyphs, g => g.mean);
+    status.textContent = `${fmt(n - 1)} characters` +
+      (skipped ? ` · ${fmt(skipped)} skipped (not full width)` : '');
+    schedule();
+  }
+
+  // ---------- Sampling ----------
+  // lineHeight > 1 samples fewer rows, so text shown with taller lines keeps its proportions
+  function sampleSource(cols, lineHeight = 1) {
+    let w, h, draw;
+    if (source.kind === 'emoji') {
+      w = h = 1;
+      // Render the emoji square, then stretch it over the sampling canvas. With line
+      // height > 1 that canvas is wider than tall (rows stand for taller lines), so drawing
+      // the emoji straight into it would leave it too narrow on screen.
+      draw = (g, W, H) => {
+        const sq = document.createElement('canvas');
+        sq.width = sq.height = W;
+        const q = sq.getContext('2d');
+        q.textAlign = 'center'; q.textBaseline = 'middle';
+        q.font = `${W * 0.82}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`;
+        q.fillText(source.value, W / 2, W / 2 + W * 0.05);
+        g.imageSmoothingQuality = 'high';
+        g.drawImage(sq, 0, 0, W, H);
+      };
+    } else {
+      const img = source.value;
+      w = img.naturalWidth; h = img.naturalHeight;
+      draw = (g, W, H) => { g.imageSmoothingQuality = 'high'; g.drawImage(img, 0, 0, W, H); };
+    }
+    const rows = Math.max(1, Math.round(cols * h / w / lineHeight));
+    // render big first, then downsample (better quality than one big step for emoji)
+    const big = document.createElement('canvas');
+    const scale = Math.max(1, Math.ceil(600 / Math.max(cols, rows)));
+    big.width = cols * 3 * scale; big.height = rows * 3 * scale;
+    draw(big.getContext('2d'), big.width, big.height);
+    const small = document.createElement('canvas');
+    small.width = cols * 3; small.height = rows * 3;
+    const sg = small.getContext('2d', { willReadFrequently: true });
+    sg.imageSmoothingQuality = 'high';
+    sg.drawImage(big, 0, 0, small.width, small.height);
+    return { cols, rows, data: sg.getImageData(0, 0, small.width, small.height).data };
+  }
+
+  // ---------- Matching ----------
+  function compute(lineHeight = 1) {
+    if (!glyphs.length) return null;
+    const cols = +$('cols').value;
+    const contrast = +$('contrast').value;
+    const exposure = +$('exposure').value;
+    const shapeW = +$('shape').value;
+    const invert = $('invert').checked;
+    const color = $('color').checked;
+    const { rows, data } = sampleSource(cols, lineHeight);
+    const W = cols * 3;
+    const cells = new Array(cols * rows);
+    const cache = new Map();
+    const v = new Array(9);
+
+    for (let cy = 0; cy < rows; cy++) for (let cx = 0; cx < cols; cx++) {
+      let R = 0, G = 0, B = 0, A = 0;
+      for (let sy = 0; sy < 3; sy++) for (let sx = 0; sx < 3; sx++) {
+        const i = ((cy * 3 + sy) * W + cx * 3 + sx) * 4;
+        const a = data[i + 3] / 255;
+        const r = data[i] / 255, g = data[i + 1] / 255, b = data[i + 2] / 255;
+        const lum = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        // ink: dark pixels get many strokes; in color mode keep bright areas filled so hue shows
+        let ink = color ? a * (0.45 + 0.55 * (1 - lum)) : a * (1 - lum);
+        if (invert) ink = 1 - ink;
+        ink = (ink - 0.5) * contrast + 0.5 + exposure;
+        v[sy * 3 + sx] = ink < 0 ? 0 : ink > 1 ? 1 : ink;
+        R += data[i] * a; G += data[i + 1] * a; B += data[i + 2] * a; A += a;
+      }
+      const mean = v.reduce((p, q) => p + q) / 9;
+      const key = v.map(x => (x * 15) | 0).join('');
+      let best = cache.get(key);
+      if (!best) {
+        // Glyphs are sorted by mean. Since avg((f-v)^2) >= (mean_f - mean_v)^2, every
+        // glyph's distance is at least kBound * dm^2, so walk outward from the closest
+        // mean and stop once that bound can't beat the best match found so far.
+        const n = glyphs.length, kBound = shapeW + 4 * (1 - shapeW);
+        let lo = 0, hi = n;
+        while (lo < hi) { const m = (lo + hi) >> 1; if (glyphMeans[m] < mean) lo = m + 1; else hi = m; }
+        let i = lo - 1, j = lo, bd = Infinity;
+        while (i >= 0 || j < n) {
+          const di = i >= 0 ? mean - glyphMeans[i] : Infinity;
+          const dj = j < n ? glyphMeans[j] - mean : Infinity;
+          const idx = di < dj ? i-- : j++;
+          const dm = Math.min(di, dj);
+          if (kBound * dm * dm >= bd) break;
+          const gl = glyphs[idx];
+          let ds = 0;
+          for (let k = 0; k < 9; k++) { const d = gl.f[k] - v[k]; ds += d * d; }
+          const d = shapeW * ds / 9 + (1 - shapeW) * dm * dm * 4;
+          if (d < bd) { bd = d; best = gl.ch; }
+        }
+        cache.set(key, best);
+      }
+      cells[cy * cols + cx] = A > 0
+        ? { ch: best, r: R / A | 0, g: G / A | 0, b: B / A | 0, a: A / 9 }
+        : { ch: best, r: 0, g: 0, b: 0, a: 0 };
+    }
+    return { cols, rows, cells, color, lineHeight };
+  }
+
+  // ---------- Drawing ----------
+  function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+
+  function draw(progress = 1) {
+    if (!grid) return;
+    const { cols, rows, cells, color, lineHeight: lh } = grid;
+    const box = stage.getBoundingClientRect();
+    const pad = window.innerWidth <= 760 ? 32 : 48;
+    const availW = box.width - pad, availH = (window.innerWidth <= 760 ? box.width : box.height) - pad;
+    const cell = Math.max(2, Math.floor(Math.min(availW / cols, availH / (rows * lh)) * 10) / 10);
+    const rowH = cell * lh;   // like CSS line-height: the glyph stays square, rows get taller
+    const dpr = window.devicePixelRatio || 1;
+    out.width = Math.round(cols * cell * dpr);
+    out.height = Math.round(rows * rowH * dpr);
+    out.style.width = cols * cell + 'px';
+    out.style.height = rows * rowH + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.fillStyle = css('--bg');
+    ctx.fillRect(0, 0, cols * cell, rows * rowH);
+    ctx.font = fontFor(cell * 0.92);
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    const fg = css('--fg');
+    const cx0 = cols / 2, cy0 = rows * lh / 2, maxD = Math.hypot(cx0, cy0);
+    for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+      const c = cells[y * cols + x];
+      if (c.ch === SPACE) continue;
+      const t = Math.hypot(x + .5 - cx0, (y + .5) * lh - cy0) / maxD;
+      if (t > progress) continue;
+      ctx.fillStyle = color && c.a > 0.05 ? `rgb(${c.r},${c.g},${c.b})` : fg;
+      ctx.fillText(c.ch, (x + .5) * cell, (y + .5) * rowH + cell * 0.04);
+    }
+  }
+
+  let pending = false, animate = true;
+  function schedule() {
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(() => {
+      pending = false;
+      grid = compute(+$('lineHeight').value);
+      if (!grid) return;
+      const token = ++renderToken;
+      if (!animate) return draw(1);
+      animate = false;
+      const t0 = performance.now();
+      const step = now => {
+        if (token !== renderToken) return;
+        const p = Math.min(1, (now - t0) / 700);
+        draw(1 - Math.pow(1 - p, 3));
+        if (p < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    });
+  }
+
+  window.addEventListener('resize', () => draw(1));
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => draw(1));
+
+  // ---------- Export ----------
+  $('savePng').onclick = () => {
+    const a = document.createElement('a');
+    a.download = 'hanzi-art.png';
+    a.href = out.toDataURL('image/png');
+    a.click();
+  };
+  $('copyText').onclick = async () => {
+    if (!grid) return;
+    const tg = grid, lh = grid.lineHeight;
+    const rows = [];
+    for (let y = 0; y < tg.rows; y++) rows.push(tg.cells.slice(y * tg.cols, (y + 1) * tg.cols));
+    // drop empty rows at the top and bottom
+    const blank = r => r.every(c => c.ch === SPACE);
+    while (rows.length && blank(rows[0])) rows.shift();
+    while (rows.length && blank(rows[rows.length - 1])) rows.pop();
+    const text = rows.map(r => r.map(c => c.ch).join('').replace(/　+$/, '')).join('\n');
+
+    const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+    const html = `<pre style="font-family:${fontFamily().replace(/"/g, "'")};font-weight:${fontWeight()};` +
+      `font-size:16px;line-height:${lh};letter-spacing:0;margin:0">` +
+      rows.map(r => {
+        if (!tg.color) return esc(r.map(c => c.ch).join(''));
+        return r.map(c => c.ch === SPACE || c.a <= 0.05 ? esc(c.ch)
+          : `<span style="color:rgb(${c.r},${c.g},${c.b})">${esc(c.ch)}</span>`).join('');
+      }).join('\n') + '</pre>';
+    try {
+      if (window.ClipboardItem) {
+        await navigator.clipboard.write([new ClipboardItem({
+          'text/plain': new Blob([text], { type: 'text/plain' }),
+          'text/html': new Blob([html], { type: 'text/html' }),
+        })]);
+      } else {
+        await navigator.clipboard.writeText(text);
+      }
+      flash($('copyText'), 'Copied');
+    } catch (e) { flash($('copyText'), 'Failed'); }
+  };
+  function flash(btn, msg) {
+    const old = btn.textContent; btn.textContent = msg;
+    setTimeout(() => btn.textContent = old, 1200);
+  }
+
+  markEmoji();
+  rebuildGlyphs();
+  document.fonts.ready.then(rebuildGlyphs);
+})();
+</script>
+</body>
+</html>
